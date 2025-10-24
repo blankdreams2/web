@@ -5,6 +5,7 @@ import PageHead from '@/components/PageHead.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getAllProjects } from '@/lib/data-utils'
+import Paragraph from '@/components/about/Paragraph.tsx'
 
 const projects = await getAllProjects()
 ---
@@ -15,25 +16,43 @@ const projects = await getAllProjects()
 
   <section>
     <div class="min-w-full">
-      <div class="prose mb-8">
-        <h3 class="mt-0">chào, or hi there.</h3>
-        <p>
-          started coding in 2021 and I've been kinda like? it. While I may not be
-          deeply curious about how "computer" works but I do want to see how they
-          come together and literally create dark magic, and that's how this website
-          was made.
-        </p>
-        <p>
-          lately I've been exploring UI/UX, pixel-art interfaces, and a
-          lot of CTFs. I also care about clean, fast web experiences and small
-          tools that feel nice to use.
-        </p>
-        <p>
-          If you're curious about the code, it's open-source (old web, writing the new one right now)at
-          <Link href="https://github.com/thienguen/website" external underline
-            >@thienguen/website</Link
-          >.
-        </p>
+      <div class="mb-8">
+        <Paragraph client:load tag="chào, or hi there" dir="ltr">
+          Started coding in <span class="font-semibold text-pink-600 dark:text-yellow-500">2021</span>
+          {` and I've been kinda like? it. While I may not be deeply curious about how "computer" works
+            but I do want to see how they come together and literally create dark magic,
+            and that's how this website was made. 🐧`}
+        </Paragraph>
+
+        <Paragraph client:load tag="outside of coding" dir="rtl">
+          {`I'm also fascinated with `}
+          <span class="font-semibold text-blue-700 dark:text-[#3AAAF2]">mathematics</span>
+          {` and wish to make a career out of it someday. Things I love include: j̶a̶p̶a̶n̶, coffee, dark mode, and cats.`}
+        </Paragraph>
+
+        <Paragraph client:load tag="currently?" dir="ltr">
+          {`An undergraduate student majoring in Computer Science at `}
+          <span class="font-semibold text-[#ff2c2c]">UNLV</span>
+          {`. Alongside my studies, I'm also interning as a software engineer at a local firm focusing in Web3, Big Data.`}
+        </Paragraph>
+
+        <Paragraph client:load tag="rpg maker games" dir="rtl">
+          {`Words can't describe how big of a fan I am of this subculture, which had its heyday in the early 2010s.
+          I'm still actively playing these games and, hopefully, one day, `}
+          <span class="font-semibold text-purple-700 dark:text-purple-300">I will create one myself</span>
+          {` Some of my personal favorites is in the dashboard.`}
+        </Paragraph>
+
+        <Paragraph client:load tag="thank you" dir="ltr">
+          {`I hope you enjoy your stay. The source code for this website is available at `}
+          <a
+            target="_blank"
+            class="link-underline3 link-underline2 font-semibold text-pink-800 dark:text-gold"
+            href={`https://github.com/Thienguen/thien-porfolio`}
+            rel="noreferrer noopener"
+            >@thienguen/website</a
+          >
+        </Paragraph>
       </div>
 
       <!-- <h2 class="mb-4 text-2xl font-medium">Projects</h2>
