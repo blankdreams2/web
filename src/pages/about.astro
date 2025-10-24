@@ -1,56 +1,65 @@
 ---
-import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import Link from '@/components/Link.astro'
-import PageHead from '@/components/PageHead.astro'
-import ProjectCard from '@/components/ProjectCard.astro'
-import Layout from '@/layouts/Layout.astro'
-import { getAllProjects } from '@/lib/data-utils'
 import Paragraph from '@/components/about/Paragraph.tsx'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import Layout from '@/layouts/Layout.astro'
+// import { getAllProjects } from '@/lib/data-utils'
 
-const projects = await getAllProjects()
+// const projects = await getAllProjects()
 ---
 
-<Layout class="max-w-3xl">
-  <PageHead slot="head" title="About" />
+<Layout class='max-w-3xl'>
+  <PageHead slot='head' title='About' />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
 
   <section>
-    <div class="min-w-full">
-      <div class="mb-8">
-        <Paragraph client:load tag="chào, or hi there" dir="ltr">
-          Started coding in <span class="font-semibold text-pink-600 dark:text-yellow-500">2021</span>
-          {` and I've been kinda like? it. While I may not be deeply curious about how "computer" works
-            but I do want to see how they come together and literally create dark magic,
-            and that's how this website was made. 🐧`}
+    <div class='min-w-full'>
+      <div class='mb-8'>
+        <Paragraph client:load tag='chào' dir='ltr'>
+          I started coding in <span class='font-semibold text-pink-600 dark:text-yellow-500'
+            >2021</span
+          >
+          {
+            ` and I've loved it ever since. I may not know deeply how computers work,
+            but I love seeing how the pieces come together to create
+            something that feels like magic—that's how this website was made. 🐧`
+          }
         </Paragraph>
 
-        <Paragraph client:load tag="outside of coding" dir="rtl">
+        <Paragraph client:load tag='outside of coding' dir='rtl'>
           {`I'm also fascinated with `}
-          <span class="font-semibold text-blue-700 dark:text-[#3AAAF2]">mathematics</span>
-          {` and wish to make a career out of it someday. Things I love include: j̶a̶p̶a̶n̶, coffee, dark mode, and cats.`}
+          <span class='font-semibold text-blue-700 dark:text-[#3AAAF2]'>mathematics</span>
+          {
+            ` and wish to make a career out of it someday. Things I love include: marble coffee, dark mode, and cats.`
+          }
         </Paragraph>
 
-        <Paragraph client:load tag="currently?" dir="ltr">
+        <Paragraph client:load tag='currently?' dir='ltr'>
           {`A graduate student majoring in Computer Science at `}
-          <span class="font-semibold text-[#ff2c2c]">UNLV</span>
-          {`. Alongside my studies, I'm also interning as a software engineer at a local firm focusing in Web3, Big Data.`}
+          <span class='font-semibold text-[#ff2c2c]'>UNLV</span>
+          {
+            `. Alongside my studies, I'm also interning as a software engineer at a local firm focusing in Web3, Big Data.`
+          }
         </Paragraph>
 
-        <Paragraph client:load tag="rpg maker games" dir="rtl">
-          {`Words can't describe how big of a fan I am of this subculture, which had its heyday in the early 2010s.
-          I'm still actively playing these games and, hopefully, one day, `}
-          <span class="font-semibold text-purple-700 dark:text-purple-300">I will create one myself</span>
+        <Paragraph client:load tag='rpg maker games' dir='rtl'>
+          {
+            `Words can't describe how big of a fan I am of this subculture, which had its peak in the early 2010s.
+          I'm still actively playing these games and, hopefully, one day, `
+          }
+          <span class='font-semibold text-purple-700 dark:text-purple-300'
+            >I will create one myself</span
+          >
           {` Some of my personal favorites is in the dashboard.`}
         </Paragraph>
 
-        <Paragraph client:load tag="thank you" dir="ltr">
+        <Paragraph client:load tag='thank you' dir='ltr'>
           {`I hope you enjoy your stay. The source code for this website is available at `}
           <a
-            target="_blank"
-            class="link-underline3 link-underline2 font-semibold text-pink-800 dark:text-gold"
+            target='_blank'
+            class='link-underline3 link-underline2 dark:text-gold font-semibold text-pink-800'
             href={`https://github.com/Thienguen/thien-porfolio`}
-            rel="noreferrer noopener"
-            >@thienguen/website</a
+            rel='noreferrer noopener'>@thienguen/website</a
           >
         </Paragraph>
       </div>
