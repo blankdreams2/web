@@ -48,3 +48,6 @@ export const ICON_MAP: IconMap = {
   Email: 'lucide:mail',
   RSS: 'lucide:rss',
 }
+
+export const LIGHT_UNDERLINE = '#D87787'
+export const DARK_UNDERLINE = '#b620e0'

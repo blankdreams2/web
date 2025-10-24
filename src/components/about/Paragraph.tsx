@@ -3,6 +3,7 @@
 import React from 'react'
 import { RoughNotation } from 'react-rough-notation'
 import { Gamepad2 } from 'lucide-react'
+import { LIGHT_UNDERLINE, DARK_UNDERLINE } from '@/consts'
 
 export interface ParagraphProps {
   tag: string
@@ -11,10 +12,6 @@ export interface ParagraphProps {
   dir?: 'ltr' | 'rtl'
   children?: React.ReactNode
 }
-
-// Pick colors similar to the original component
-const LIGHT_UNDERLINE = '#D87787'
-const DARK_UNDERLINE = '#b620e0'
 
 export default function Paragraph({ tag, answer, customAnswer, dir = 'ltr', children }: ParagraphProps) {
   const [underlineColor, setUnderlineColor] = React.useState(LIGHT_UNDERLINE)
