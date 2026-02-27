@@ -1,6 +1,7 @@
 ---
 import Paragraph from '@/components/about/Paragraph.tsx'
 import LiveClock from '@/components/about/LiveClock'
+import AboutPageTitle from '@/components/about/AboutPageTitle'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
@@ -11,25 +12,27 @@ const repoUrl = 'https://github.com/blankdreams2/website'
 
 <Layout class="max-w-3xl">
   <PageHead slot="head" title="About" />
-  <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
-  <div class="about-page flex flex-col gap-y-8">
+  <AboutPageTitle client:load />
+  <!-- <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} /> -->
+  <div class="about-page bg-starfield relative flex flex-col gap-y-8">
     <!-- Hero: clock, location, profile -->
     <section
       class="bg-grid-pattern flex flex-col items-center gap-6 p-6 pb-4 text-center"
     >
       <LiveClock client:load />
-      <div class="group relative z-0 -rotate-2 transition-transform duration-300 hover:scale-105 hover:rotate-[-4deg]">
+      <!-- polaroid frame -->
+      <div class="group relative z-0 -rotate-2 bg-white p-3 pb-12 shadow-lg transition-transform duration-300 hover:scale-105 hover:rotate-[-4deg] hover:shadow-xl">
         <Image
           src="/static/coffee.png"
           alt="blank_dreams"
-          class="relative block h-auto w-44 shadow-lg transition-shadow duration-300 group-hover:shadow-xl sm:w-48"
+          class="relative block h-auto w-44 shadow-sm sm:w-48"
           width={200}
           height={200}
         />
         <p
-          class="font-caveat text-foreground dark:text-background absolute -bottom-4 left-1/2 -translate-x-1/2 text-sm whitespace-nowrap"
+          class="font-caveat absolute bottom-3 left-1/2 -translate-x-1/2 text-sm whitespace-nowrap text-neutral-800"
         >
-          me again :)
+          just the letter T.
         </p>
       </div>
       <h1 class="font-bon-vivant pt-2 text-6xl font-bold sm:text-7xl">

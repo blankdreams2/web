@@ -1,18 +1,23 @@
 ---
 import { SOCIAL_LINKS } from '@/consts'
-import Link from './Link.astro'
 import SocialIcons from './SocialIcons.astro'
 ---
 
 <footer class='font-editorial mt-16 pt-12'>
   <div
-    class='mx-auto mb-8 flex max-w-screen-md flex-col items-center justify-center gap-2 text-sm text-center sm:mb-6'
+    class='mx-auto mb-8 flex max-w-screen-md flex-col items-center justify-center gap-2 text-center text-sm sm:mb-6'
   >
     <p class='text-muted-foreground'>
-      &copy; {new Date().getFullYear()}・From a boy who was never enough<span class='text-accent'>.</span>
+      &copy; {new Date().getFullYear()}・From a boy who was never enough<span class='text-accent'
+        >.</span
+      >
     </p>
     <div class='mt-2'>
-      <SocialIcons links={SOCIAL_LINKS} />
+      <SocialIcons
+        links={SOCIAL_LINKS}
+        variant='ghost'
+        iconClass='size-5 text-muted-foreground hover:text-foreground transition-colors'
+      />
     </div>
   </div>
 

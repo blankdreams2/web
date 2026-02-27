@@ -10,7 +10,7 @@ export default function LiveClock() {
   const [time, setTime] = useState('00:00:00')
 
   useEffect(() => {
-    const format = (n: number) => n.toString().padStart(2, '0')
+    // const format = (n: number) => n.toString().padStart(2, '0')
     const update = () => {
       const now = new Date()
       const formatter = new Intl.DateTimeFormat('en-CA', {
