@@ -18,8 +18,8 @@ function CupCoffee() {
   })
 
   return (
-    <group ref={groupRef} position={[0.5, -2, 1.75]}>
-      <primitive object={scene} scale={1.25} />
+    <group ref={groupRef} position={[0.3, 0, 1.75]}>
+      <primitive object={scene} scale={1.3} />
     </group>
   )
 }
@@ -37,7 +37,7 @@ function CoffeeMachine() {
   })
 
   return (
-    <group ref={groupRef} position={[1.15, -0.5, 0]}>
+    <group ref={groupRef} position={[1, -1, 0.55]}>
       <primitive object={scene} scale={0.5} />
     </group>
   )
@@ -75,8 +75,8 @@ function Burger() {
   })
 
   return (
-    <group ref={groupRef} position={[-1.0, -0.9, 0.3]}>
-      <primitive object={scene} scale={0.05}  />
+    <group ref={groupRef} position={[-1, 0, 1.25]}>
+      <primitive object={scene} scale={0.045}  />
     </group>
   )
 }
@@ -100,13 +100,9 @@ function Computer() {
   )
 }
 
-// Preload models so they're ready when scene mounts
-useGLTF.preload('/3d/penguin.glb')
-useGLTF.preload('/3d/computer.glb')
-
 export function CoffeeScene() {
   return (
-    <div className="absolute -bottom-6 -right-12 z-10 size-48 sm:size-96 overflow-visible">
+    <div className="absolute -bottom-6 -right-20 z-10 size-48 sm:size-96 overflow-visible">
       <div className="size-full min-h-[192px] min-w-[192px] sm:min-h-[300px] sm:min-w-[300px]">
         <Canvas
           camera={{ position: [-0.2, 0.6, 3.5], fov: 60 }}
@@ -116,8 +112,8 @@ export function CoffeeScene() {
           <directionalLight position={[5, 5, 5]} intensity={1.5} />
           <CupCoffee />
           <CoffeeMachine />
-          {/* <Penguin /> */}
-          {/* <Computer /> */}
+          <Penguin />
+          <Computer />
           <Burger />
         </Canvas>
       </div>
