@@ -11,22 +11,24 @@ export type Experience = {
 // from linkedin - you can fix/edit these
 export const EXPERIENCES: Experience[] = [
   {
-    role: 'Head of Software Development Committee',
-    company: 'Cyber Clinic',
-    duration: 'Feb 2024 - Dec 2025',
-    location: 'Las Vegas, NV',
-    description:
-      'Led software development initiatives. PHP, Bootstrap, project management.',
-    technologies: ['PHP', 'Bootstrap', 'Linux', 'Cloudflare'],
-  },
-  {
     role: 'Software Engineer',
     company: 'New Harbor',
     duration: 'Sep 2024 - May 2025',
     location: 'Remote',
     description:
       'Building a cybersecurity platform. Full-stack work with modern Vue ecosystem.',
+    logo: '/experience/newharbor_logo.jpg',
     technologies: ['TypeScript', 'Nuxt', 'Vue', 'Supabase', 'UX'],
+  },
+  {
+    role: 'Lead Engineer',
+    company: 'Cyber Clinic',
+    duration: 'Feb 2024 - Dec 2025',
+    location: 'Las Vegas, NV',
+    description:
+      'Led software development initiatives. Using PHP, Bootstrap, project management, etc.',
+    logo: '/experience/cyberclinic.png',
+    technologies: ['PHP', 'Bootstrap', 'Linux', 'Cloudflare'],
   },
   {
     role: 'Software Engineer I',
@@ -34,7 +36,8 @@ export const EXPERIENCES: Experience[] = [
     duration: 'Jan 2023 - Oct 2024',
     location: 'Remote',
     description:
-      'Full-stack development, user experience, API integration. Building and maintaining production systems.',
+      'End-to-end product engineering, UX/UI, API integration. Building and maintaining production systems.',
+    logo: '/experience/decentrepx.png',
     technologies: [
       'TypeScript',
       'React',
@@ -50,9 +53,11 @@ export const EXPERIENCES: Experience[] = [
     duration: 'Dec 2022 - Jun 2023',
     location: 'Hybrid',
     description:
-      'Got hands-on with full-stack development, Zapier integrations, and real-world dev processes.',
+      'Worked on an online auction platform for residential real estate.',
+    logo: '/experience/decentrepx.png',
     technologies: ['TypeScript', 'React', 'Zapier', 'Firebase', 'Blockchain'],
   },
+
   // {
   //   role: 'President',
   //   company: 'UNLV Association for Computing Machinery',
@@ -62,20 +67,22 @@ export const EXPERIENCES: Experience[] = [
   //     'Leadership, project management, campus outreach. Leading the ACM chapter.',
   // },
   {
-    role: 'CS Teaching Assistant',
+    role: 'Teaching Assistant',
     company: 'University of Nevada, Las Vegas',
     duration: '2025',
     location: 'Las Vegas, NV',
     description:
-      'Teaching assistant for object-oriented programming courses. C++, Linux, Python.',
+      'Assisted with object-oriented programming courses. C++, Linux, Python.',
+    logo: '/experience/unlv.jpg',
     technologies: ['C++', 'Python', 'Java'],
   },
   {
-    role: 'Computer Science Tutor',
+    role: 'Tutor',
     company: 'University of Nevada, Las Vegas',
     duration: '2025',
     location: 'Las Vegas, NV',
-    description: 'Support falculty and students with computer science topics.',
+    description: 'Helped faculty and students with computer science topics.',
+    logo: '/experience/unlv.jpg',
     technologies: [
       'C/C++',
       'Python',
@@ -89,10 +96,12 @@ export const EXPERIENCES: Experience[] = [
   },
   {
     role: 'Undergraduate Research Assistant',
-    company: 'University of Nevada, Las Vegas',
+    company: 'IIS Lab, University of Nevada, Las Vegas',
     duration: '2025',
     location: 'Las Vegas, NV',
-    description: 'Assist in research on deep learning & cybersecurity.',
+    description:
+      'Helped with research on deep learning and generative AI in cybersecurity.',
+    logo: '/experience/iislab.png',
     technologies: ['Python', 'PyTorch', 'TensorFlow', 'Keras'],
   },
 ]

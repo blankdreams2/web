@@ -35,8 +35,16 @@ export const NAV_LINKS: SocialLink[] = [
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    href: 'https://github.com/thienguen',
+    href: 'https://github.com/blankdreams2',
     label: 'GitHub',
+  },
+  {
+    href: 'https://www.linkedin.com/in/thien-nguyen-2a4a37234/',
+    label: 'LinkedIn',
+  },
+  {
+    href: 'mailto:nein@nein.nein',
+    label: 'Email',
   },
   {
     href: '/rss.xml',
@@ -53,5 +61,6 @@ export const ICON_MAP: IconMap = {
   RSS: 'lucide:rss',
 }
 
+// forgot what is this for.
 export const LIGHT_UNDERLINE = '#D87787'
 export const DARK_UNDERLINE = '#b620e0'

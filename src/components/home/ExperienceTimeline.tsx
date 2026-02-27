@@ -11,17 +11,13 @@ const INITIAL_COUNT = 3
 const ExperienceItem = ({ exp }: { exp: Experience }): React.ReactElement => {
   return (
     <li className="relative flex gap-6">
-      {/* company logo placeholder - centered on timeline */}
+      {/* company logo - centered on timeline */}
       <div
-        className="bg-accent/20 border-accent relative z-10 mt-1 flex size-12 shrink-0 items-center justify-center rounded-full border-2"
+        className="bg-muted/50 relative z-10 mt-1 flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-full"
         aria-hidden
       >
         {exp.logo ? (
-          <img
-            src={exp.logo}
-            alt=""
-            className="size-10 rounded-full object-cover"
-          />
+          <img src={exp.logo} alt="" className="size-full object-contain bg-white" />
         ) : (
           <Building2 className="text-accent size-6" strokeWidth={1.5} />
         )}
@@ -115,7 +111,7 @@ export function ExperienceTimeline({ experiences }: Props) {
             <button
               type="button"
               onClick={() => setExpanded(!expanded)}
-              className="text-accent hover:text-accent/80 border-accent/50 bg-accent/10 inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
+              className="text-muted-foreground hover:text-foreground group inline-flex items-center gap-2 text-sm transition-colors"
             >
               {expanded ? 'Show less' : `See ${rest.length} more`}
               <motion.span
