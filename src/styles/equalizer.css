@@ -52,3 +52,28 @@
   height: 24px;
   animation: pulse5 1s infinite;
 }
+
+/* timeline line glow */
+
+@keyframes timelineGlow {
+  0%,
+  100% {
+    opacity: 0.6;
+    box-shadow: 0 0 4px var(--accent);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 16px var(--accent), 0 0 24px var(--accent);
+  }
+}
+
+.timeline-line {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent) 20%,
+    var(--accent) 80%,
+    transparent
+  );
+  animation: timelineGlow 2.5s ease-in-out infinite;
+}

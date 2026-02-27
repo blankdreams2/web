@@ -1,5 +1,8 @@
 ---
+import { ExperienceTimeline } from '@/components/home/ExperienceTimeline'
+import PageTitle from '@/components/home/PageTitle.astro'
 import PageHead from '@/components/PageHead.astro'
+import { EXPERIENCES } from '@/data/experiences'
 import Layout from '@/layouts/Layout.astro'
 import { Image } from 'astro:assets'
 
@@ -9,7 +12,14 @@ import profileImage from '../../public/static/coffee.png'
 <Layout class="max-w-3xl">
   <PageHead slot="head" title="Home" />
 
-  <section class="flex min-h-[70vh] flex-col items-center justify-center gap-y-10 py-16">
+  <PageTitle
+    title="If I could put a picture of an anime girl here, I would. &X-a-vier"
+    titleJP="ホームページ。"
+  />
+
+  <section
+    class="flex min-h-[70vh] flex-col items-center justify-center gap-y-6 py-16"
+  >
     <!-- polaroid image -->
     <div
       id="profile-image-container"
@@ -28,19 +38,26 @@ import profileImage from '../../public/static/coffee.png'
     </div>
 
     <!-- chào intro -->
-    <div class="flex flex-col items-center gap-y-1 text-center">
-      <p class="font-editorial text-muted-foreground text-xl italic sm:text-2xl">
+    <div class="flex flex-col items-center text-center">
+      <p
+        class="font-editorial text-muted-foreground text-xl italic sm:text-2xl"
+      >
         Chào, I'm
       </p>
-      <h1 class="font-display text-foreground text-5xl leading-tight font-bold tracking-tight sm:text-7xl">
-        Thien Nguyen
+      <h1
+        class="text-accent font-display text-5xl leading-tight font-bold tracking-tight sm:text-7xl"
+      >
+        blank_dreams
       </h1>
     </div>
 
     <!-- ctrl+k placeholder -->
     <p class="text-muted-foreground flex items-center gap-2 text-sm">
       Press
-      <kbd class="rounded border border-white/20 bg-white/10 px-2 py-0.5 font-mono text-xs">Ctrl</kbd>
+      <kbd
+        class="rounded border border-white/20 bg-white/10 px-2 py-0.5 font-mono text-xs"
+        >Ctrl</kbd
+      >
       + K to start
     </p>
 
@@ -50,5 +67,10 @@ import profileImage from '../../public/static/coffee.png'
       <span class="middle"></span>
       <span class="right"></span>
     </div>
+  </section>
+
+  <!-- experience section -->
+  <section class="mt-16">
+    <ExperienceTimeline client:load experiences={EXPERIENCES} />
   </section>
 </Layout>

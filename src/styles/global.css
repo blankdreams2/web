@@ -238,3 +238,13 @@
     @apply border-border outline-ring/50 tracking-tight;
   }
 }
+
+/* Light theme selection */
+::selection {
+  @apply bg-gray-500 text-white;
+}
+
+/* Dark theme selection */
+.dark ::selection {
+  @apply bg-gray-300 text-black;
+}
