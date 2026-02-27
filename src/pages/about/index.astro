@@ -1,69 +1,84 @@
 ---
 import Paragraph from '@/components/about/Paragraph.tsx'
+import LiveClock from '@/components/about/LiveClock'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
-// import { getAllProjects } from '@/lib/data-utils'
+import { Image } from 'astro:assets'
 
-// const projects = await getAllProjects()
+const repoUrl = 'https://github.com/blankdreams2/website'
 ---
 
-<Layout class='max-w-3xl'>
-  <PageHead slot='head' title='About' />
+<Layout class="max-w-3xl">
+  <PageHead slot="head" title="About" />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
-  <h1 class='mb-6 '>In Progress...</h1>
-
-  <!-- <section>
-    <div class='min-w-full'>
-      <div class='mb-8'>
-        <Paragraph client:load tag='chào' dir='ltr'>
-          I started coding in <span class='font-semibold text-pink-600 dark:text-yellow-500'
-            >2021</span
-          >
-          {
-            ` and I've loved it ever since. I may not know deeply how computers work,
-            but I love seeing how the pieces come together to create
-            something that feels like magic—that's how this website was made. 🐧`
-          }
-        </Paragraph>
-
-        <Paragraph client:load tag='outside of coding' dir='rtl'>
-          {`I'm also fascinated with `}
-          <span class='font-semibold text-blue-700 dark:text-[#3AAAF2]'>mathematics</span>
-          {
-            ` and wish to make a career out of it someday. Things I love include: marble coffee, dark mode, and cats.`
-          }
-        </Paragraph>
-
-        <Paragraph client:load tag='currently?' dir='ltr'>
-          {`A graduate student majoring in Computer Science at `}
-          <span class='font-semibold text-[#ff2c2c]'>UNLV</span>
-          {
-            `. Alongside my studies, I'm also interning as a software engineer at a local firm focusing in Web3, Big Data.`
-          }
-        </Paragraph>
-
-        <Paragraph client:load tag='rpg maker games' dir='rtl'>
-          {
-            `Words can't describe how big of a fan I am of this subculture, which had its peak in the early 2010s.
-          I'm still actively playing these games and, hopefully, one day, `
-          }
-          <span class='font-semibold text-purple-700 dark:text-purple-300'
-            >I will create one myself</span
-          >
-          {` Some of my personal favorites is in the dashboard.`}
-        </Paragraph>
-
-        <Paragraph client:load tag='thank you' dir='ltr'>
-          {`I hope you enjoy your stay. The source code for this website is available at `}
-          <a
-            target='_blank'
-            class='link-underline3 link-underline2 dark:text-gold font-semibold text-pink-800'
-            href={`https://github.com/Thienguen/thien-porfolio`}
-            rel='noreferrer noopener'>@blankdreams2/website</a
-          >
-        </Paragraph>
+  <div class="about-page flex flex-col gap-y-8">
+    <!-- Hero: clock, location, profile -->
+    <section
+      class="bg-grid-pattern flex flex-col items-center gap-6 p-6 pb-4 text-center"
+    >
+      <LiveClock client:load />
+      <div class="group relative z-0 -rotate-2 transition-transform duration-300 hover:scale-105 hover:rotate-[-4deg]">
+        <Image
+          src="/static/coffee.png"
+          alt="blank_dreams"
+          class="relative block h-auto w-44 shadow-lg transition-shadow duration-300 group-hover:shadow-xl sm:w-48"
+          width={200}
+          height={200}
+        />
+        <p
+          class="font-caveat text-foreground dark:text-background absolute -bottom-4 left-1/2 -translate-x-1/2 text-sm whitespace-nowrap"
+        >
+          me again :)
+        </p>
       </div>
-    </div>
-  </section> -->
+      <h1 class="font-bon-vivant pt-2 text-6xl font-bold sm:text-7xl">
+        who's <br />
+        <span class="text-accent -mt-8 block font-display text-5xl font-black sm:text-6xl">
+          blank_dreams?
+        </span>
+      </h1>
+    </section>
+
+    <!-- About sections -->
+    <section class="flex flex-col gap-8 px-2">
+      <Paragraph client:load tag="chào, or hi there" dir="ltr">
+        Started coding in <span class="font-semibold text-[#facc15]">2021</span>
+        {` and I've been kinda like? it. While I may not be deeply curious about how "computer" works but I do want to see how they come together and literally create dark magic, and that's how this website was made. `}
+      </Paragraph>
+
+      <Paragraph client:load tag="outside of coding" dir="rtl">
+        {`I'm also fascinated with `}
+        <span class="font-semibold text-accent">mathematics</span>
+        {` and wish to make a career out of it someday. Things I love include: `}
+        <span class="font-semibold text-accent">japan</span>
+        {`, coffee, dark mode, and cats.`}
+      </Paragraph>
+
+      <Paragraph client:load tag="currently?" dir="ltr">
+        <!-- {`An undergraduate student majoring in Computer Science at `}
+        <span class="font-semibold text-accent">UNLV</span>
+        {`. Alongside my studies, I'm also interning as a software engineer at a local firm focusing in Web3, Big Data.`} -->
+        {`Limbus Company.`}
+      </Paragraph>
+
+      <Paragraph client:load tag="rpg maker games" dir="rtl">
+        {`Words can't describe how big of a fan I am of this subculture, which had its heyday in the early 2010s. I'm still actively playing these games and, hopefully, one day, `}
+        <span class="font-semibold text-accent">I will create one myself</span>
+        {`. Some of my personal favorites is in the dashboard.`}
+      </Paragraph>
+
+      <Paragraph client:load tag="thank you" dir="ltr">
+        {`I hope you enjoy your stay. The source code for this website is available at `}
+        <a
+          href={repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-semibold text-accent underline decoration-accent underline-offset-2 hover:opacity-80"
+        >
+          @blankdreams2/web
+        </a>
+      </Paragraph>
+    </section>
+  </div>
 </Layout>
