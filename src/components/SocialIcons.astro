@@ -14,7 +14,7 @@ interface Props {
 const { links, variant = 'outline', iconClass = 'size-4' } = Astro.props
 ---
 
-<ul class="flex flex-wrap justify-center gap-6" role="list">
+<ul class="flex flex-wrap justify-center gap-2" role="list">
   {
     links.map(({ href, label }) => (
       <li>

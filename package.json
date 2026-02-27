@@ -21,6 +21,7 @@
     "@expressive-code/plugin-collapsible-sections": "^0.40.2",
     "@expressive-code/plugin-line-numbers": "^0.40.2",
     "@iconify-json/lucide": "^1.2.94",
+    "@iconify-json/simple-icons": "^1.2.71",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@react-three/drei": "^10.7.7",
@@ -50,7 +51,8 @@
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1",
     "three": "^0.183.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typewriter-effect": "^2.22.0"
   },
   "devDependencies": {
     "@types/three": "^0.183.1",

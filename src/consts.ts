@@ -20,12 +20,12 @@ export const NAV_LINKS: SocialLink[] = [
     label: '/about',
   },
   {
-    href: '/blog',
-    label: '/blog',
-  },
-  {
     href: '/project',
     label: '/project',
+  },
+  {
+    href: '/blog',
+    label: '/blog',
   },
   {
     href: '/guestbook',
@@ -43,6 +43,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
     label: 'LinkedIn',
   },
   {
+    href: 'https://discordapp.com/users/481754320778428418',
+    label: 'Discord',
+  },
+  {
     href: 'mailto:nein@nein.nein',
     label: 'Email',
   },
@@ -57,6 +61,7 @@ export const ICON_MAP: IconMap = {
   GitHub: 'lucide:github',
   LinkedIn: 'lucide:linkedin',
   Twitter: 'lucide:twitter',
+  Discord: 'simple-icons:discord',
   Email: 'lucide:mail',
   RSS: 'lucide:rss',
 }

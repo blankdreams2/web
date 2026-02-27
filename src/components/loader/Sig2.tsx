@@ -3,9 +3,9 @@
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-// Swiggly underline path — more curves
+// Chaotic underline — wild curves, irregular amplitude
 const UNDERLINE_PATH =
-  'M 0,85 C 70,75 140,95 210,85 C 280,75 350,95 420,85 C 490,75 560,95 630,85 C 700,75 770,95 840,85'
+  'M 0,85 C 50,60 100,95 150,75 C 200,98 260,68 320,90 C 380,65 440,92 500,78 C 560,96 620,72 680,88 C 740,70 780,94 840,82'
 
 interface SignatureProps {
   className?: string
@@ -56,10 +56,9 @@ export function Signature({ className }: SignatureProps) {
         ))}
       </motion.span>
 
-      {/* Drawing underline — 3x longer, 3x wider stroke */}
       <svg
-        viewBox="0 0 840 100"
-        className="h-8 w-full max-w-[960px] sm:max-w-[1200px] md:max-w-[1440px]"
+        viewBox="0 0 900 90"
+        className="h-10 w-full max-w-[960px] -translate-y-4 sm:max-w-[1200px] md:max-w-[1440px]"
         fill="none"
       >
         <motion.path
