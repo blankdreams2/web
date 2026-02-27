@@ -1,8 +1,8 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF, Clone } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 import type { Group } from 'three'
 
 // cup: inside polaroid bottom-right, gentle steam-like bob
@@ -18,7 +18,7 @@ function CupCoffee() {
   })
 
   return (
-    <group ref={groupRef} position={[0.3, 0, 1.75]}>
+    <group ref={groupRef} position={[0.3, 0, 1.8]}>
       <primitive object={scene} scale={1.3} />
     </group>
   )
@@ -43,21 +43,22 @@ function CoffeeMachine() {
   )
 }
 
-// penguin: top-left outside polaroid
+// penguin: top-left - SAME z as cup (1.8) so definitely in view
 function Penguin() {
   const groupRef = useRef<Group>(null)
   const { scene } = useGLTF('/3d/penguin.glb')
+  const cloned = useMemo(() => scene.clone(), [scene])
 
   useFrame((state) => {
     if (!groupRef.current) return
     const t = state.clock.elapsedTime
-    groupRef.current.position.y = 0.4 + Math.sin(t * 0.7) * 0.05
+    groupRef.current.position.y = 0.2 + Math.sin(t * 0.7) * 0.05
     groupRef.current.rotation.y = Math.sin(t * 0.3) * 0.1
   })
 
   return (
-    <group ref={groupRef} position={[-0.7, 0.4, 0.4]}>
-      <Clone object={scene} scale={0.5} />
+    <group ref={groupRef} position={[-0.6, 0.2, 1.8]}>
+      <primitive object={cloned} scale={1} />
     </group>
   )
 }
@@ -75,34 +76,35 @@ function Burger() {
   })
 
   return (
-    <group ref={groupRef} position={[-1, 0, 1.25]}>
-      <primitive object={scene} scale={0.045}  />
+    <group ref={groupRef} position={[-0.9, 0, 1]}>
+      <primitive object={scene} scale={0.04}  />
     </group>
   )
 }
 
-// computer: top-right outside polaroid
+// computer: top-right - SAME z as cup (1.8) so definitely in view
 function Computer() {
   const groupRef = useRef<Group>(null)
   const { scene } = useGLTF('/3d/computer.glb')
+  const cloned = useMemo(() => scene.clone(), [scene])
 
   useFrame((state) => {
     if (!groupRef.current) return
     const t = state.clock.elapsedTime
-    groupRef.current.position.y = 0.35 + Math.sin(t * 0.65) * 0.05
+    groupRef.current.position.y = 0.2 + Math.sin(t * 0.65) * 0.05
     groupRef.current.rotation.z = -0.05 + Math.sin(t * 0.4) * 0.02
   })
 
   return (
-    <group ref={groupRef} position={[0.85, 0.35, 0.4]}>
-      <Clone object={scene} scale={0.35} />
+    <group ref={groupRef} position={[-1, 0, 0]}>
+      <primitive object={cloned} scale={0.0045} />
     </group>
   )
 }
 
 export function CoffeeScene() {
   return (
-    <div className="absolute -bottom-6 -right-20 z-10 size-48 sm:size-96 overflow-visible">
+    <div className="absolute -bottom-6 -right-20 z-10 size-96 overflow-visible">
       <div className="size-full min-h-[192px] min-w-[192px] sm:min-h-[300px] sm:min-w-[300px]">
         <Canvas
           camera={{ position: [-0.2, 0.6, 3.5], fov: 60 }}
@@ -110,10 +112,10 @@ export function CoffeeScene() {
         >
           <ambientLight intensity={1} />
           <directionalLight position={[5, 5, 5]} intensity={1.5} />
+          {/* <Computer /> */}
           <CupCoffee />
           <CoffeeMachine />
           <Penguin />
-          <Computer />
           <Burger />
         </Canvas>
       </div>
