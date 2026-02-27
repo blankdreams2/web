@@ -4,18 +4,25 @@
 
 @theme inline {
   --font-sans:
-    /* Geist, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', */
-    'Inclusive Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-mono:
     Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
+  --font-display: 'Mudstone Sans', sans-serif;
+  --font-editorial: 'PP Editorial New', serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-caveat: 'Caveat', cursive;
+  --font-bonvivant: 'BonVivant', cursive;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
 
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
@@ -59,30 +66,166 @@
   font-display: swap;
 }
 
+/* display + decorative */
+
+@font-face {
+  font-family: 'Mudstone Sans';
+  src: url('/fonts/MudstoneSans.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/BricolageGrotesque.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('/fonts/Caveat.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BonVivant';
+  src: url('/fonts/BonVivant.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* pp editorial new family */
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('/fonts/PPEditorial/PPEditorialNew-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('/fonts/PPEditorial/PPEditorialNew-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('/fonts/PPEditorial/PPEditorialNew-Ultralight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('/fonts/PPEditorial/PPEditorialNew-UltralightItalic.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('/fonts/PPEditorial/PPEditorialNew-Ultrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('/fonts/PPEditorial/PPEditorialNew-UltraboldItalic.otf') format('opentype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* playfair display family */
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay/PlayfairDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay/PlayfairDisplay-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay/PlayfairDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay/PlayfairDisplay-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay/PlayfairDisplay-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay/PlayfairDisplay-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
-  /* --background: oklch(1 0 0); */
-  --background: rgb(249 244 235);
-  --foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --background: #000000;
+  --foreground: #f5f5f5;
+  --primary: #f5f5f5;
+  --primary-foreground: #000000;
+  --accent: #facc15;
+  --accent-foreground: #000000;
+  --muted: #1a1a1a;
+  --muted-foreground: #a3a3a3;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: rgba(255 255 255 / 0.1);
+  --ring: #facc15;
 }
 
 [data-theme='dark'] {
-  --background: rgb(32 33 34);
-  /* --background: oklch(0.145 0 0); */
-  --foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --background: #000000;
+  --foreground: #f5f5f5;
+  --primary: #f5f5f5;
+  --primary-foreground: #000000;
+  --accent: #facc15;
+  --accent-foreground: #000000;
+  --muted: #1a1a1a;
+  --muted-foreground: #a3a3a3;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --ring: oklch(0.556 0 0);
+  --border: rgba(255 255 255 / 0.1);
+  --ring: #facc15;
 }
 
 @layer base {

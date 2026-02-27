@@ -1,66 +1,54 @@
 ---
-import BlogCard from '@/components/BlogCard.astro'
-import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
-import { buttonVariants } from '@/components/ui/button'
-import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
-import { getRecentPosts } from '@/lib/data-utils'
+import { Image } from 'astro:assets'
 
-const blog = await getRecentPosts(SITE.featuredPostCount)
+import profileImage from '../../public/static/coffee.png'
 ---
 
 <Layout class="max-w-3xl">
   <PageHead slot="head" title="Home" />
-  <h1 class="mb-6 text-xl">Migrating from vankythien.dev, thienguen.gitbook.io/ctf-writeups/ a work in progress</h1>
 
-  <!-- <section class="rounded-lg border">
-    <div class="flex flex-col space-y-1.5 p-6">
-      <h3 class="text-3xl leading-none font-medium">T</h3>
-      <p class="text-muted-foreground text-sm">blank_dreams • personal blog</p>
-    </div>
-    <div class="p-6 pt-0">
-
-      <p class="text-muted-foreground mb-2 text-sm">
-        This is my corner of the web where I write about software, UI/UX, pixel art, and CTFs.
-      </p>
-      <p class="text-muted-foreground text-sm">
-        Read more <Link href="/about" class="text-foreground" underline
-          >about me</Link
-        > or jump straight to the <Link
-          href="/blog"
-          class="text-foreground"
-          underline>blog</Link
-        >.
-      </p>
-    </div>
-  </section> -->
-  <!-- <section class="flex flex-col gap-y-4">
-    <h2 class="text-2xl font-medium">Latest posts</h2>
-    <ul class="flex flex-col gap-y-4">
-      {
-        blog.map((post) => (
-          <li>
-            <BlogCard entry={post} />
-          </li>
-        ))
-      }
-    </ul>
-    <div class="flex justify-center">
-      <Link
-        href="/blog"
-        class={buttonVariants({ variant: 'ghost' }) + ' group'}
+  <section class="flex min-h-[70vh] flex-col items-center justify-center gap-y-10 py-16">
+    <!-- polaroid image -->
+    <div
+      id="profile-image-container"
+      class="group relative rotate-2 bg-white p-3 pb-12 shadow-lg transition-transform duration-300 hover:scale-105 hover:rotate-3"
+    >
+      <Image
+        src={profileImage}
+        alt="blank_dreams"
+        class="relative block h-auto w-44 sm:w-52"
+      />
+      <p
+        class="font-caveat absolute bottom-3 left-1/2 -translate-x-1/2 text-sm whitespace-nowrap text-neutral-800"
       >
-        See all posts <span
-          class="ml-1.5 transition-transform group-hover:translate-x-1"
-          >&rarr;</span
-        >
-      </Link>
+        nope, thats not me 🐧
+      </p>
     </div>
-  </section> -->
 
+    <!-- chào intro -->
+    <div class="flex flex-col items-center gap-y-1 text-center">
+      <p class="font-editorial text-muted-foreground text-xl italic sm:text-2xl">
+        Chào, I'm
+      </p>
+      <h1 class="font-display text-foreground text-5xl leading-tight font-bold tracking-tight sm:text-7xl">
+        Thien Nguyen
+      </h1>
+    </div>
 
+    <!-- ctrl+k placeholder -->
+    <p class="text-muted-foreground flex items-center gap-2 text-sm">
+      Press
+      <kbd class="rounded border border-white/20 bg-white/10 px-2 py-0.5 font-mono text-xs">Ctrl</kbd>
+      + K to start
+    </p>
 
-  <!-- section here is gonna be that chao, or hi there -->
+    <!-- equalizer -->
+    <div class="equalizer">
+      <span class="left"></span>
+      <span class="middle"></span>
+      <span class="right"></span>
+    </div>
+  </section>
 </Layout>
-
