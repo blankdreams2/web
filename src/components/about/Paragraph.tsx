@@ -1,9 +1,9 @@
 'use client'
 
-import React from 'react'
-import { RoughNotation } from 'react-rough-notation'
+import { Highlighter } from '@/components/ui/highlighter'
+import { DARK_UNDERLINE, LIGHT_UNDERLINE } from '@/consts'
 import { Gamepad2, Laptop2 } from 'lucide-react'
-import { LIGHT_UNDERLINE, DARK_UNDERLINE } from '@/consts'
+import React from 'react'
 
 export interface ParagraphProps {
   tag: string
@@ -21,6 +21,14 @@ export default function Paragraph({
   children,
 }: ParagraphProps) {
   const [underlineColor, setUnderlineColor] = React.useState(LIGHT_UNDERLINE)
+  const [highlightKey, setHighlightKey] = React.useState(0)
+
+  // Re-trigger highlighter on page load (fixes client-side nav)
+  React.useEffect(() => {
+    const handler = () => setHighlightKey((k) => k + 1)
+    document.addEventListener('astro:page-load', handler)
+    return () => document.removeEventListener('astro:page-load', handler)
+  }, [])
 
   // Observe theme changes by watching the `dark` class on the root element
   React.useEffect(() => {
@@ -52,16 +60,15 @@ export default function Paragraph({
           {tag === 'chào, or hi there' && (
             <Laptop2 className="mt-1 mr-1.5 inline-block h-5 w-5" />
           )}
-          <RoughNotation
-            type="underline"
+          <Highlighter
+            key={highlightKey}
+            action="underline"
             color={underlineColor}
             strokeWidth={2}
-            order={1}
-            show={true}
-            animationDelay={200}
+            isView={false}
           >
             {tag || 'Lorem ipsum dolor sit amet.'}
-          </RoughNotation>
+          </Highlighter>
         </p>
 
         {customAnswer || children ? (
