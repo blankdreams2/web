@@ -43,7 +43,7 @@ const ExperienceItem = ({ exp }: { exp: Experience }): React.ReactElement => {
             {exp.technologies.map((tech) => (
               <span
                 key={tech}
-                className="inline-flex items-center gap-1.5 rounded-full bg-muted px-3 py-1 text-xs"
+                className="bg-muted inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs"
               >
                 <TechIcon name={tech} />
                 {tech}
@@ -67,13 +67,13 @@ export function ExperienceTimeline({ experiences }: Props) {
   const hasMore = rest.length > 0
 
   return (
-    <section>
+    <section className="mt-16">
       <h2 className="text-5xl font-bold">
         Experience<span className="text-accent">.</span>
       </h2>
       <p className="text-muted-foreground mb-6 text-2xl">
         Where I've{' '}
-        <span className="text-foreground font-serif italic underline decoration-accent underline-offset-4">
+        <span className="text-foreground decoration-accent font-serif italic underline underline-offset-4">
           Worked
         </span>{' '}
         so far.
@@ -81,15 +81,14 @@ export function ExperienceTimeline({ experiences }: Props) {
 
       <div className="relative">
         <div
-          className="timeline-line absolute left-6 top-2 bottom-2 z-0 w-px"
+          className="bg-border absolute top-2 bottom-2 left-6 w-px"
           aria-hidden
         />
 
-        <ul className="relative z-10 flex flex-col gap-8">
+        <ul className="flex flex-col gap-8">
           {initial.map((exp, i) => (
             <ExperienceItem key={`${exp.company}-${exp.role}-${i}`} exp={exp} />
           ))}
-
 
           <AnimatePresence initial={false}>
             {expanded && (
@@ -101,7 +100,10 @@ export function ExperienceTimeline({ experiences }: Props) {
                 className="flex flex-col gap-8 overflow-hidden"
               >
                 {rest.map((exp, i) => (
-                  <ExperienceItem key={`${exp.company}-${exp.role}-${i}`} exp={exp} />
+                  <ExperienceItem
+                    key={`${exp.company}-${exp.role}-${i}`}
+                    exp={exp}
+                  />
                 ))}
               </motion.div>
             )}
@@ -113,7 +115,7 @@ export function ExperienceTimeline({ experiences }: Props) {
             <button
               type="button"
               onClick={() => setExpanded(!expanded)}
-              className="text-accent hover:text-accent/80 inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/10 px-5 py-2.5 text-sm font-medium transition-colors"
+              className="text-accent hover:text-accent/80 border-accent/50 bg-accent/10 inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
             >
               {expanded ? 'Show less' : `See ${rest.length} more`}
               <motion.span

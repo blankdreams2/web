@@ -1,76 +1,17 @@
 ---
 import { ExperienceTimeline } from '@/components/home/ExperienceTimeline'
+import Hero from '@/components/home/Hero.astro'
 import PageTitle from '@/components/home/PageTitle.astro'
+import WorksSection from '@/components/home/WorksSection.astro'
 import PageHead from '@/components/PageHead.astro'
 import { EXPERIENCES } from '@/data/experiences'
 import Layout from '@/layouts/Layout.astro'
-import { Image } from 'astro:assets'
-
-import profileImage from '../../public/static/coffee.png'
 ---
 
 <Layout class="max-w-3xl">
   <PageHead slot="head" title="Home" />
-
-  <PageTitle
-    title="If I could put a picture of an anime girl here, I would. &X-a-vier"
-    titleJP="ホームページ。"
-  />
-
-  <section
-    class="flex min-h-[70vh] flex-col items-center justify-center gap-y-6 py-16"
-  >
-    <!-- polaroid image -->
-    <div
-      id="profile-image-container"
-      class="group relative rotate-2 bg-white p-3 pb-12 shadow-lg transition-transform duration-300 hover:scale-105 hover:rotate-3"
-    >
-      <Image
-        src={profileImage}
-        alt="blank_dreams"
-        class="relative block h-auto w-44 sm:w-52"
-      />
-      <p
-        class="font-caveat absolute bottom-3 left-1/2 -translate-x-1/2 text-sm whitespace-nowrap text-neutral-800"
-      >
-        nope, thats not me 🐧
-      </p>
-    </div>
-
-    <!-- chào intro -->
-    <div class="flex flex-col items-center text-center">
-      <p
-        class="font-editorial text-muted-foreground text-xl italic sm:text-2xl"
-      >
-        Chào, I'm
-      </p>
-      <h1
-        class="text-accent font-display text-5xl leading-tight font-bold tracking-tight sm:text-7xl"
-      >
-        blank_dreams
-      </h1>
-    </div>
-
-    <!-- ctrl+k placeholder -->
-    <p class="text-muted-foreground flex items-center gap-2 text-sm">
-      Press
-      <kbd
-        class="rounded border border-white/20 bg-white/10 px-2 py-0.5 font-mono text-xs"
-        >Ctrl</kbd
-      >
-      + K to start
-    </p>
-
-    <!-- equalizer -->
-    <div class="equalizer">
-      <span class="left"></span>
-      <span class="middle"></span>
-      <span class="right"></span>
-    </div>
-  </section>
-
-  <!-- experience section -->
-  <section class="mt-16">
-    <ExperienceTimeline client:load experiences={EXPERIENCES} />
-  </section>
+  <PageTitle titleJP="ホームページ。" />
+  <Hero />
+  <ExperienceTimeline client:load experiences={EXPERIENCES} />
+  <WorksSection />
 </Layout>
