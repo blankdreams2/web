@@ -1,4 +1,5 @@
 ---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import { ExperienceTimeline } from '@/components/home/ExperienceTimeline'
 import Hero from '@/components/home/Hero.astro'
 import PageTitle from '@/components/home/PageTitle.astro'
@@ -8,9 +9,11 @@ import { EXPERIENCES } from '@/data/experiences'
 import Layout from '@/layouts/Layout.astro'
 ---
 
-<Layout class="max-w-3xl">
-  <PageHead slot="head" title="Home" />
-  <PageTitle titleJP="ホームページ。" />
+<Layout class='max-w-3xl'>
+  <PageHead slot='head' title='Home' />
+  <PageTitle titleJP='ホームページ。'>
+    <Breadcrumbs slot='breadcrumbs' items={[{ label: 'home', icon: 'lucide:home' }]} />
+  </PageTitle>
   <Hero />
   <ExperienceTimeline client:load experiences={EXPERIENCES} />
   <WorksSection />

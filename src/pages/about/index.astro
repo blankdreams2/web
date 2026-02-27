@@ -1,7 +1,7 @@
 ---
-import Paragraph from '@/components/about/Paragraph.tsx'
-import LiveClock from '@/components/about/LiveClock'
 import AboutPageTitle from '@/components/about/AboutPageTitle'
+import LiveClock from '@/components/about/LiveClock'
+import Paragraph from '@/components/about/Paragraph.tsx'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
@@ -10,74 +10,82 @@ import { Image } from 'astro:assets'
 const repoUrl = 'https://github.com/blankdreams2/website'
 ---
 
-<Layout class="max-w-3xl">
-  <PageHead slot="head" title="About" />
-  <AboutPageTitle client:load />
-  <!-- <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} /> -->
-  <div class="about-page bg-starfield relative flex flex-col gap-y-8">
+<Layout class='max-w-3xl'>
+  <PageHead slot='head' title='About' />
+  <div class='mt-3 mb-6 text-center'>
+    <AboutPageTitle client:load />
+    <div class='mt-2'>
+      <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
+    </div>
+  </div>
+  <div class='about-page bg-starfield relative flex flex-col gap-y-8'>
     <!-- Hero: clock, location, profile -->
-    <section
-      class="bg-grid-pattern flex flex-col items-center gap-6 p-6 pb-4 text-center"
-    >
+    <section class='bg-grid-pattern flex flex-col items-center gap-6 p-6 pb-4 text-center'>
       <LiveClock client:load />
       <!-- polaroid frame -->
-      <div class="group relative z-0 -rotate-2 bg-white p-3 pb-12 shadow-lg transition-transform duration-300 hover:scale-105 hover:rotate-[-4deg] hover:shadow-xl">
+      <div
+        class='group relative z-0 -rotate-2 bg-white p-3 pb-12 shadow-lg transition-transform duration-300 hover:scale-105 hover:rotate-[-4deg] hover:shadow-xl'
+      >
         <Image
-          src="/static/coffee.png"
-          alt="blank_dreams"
-          class="relative block h-auto w-44 shadow-sm sm:w-48"
+          src='/static/coffee.png'
+          alt='blank_dreams'
+          class='relative block h-auto w-44 shadow-sm sm:w-48'
           width={200}
           height={200}
         />
         <p
-          class="font-caveat absolute bottom-3 left-1/2 -translate-x-1/2 text-sm whitespace-nowrap text-neutral-800"
+          class='font-caveat absolute bottom-3 left-1/2 -translate-x-1/2 text-sm whitespace-nowrap text-neutral-800'
         >
           just the letter T.
         </p>
       </div>
-      <h1 class="font-bon-vivant pt-2 text-6xl font-bold sm:text-7xl">
+      <h1 class='font-bon-vivant pt-2 text-6xl font-bold sm:text-7xl'>
         who's <br />
-        <span class="text-accent -mt-8 block font-display text-5xl font-black sm:text-6xl">
+        <span class='text-accent font-display -mt-8 block text-5xl font-black sm:text-6xl'>
           blank_dreams?
         </span>
       </h1>
     </section>
 
     <!-- About sections -->
-    <section class="flex flex-col gap-8 px-2">
-      <Paragraph client:load tag="chào, or hi there" dir="ltr">
-        I started coding in <span class="font-semibold text-[#facc15]">2021</span>
-        {` and I've been kinda like? it. While I may not be deeply curious about how "computer" works but I do want to see how they come together and literally create dark magic, and that's how this website was made. `}
+    <section class='flex flex-col gap-8 px-2'>
+      <Paragraph client:load tag='chào, or hi there' dir='ltr'>
+        I started coding in <span class='font-semibold text-[#facc15]'>2021</span>
+        {
+          ` and I've been kinda like? it. While I may not be deeply curious about how "computer" works but I do want to see how they come together and literally create dark magic, and that's how this website was made. `
+        }
       </Paragraph>
 
-      <Paragraph client:load tag="outside of coding" dir="rtl">
+      <Paragraph client:load tag='outside of coding' dir='rtl'>
         {`I'm also fascinated with `}
-        <span class="font-semibold text-accent">mathematics</span>
+        <span class='text-accent font-semibold'>mathematics</span>
         {` and wish to make a career out of it someday. Things I love include: `}
-        <span class="font-semibold text-accent">japan</span>
+        <span class='text-accent font-semibold'>japan</span>
         {`, coffee, dark mode, and cats.`}
       </Paragraph>
 
-      <Paragraph client:load tag="currently?" dir="ltr">
+      <Paragraph client:load tag='currently?' dir='ltr'>
         <!-- {`An undergraduate student majoring in Computer Science at `}
         <span class="font-semibold text-accent">UNLV</span>
         {`. Alongside my studies, I'm also interning as a software engineer at a local firm focusing in Web3, Big Data.`} -->
         {`Limbus Company.`}
       </Paragraph>
 
-      <Paragraph client:load tag="rpg maker games" dir="rtl">
-        {`Words can't describe how big of a fan I am of this subculture, which had its heyday in the early 2010s. I'm still actively playing these games and, hopefully, one day, `}
-        <span class="font-semibold text-accent">I will create one myself</span>
+      <Paragraph client:load tag='rpg maker games' dir='rtl'>
+        {
+          `Words can't describe how big of a fan I am of this subculture, which had its heyday in the early 2010s. I'm still actively playing these games and, hopefully, one day, `
+        }
+        <span class='text-accent font-semibold'>I will create one myself</span>
         {`. Some of my personal favorites is in the dashboard.`}
       </Paragraph>
 
-      <Paragraph client:load tag="thank you" dir="ltr">
+      <Paragraph client:load tag='thank you' dir='ltr'>
         {`I hope you enjoy your stay. The source code for this website is available at `}
         <a
           href={repoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="font-semibold text-accent underline decoration-accent underline-offset-2 hover:opacity-80"
+          target='_blank'
+          rel='noopener noreferrer'
+          class='text-accent decoration-accent font-semibold underline underline-offset-2 hover:opacity-80'
         >
           @blankdreams2/web
         </a>

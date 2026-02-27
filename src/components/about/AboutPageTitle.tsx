@@ -13,7 +13,7 @@ const TOOLTIP =
 
 export default function AboutPageTitle() {
   return (
-    <div className="mt-3 mb-6 text-center">
+    <div className="text-center">
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>

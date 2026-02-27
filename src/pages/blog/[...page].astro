@@ -8,11 +8,7 @@ import Layout from '@/layouts/Layout.astro'
 import { getAllPosts, groupPostsByYear } from '@/lib/data-utils'
 import type { PaginateFunction } from 'astro'
 
-export async function getStaticPaths({
-  paginate,
-}: {
-  paginate: PaginateFunction
-}) {
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
   const allPosts = await getAllPosts()
   return paginate(allPosts, { pageSize: SITE.postsPerPage })
 }
@@ -23,21 +19,26 @@ const postsByYear = groupPostsByYear(page.data)
 const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
 ---
 
-<Layout class="max-w-3xl">
-  <PageHead slot="head" title="Blog" />
-  <Breadcrumbs
-    items={[
-      { label: 'Blog', href: '/blog', icon: 'lucide:library-big' },
-      { label: `Page ${page.currentPage}`, icon: 'lucide:book-copy' },
-    ]}
-  />
+<Layout class='max-w-3xl'>
+  <PageHead slot='head' title='Blog' />
+  <div class='mt-3 mb-6 text-center'>
+    <h2 class='text-foreground text-xl font-bold'>Blog</h2>
+    <div class='mt-2'>
+      <Breadcrumbs
+        items={[
+          { label: 'Blog', href: '/blog', icon: 'lucide:library-big' },
+          { label: `Page ${page.currentPage}`, icon: 'lucide:book-copy' },
+        ]}
+      />
+    </div>
+  </div>
 
-  <div class="flex min-h-[calc(100vh-18rem)] flex-col gap-y-8">
+  <div class='flex min-h-[calc(100vh-18rem)] flex-col gap-y-8'>
     {
       years.map((year) => (
-        <section class="flex flex-col gap-y-4">
-          <div class="font-medium">{year}</div>
-          <ul class="flex flex-col gap-4">
+        <section class='flex flex-col gap-y-4'>
+          <div class='font-medium'>{year}</div>
+          <ul class='flex flex-col gap-4'>
             {postsByYear[year].map((post) => (
               <li>
                 <BlogCard entry={post} />
@@ -52,7 +53,7 @@ const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
   <PaginationComponent
     currentPage={page.currentPage}
     totalPages={page.lastPage}
-    baseUrl="/blog/"
+    baseUrl='/blog/'
     client:load
   />
 </Layout>
