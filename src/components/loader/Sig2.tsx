@@ -11,7 +11,7 @@ interface SignatureProps {
   className?: string
 }
 
-const LETTERS = 'blank_dreams'.split('')
+const LETTERS = 'blank_dreams.'.split('')
 
 export function Signature({ className }: SignatureProps) {
   return (
