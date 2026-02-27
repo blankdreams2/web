@@ -1,12 +1,42 @@
 ---
-import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
+import PageTitle from '@/components/home/PageTitle.astro'
+import ProjectCard from '@/components/ProjectCard.astro'
 import Layout from '@/layouts/Layout.astro'
-import '@/styles/global.css'
+import { getAllProjects } from '@/lib/data-utils'
+import { Icon } from 'astro-icon/components'
+import type { CollectionEntry } from 'astro:content'
+
+const allProjects = await getAllProjects()
 ---
 
 <Layout class="max-w-3xl">
   <PageHead slot="head" title="project" />
-  <Breadcrumbs items={[{ label: 'project', icon: 'lucide:sparkle' }]} />
-  <h1 class="mb-6 ">In Progress...</h1>
+  <PageTitle titleJP="注目プロジェクト。" />
+
+  <section class="flex flex-col">
+    {allProjects.length > 0 ? (
+      <ul class="flex flex-col gap-6">
+        {allProjects.map((project: CollectionEntry<'projects'>) => (
+          <li>
+            <ProjectCard project={project} />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div
+        class="bg-muted/30 flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed py-16 text-center"
+        role="status"
+      >
+        <Icon
+          name="lucide:folder-open"
+          class="text-muted-foreground size-12"
+        />
+        <p class="text-muted-foreground text-lg">Nothing here yet.</p>
+        <p class="text-muted-foreground/80 text-sm">
+          Add projects in <code class="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">src/content/projects/</code>
+        </p>
+      </div>
+    )}
+  </section>
 </Layout>
