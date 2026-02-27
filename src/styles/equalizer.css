@@ -52,3 +52,18 @@
   height: 24px;
   animation: pulse5 1.25s infinite;
 }
+
+/* grid pattern left-to-right scroll */
+
+@keyframes gridScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.grid-pattern-scroll {
+  animation: gridScroll 30s linear infinite;
+}
