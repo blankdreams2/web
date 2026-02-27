@@ -287,6 +287,30 @@
 
 /* grid pattern background */
 
+/* tooltip fade */
+@keyframes tooltip-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes tooltip-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.tooltip-fade {
+  animation: tooltip-fade-in 0.2s ease-out forwards;
+}
+.tooltip-fade[data-state='closed'] {
+  animation: tooltip-fade-out 0.15s ease-in forwards;
+}
+
 @layer utilities {
   .bg-grid-pattern {
     position: relative;
