@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, Clone } from '@react-three/drei'
 import type { Group } from 'three'
 
 // cup: inside polaroid bottom-right, gentle steam-like bob
@@ -18,8 +18,8 @@ function CupCoffee() {
   })
 
   return (
-    <group ref={groupRef} position={[0.25, -0.8, 1.2]}>
-      <primitive object={scene} scale={2} />
+    <group ref={groupRef} position={[0.5, -2, 1.75]}>
+      <primitive object={scene} scale={1.25} />
     </group>
   )
 }
@@ -43,7 +43,7 @@ function CoffeeMachine() {
   )
 }
 
-// penguin: top-left outside polaroid, visible
+// penguin: top-left outside polaroid
 function Penguin() {
   const groupRef = useRef<Group>(null)
   const { scene } = useGLTF('/3d/penguin.glb')
@@ -51,13 +51,13 @@ function Penguin() {
   useFrame((state) => {
     if (!groupRef.current) return
     const t = state.clock.elapsedTime
-    groupRef.current.position.y = 0.5 + Math.sin(t * 0.7) * 0.05
+    groupRef.current.position.y = 0.4 + Math.sin(t * 0.7) * 0.05
     groupRef.current.rotation.y = Math.sin(t * 0.3) * 0.1
   })
 
   return (
-    <group ref={groupRef} position={[-0.85, 0.5, 0.2]}>
-      <primitive object={scene} scale={0.35} />
+    <group ref={groupRef} position={[-0.7, 0.4, 0.4]}>
+      <Clone object={scene} scale={0.5} />
     </group>
   )
 }
@@ -94,26 +94,30 @@ function Computer() {
   })
 
   return (
-    <group ref={groupRef} position={[0.5, 0.5, 0]}>
-      <primitive object={scene} scale={3} />
+    <group ref={groupRef} position={[0.85, 0.35, 0.4]}>
+      <Clone object={scene} scale={0.35} />
     </group>
   )
 }
+
+// Preload models so they're ready when scene mounts
+useGLTF.preload('/3d/penguin.glb')
+useGLTF.preload('/3d/computer.glb')
 
 export function CoffeeScene() {
   return (
     <div className="absolute -bottom-6 -right-12 z-10 size-48 sm:size-96 overflow-visible">
       <div className="size-full min-h-[192px] min-w-[192px] sm:min-h-[300px] sm:min-w-[300px]">
         <Canvas
-          camera={{ position: [-0.3, 0.8, 3.2], fov: 55 }}
+          camera={{ position: [-0.2, 0.6, 3.5], fov: 60 }}
           gl={{ antialias: true, alpha: true }}
         >
           <ambientLight intensity={1} />
           <directionalLight position={[5, 5, 5]} intensity={1.5} />
           <CupCoffee />
           <CoffeeMachine />
-          <Penguin />
-          <Computer />
+          {/* <Penguin /> */}
+          {/* <Computer /> */}
           <Burger />
         </Canvas>
       </div>
