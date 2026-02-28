@@ -38,6 +38,20 @@ export async function getFeaturedProjects(): Promise<
   return all.filter((p) => FEATURED_PROJECT_NAMES.includes(p.data.name))
 }
 
+export async function getProjectBySlug(
+  slug: string,
+): Promise<CollectionEntry<'projects'> | undefined> {
+  const projects = await getCollection('projects')
+  return projects.find((p) => p.id === slug)
+}
+
+export async function getCaseStudyProjects(): Promise<
+  CollectionEntry<'projects'>[]
+> {
+  const projects = await getCollection('projects')
+  return projects.filter((p) => p.data.caseStudy === true)
+}
+
 export async function getAllTags(): Promise<Map<string, number>> {
   const posts = await getAllPosts()
   return posts.reduce((acc, post) => {

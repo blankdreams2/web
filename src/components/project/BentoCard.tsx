@@ -52,9 +52,9 @@ export const BentoCard: React.FC<BentoCardProps> = ({
       )}
     >
       <a
-        href={project.link}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={project.caseStudy ? `/project/${project.id}` : project.link}
+        target={project.caseStudy ? undefined : '_blank'}
+        rel={project.caseStudy ? undefined : 'noopener noreferrer'}
         className={cn(
           'relative flex h-full min-h-0 overflow-hidden',
           isWide && 'flex-col gap-2 p-4 sm:flex-row sm:gap-3',
@@ -121,7 +121,7 @@ export const BentoCard: React.FC<BentoCardProps> = ({
             </div>
           )}
           <span className="text-muted-foreground group-hover:text-accent mt-3 inline-flex items-center gap-1 text-xs transition-colors">
-            Visit
+            {project.caseStudy ? 'Read case study' : 'Visit'}
             <svg
               className="size-3.5"
               fill="none"
@@ -132,7 +132,11 @@ export const BentoCard: React.FC<BentoCardProps> = ({
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M7 17L17 7M17 7H7M17 7v10"
+                d={
+                  project.caseStudy
+                    ? 'M9 5l7 7-7 7'
+                    : 'M7 17L17 7M17 7H7M17 7v10'
+                }
               />
             </svg>
           </span>
@@ -143,7 +147,7 @@ export const BentoCard: React.FC<BentoCardProps> = ({
         src={project.image ?? PLACEHOLDER_IMAGE}
         alt=""
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 z-30 w-48 -translate-x-1/2 -translate-y-2 rounded-lg border border-border bg-background object-cover opacity-0 shadow-xl transition-all duration-300 ease-out group-hover:-translate-y-4 group-hover:opacity-100"
+        className="border-border bg-background pointer-events-none absolute top-0 left-1/2 z-30 w-48 -translate-x-1/2 -translate-y-2 rounded-lg border object-cover opacity-0 shadow-xl transition-all duration-300 ease-out group-hover:-translate-y-4 group-hover:opacity-100"
       />
       <button
         type="button"

@@ -1,0 +1,109 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import { formatDate } from '@/lib/utils'
+import { badgeVariants } from '@/components/ui/badge'
+import { Icon } from 'astro-icon/components'
+import { render } from 'astro:content'
+
+export const prerender = true
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects')
+  const caseStudyProjects = projects.filter((p) => p.data.caseStudy === true)
+  return caseStudyProjects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }))
+}
+
+const { project } = Astro.props
+const projectData = project.data
+
+let Content: Awaited<ReturnType<typeof render>>['Content'] | null = null
+
+try {
+  const rendered = await render(project)
+  Content = rendered.Content
+} catch {
+  Content = null
+}
+
+const img = projectData.image as unknown
+let imageSrc: string | null = null
+if (img) {
+  if (typeof img === 'string') {
+    imageSrc = img.startsWith('/public') ? img.slice(7) : img
+  } else if (typeof img === 'object' && img !== null && 'src' in img) {
+    imageSrc = (img as { src?: string }).src ?? null
+  }
+}
+---
+
+<Layout class='max-w-3xl'>
+  <PageHead
+    slot='head'
+    title={projectData.name}
+    description={projectData.description}
+  />
+
+  <section class='flex flex-col gap-8'>
+    <header class='flex flex-col gap-4'>
+      <Breadcrumbs
+        items={[
+          { href: '/project', label: 'Project', icon: 'lucide:sparkle' },
+          { href: `/project/${project.id}`, label: projectData.name, icon: 'lucide:folder' },
+        ]}
+      />
+
+      <h1 class='font-display text-3xl font-bold tracking-tight sm:text-4xl'>
+        {projectData.name}
+      </h1>
+
+      <p class='text-muted-foreground text-lg'>{projectData.description}</p>
+
+      <div class='flex flex-wrap items-center gap-4 text-sm'>
+        {projectData.startDate && (
+          <span class='text-muted-foreground flex items-center gap-1.5'>
+            <Icon name='lucide:calendar' class='size-4' />
+            {formatDate(projectData.startDate)}
+            {projectData.endDate ? ` → ${formatDate(projectData.endDate)}` : ' → Present'}
+          </span>
+        )}
+        <a
+          href={projectData.link}
+          target='_blank'
+          rel='noopener noreferrer'
+          class='text-accent hover:underline inline-flex items-center gap-1.5'
+        >
+          <Icon name='lucide:external-link' class='size-4' />
+          Visit project
+        </a>
+      </div>
+
+      <div class='flex flex-wrap gap-2'>
+        {projectData.tags.map((tag) => (
+          <span class={badgeVariants({ variant: 'muted' })}>{tag}</span>
+        ))}
+      </div>
+    </header>
+
+    {imageSrc && (
+      <div class='overflow-hidden rounded-xl border'>
+        <img
+          src={imageSrc}
+          alt={projectData.name}
+          class='w-full object-cover'
+        />
+      </div>
+    )}
+
+    {Content && (
+      <article class='prose prose-neutral dark:prose-invert max-w-none'>
+        <Content />
+      </article>
+    )}
+  </section>
+</Layout>

@@ -9,6 +9,7 @@ export interface BentoProject {
   tags: string[]
   startDate: string | null
   endDate: string | null
+  caseStudy: boolean
 }
 
 export const serializeProject = (
@@ -34,5 +35,6 @@ export const serializeProject = (
     tags: p.data.tags ?? [],
     startDate: p.data.startDate?.toISOString() ?? null,
     endDate: p.data.endDate?.toISOString() ?? null,
+    caseStudy: p.data.caseStudy ?? false,
   }
 }
