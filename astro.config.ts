@@ -1,15 +1,15 @@
+import mdx from '@astrojs/mdx'
 import { defineConfig } from 'astro/config'
 
-import mdx from '@astrojs/mdx'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import icon from 'astro-icon'
 
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
+import rehypeShiki from '@shikijs/rehype'
 import rehypeExpressiveCode from 'rehype-expressive-code'
 import rehypeExternalLinks from 'rehype-external-links'
 import rehypeKatex from 'rehype-katex'
-import rehypeShiki from '@shikijs/rehype'
 import remarkEmoji from 'remark-emoji'
 import remarkMath from 'remark-math'
 
@@ -24,14 +24,6 @@ export default defineConfig({
   integrations: [mdx(), react(), sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()],
-    define: {
-      'import.meta.env.VITE_CONVEX_URL': JSON.stringify(
-        process.env.CONVEX_URL ?? '',
-      ),
-    },
-    build: {
-      chunkSizeWarningLimit: 600,
-    },
   },
   server: {
     port: 1234,

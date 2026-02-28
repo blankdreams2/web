@@ -1,16 +1,18 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import { GuestbookLazy } from '@/components/guestbook/GuestbookLazy'
+import PageTitle from '@/components/home/PageTitle.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
 ---
 
 <Layout class='max-w-2xl'>
-  <PageHead slot='head' title='Guestbook' />
-  <div class='space-y-6'>
-    <Breadcrumbs items={[{ label: 'Guestbook', icon: 'lucide:book-open' }]} />
-    <h1 class='font-display text-2xl font-bold sm:text-3xl'>Guestbook</h1>
-    <p class='text-muted-foreground text-sm'>Leave an anonymous message. No login required.</p>
-    <GuestbookLazy client:only="react" />
+  <PageHead slot='head' title='ズラじゃない！桂だ！' />
+  <PageTitle titleJP='ズラじゃない！桂だ！'>
+    <Breadcrumbs slot='breadcrumbs' items={[{ label: 'Guestbook', icon: 'lucide:book-open' }]} />
+  </PageTitle>
+  <div class='rounded-lg border border-border bg-muted/30 px-4 py-8 text-center'>
+    <p class='text-muted-foreground text-sm'>
+      Guestbook coming soon — Supabase setup in progress.
+    </p>
   </div>
 </Layout>
