@@ -2,7 +2,7 @@ import type { IconMap, SocialLink, Site } from '@/types'
 
 export const SITE: Site = {
   title: 'blank_dreams',
-  description: 'Personal blog by T — code, UI/UX, rpg maker games, and CTFs.',
+  description: 'Personal blog by T — school work, UI/UX, rpg maker games, and CTFs.',
   href: 'https://vankythien.dev',
   author: 'T',
   locale: 'en-US',

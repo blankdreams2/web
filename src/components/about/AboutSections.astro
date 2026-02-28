@@ -1,0 +1,48 @@
+---
+import Paragraph from '@/components/about/Paragraph.tsx'
+import { REPO_URL } from '@/consts'
+---
+
+<section class='flex flex-col gap-8 px-2'>
+  <Paragraph client:load tag='chào, or hi there' dir='ltr'>
+    {`I'm a grad student at `}
+    <span class='font-semibold text-[#c10e2f]'>UNLV</span>
+    {
+      `, 2x hackathon winner, 10x CTF winner. Been doing the coding thing for a bit and it's pretty fun. Right now I'm really into `
+    }
+    <span class='text-accent font-semibold'>CTFs</span>
+    {` — and i'm broke (classic :D).`}
+  </Paragraph>
+
+  <Paragraph client:load tag='outside of school' dir='rtl'>
+    {`I'm also fascinated with `}
+    <span class='font-semibold text-white'>mathematics</span>
+    {` and wish to make a career out of it someday. Things I love include: `}
+    <span class='font-semibold text-[#eb8033] dark:text-[#C4A484]'>coffee</span>
+    {`, dark mode, and cats.`}
+  </Paragraph>
+
+  <Paragraph client:load tag='currently?' dir='ltr'>
+    {`Limbus Company.`}
+  </Paragraph>
+
+  <Paragraph client:load tag='rpg maker games' dir='rtl'>
+    {
+      `Words can't describe how big of a fan I am of this subculture, which had its heyday in the early 2010s. I'm still actively playing these games and, hopefully, one day, `
+    }
+    <span class='text-accent font-semibold'>I will create one myself</span>
+    {`. Some of my personal favorites is in the dashboard.`}
+  </Paragraph>
+
+  <Paragraph client:load tag='thank you' dir='ltr'>
+    {`I hope you enjoy your stay. The source code for this website is available at `}
+    <a
+      href={REPO_URL}
+      target='_blank'
+      rel='noopener noreferrer'
+      class='text-accent decoration-accent font-semibold underline underline-offset-2 hover:opacity-80'
+    >
+      @blankdreams2/web
+    </a>
+  </Paragraph>
+</section>

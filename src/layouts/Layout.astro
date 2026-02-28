@@ -20,7 +20,7 @@ const { class: className } = Astro.props
 <!doctype html>
 <html class='bg-background text-foreground scheme-light-dark' lang={SITE.locale}>
   <script is:inline>
-    (() => {
+    ;(() => {
       const theme = (() => {
         try {
           const stored = localStorage.getItem('theme') ?? ''
@@ -50,12 +50,12 @@ const { class: className } = Astro.props
       <Footer />
     </LoaderWrapper>
 
-  <!-- added this listener so the theme persists when the page is reloaded -->
-  <script is:inline>
-    document.addEventListener('astro:after-swap', () => {
-      const stored = localStorage.getItem('theme') || 'light'
-      document.documentElement.setAttribute('data-theme', stored)
-    })
-  </script>
+    <!-- added this listener so the theme persists when the page is reloaded -->
+    <script is:inline>
+      document.addEventListener('astro:after-swap', () => {
+        const stored = localStorage.getItem('theme') || 'light'
+        document.documentElement.setAttribute('data-theme', stored)
+      })
+    </script>
   </body>
 </html>

@@ -1,14 +1,15 @@
 export const PLACEHOLDER_PROJECTS = [
   {
-    name: '',
+    name: 'Gatekeeper',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    tags: ['lorem', 'ipsum', 'dolor', 'sit'],
-    sourceHref: '#',
-    siteHref: '#',
+      'Gatekeeper is a web application that allows users to manage their gate access.',
+    tags: ['web', 'application', 'gate', 'access'],
+    sourceHref: 'https://github.com/blankdreams2/gatekeeper',
+    siteHref: 'https://gatekeeper.blankdreams2.dev',
+    image: '/projects/gatekeeper.png',
   },
   {
-    name: 'Lorem Project Two',
+    name: 'Cyber Clinic',
     description:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     tags: ['amet', 'consectetur', 'adipiscing'],
@@ -16,7 +17,7 @@ export const PLACEHOLDER_PROJECTS = [
     siteHref: '#',
   },
   {
-    name: 'Lorem Project Three',
+    name: 'Bad Decisions Inc.',
     description:
       'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
     tags: ['elit', 'sed', 'eiusmod', 'tempor'],

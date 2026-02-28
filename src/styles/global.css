@@ -284,32 +284,37 @@
   @apply bg-gray-300 text-black;
 }
 
-/* grid pattern background */
-
 /* tooltip fade */
 @keyframes tooltip-fade-in {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
+
 @keyframes tooltip-fade-out {
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }
 }
+
 .tooltip-fade {
   animation: tooltip-fade-in 0.2s ease-out forwards;
 }
+
 .tooltip-fade[data-state='closed'] {
   animation: tooltip-fade-out 0.15s ease-in forwards;
 }
 
+
+/* background grid small squares */
 @layer utilities {
   .bg-grid-pattern {
     position: relative;
@@ -328,20 +333,16 @@
     background-position: 0 0;
     animation: grid-move 2s linear infinite;
     will-change: background-position;
-    mask-image: radial-gradient(
-      ellipse at center,
-      black 0%,
-      black 30%,
-      transparent 70%,
-      transparent 100%
-    );
-    -webkit-mask-image: radial-gradient(
-      ellipse at center,
-      black 0%,
-      black 30%,
-      transparent 70%,
-      transparent 100%
-    );
+    mask-image: radial-gradient(ellipse at center,
+        black 0%,
+        black 30%,
+        transparent 70%,
+        transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse at center,
+        black 0%,
+        black 30%,
+        transparent 70%,
+        transparent 100%);
     pointer-events: none;
     mix-blend-mode: normal;
   }
@@ -350,6 +351,7 @@
     0% {
       background-position: 0 0;
     }
+
     100% {
       background-position: 24px 0;
     }
@@ -359,12 +361,13 @@
     0% {
       background-position: 0 0;
     }
+
     100% {
       background-position: 24px 0;
     }
   }
 
-  .bg-grid-pattern > * {
+  .bg-grid-pattern>* {
     position: relative;
     z-index: 1;
   }
@@ -374,11 +377,4 @@
       linear-gradient(to right, oklch(1 0 0 / 0.15) 1px, transparent 1px),
       linear-gradient(to bottom, oklch(1 0 0 / 0.15) 1px, transparent 1px);
   }
-}
-
-::view-transition-old(root), ::view-transition-new(root) {
-    animation:
-    none;
-    mix-blend-mode:
-    normal;
 }

@@ -1,13 +1,10 @@
 ---
-import AboutPageContent from '@/components/about/AboutPageContent.astro'
+import AboutHero from '@/components/about/AboutHero.astro'
 import AboutPageTitle from '@/components/about/AboutPageTitle'
-import LiveClock from '@/components/about/LiveClock'
-import Paragraph from '@/components/about/Paragraph.tsx'
+import AboutSections from '@/components/about/AboutSections.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
-import { REPO_URL } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
-import { Image } from 'astro:assets'
 ---
 
 <Layout class='max-w-3xl'>
@@ -15,82 +12,6 @@ import { Image } from 'astro:assets'
   <AboutPageTitle client:load>
     <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
   </AboutPageTitle>
-
-  <AboutPageContent>
-    <!-- hero: clock, location, profile -->
-    <section class='flex flex-col items-center gap-6 p-6 pb-4 text-center'>
-      <LiveClock client:load />
-      <!-- polaroid frame -->
-      <div
-        class='group relative z-0 -rotate-2 bg-white p-3 pb-12 shadow-lg transition-transform duration-300 hover:scale-105 hover:rotate-[-4deg] hover:shadow-xl'
-      >
-        <Image
-          src='/static/coffee.png'
-          alt='blank_dreams'
-          class='relative block h-auto w-44 shadow-sm sm:w-48'
-          width={200}
-          height={200}
-        />
-        <p
-          class='font-caveat absolute bottom-3 left-1/2 -translate-x-1/2 text-sm whitespace-nowrap text-neutral-800'
-        >
-          just the letter T.
-        </p>
-      </div>
-      <h1 class='font-bon-vivant pt-2 text-6xl font-bold sm:text-7xl'>
-        who's <br />
-        <span class='text-accent font-display -mt-8 block text-5xl font-black sm:text-6xl'>
-          blank_dreams?
-        </span>
-      </h1>
-    </section>
-
-    <!-- who's blank_dreams? sections -->
-    <section class='flex flex-col gap-8 px-2'>
-      <Paragraph client:load tag='chào, or hi there' dir='ltr'>
-        {`I'm a grad student at `}
-        <span class='font-semibold text-[#c10e2f]'>UNLV</span>
-        {
-          `, 2x hackathon winner, 10x CTF winner. Been doing the coding thing for a bit and it's pretty fun. Right now I'm really into `
-        }
-        <span class='text-accent font-semibold'>CTFs</span>
-        {` — and i'm broke (classic :D).`}
-      </Paragraph>
-
-      <Paragraph client:load tag='outside of school' dir='rtl'>
-        {`I'm also fascinated with `}
-        <span class='font-semibold text-white'>mathematics</span>
-        {` and wish to make a career out of it someday. Things I love include: `}
-        <span class='font-semibold text-[#eb8033] dark:text-[#C4A484]'>coffee</span>
-        {`, dark mode, and cats.`}
-      </Paragraph>
-
-      <Paragraph client:load tag='currently?' dir='ltr'>
-        <!-- {`An undergraduate student majoring in Computer Science at `}
-        <span class="font-semibold text-accent">UNLV</span>
-        {`. Alongside my studies, I'm also interning as a software engineer at a local firm focusing in Web3, Big Data.`} -->
-        {`Limbus Company.`}
-      </Paragraph>
-
-      <Paragraph client:load tag='rpg maker games' dir='rtl'>
-        {
-          `Words can't describe how big of a fan I am of this subculture, which had its heyday in the early 2010s. I'm still actively playing these games and, hopefully, one day, `
-        }
-        <span class='text-accent font-semibold'>I will create one myself</span>
-        {`. Some of my personal favorites is in the dashboard.`}
-      </Paragraph>
-
-      <Paragraph client:load tag='thank you' dir='ltr'>
-        {`I hope you enjoy your stay. The source code for this website is available at `}
-        <a
-          href={REPO_URL}
-          target='_blank'
-          rel='noopener noreferrer'
-          class='text-accent decoration-accent font-semibold underline underline-offset-2 hover:opacity-80'
-        >
-          @blankdreams2/web
-        </a>
-      </Paragraph>
-    </section>
-  </AboutPageContent>
+  <AboutHero />
+  <AboutSections />
 </Layout>
