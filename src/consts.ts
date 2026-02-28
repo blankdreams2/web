@@ -21,10 +21,10 @@ export const FEATURED_PROJECT_NAMES = [
 export const REPO_URL = 'https://github.com/blankdreams2/website'
 
 export const NAV_LINKS: SocialLink[] = [
-  // {
-  //   href: '/',
-  //   label: 'home',
-  // },
+  {
+    href: '/',
+    label: '/home',
+  },
   {
     href: '/about',
     label: '/about',

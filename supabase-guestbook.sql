@@ -1,6 +1,8 @@
 create table if not exists public.guestbook (
   id uuid default gen_random_uuid() primary key,
   message text not null,
+  name text,
+  email text,
   created_at timestamptz default now() not null
 );
 

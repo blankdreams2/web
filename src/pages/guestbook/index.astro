@@ -1,9 +1,21 @@
 ---
-import { Guestbook } from '@/components/guestbook/Guestbook'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Guestbook from '@/components/guestbook/Guestbook.astro'
+import { SpinMail } from '@/components/guestbook/SpinMail'
 import PageTitle from '@/components/home/PageTitle.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
+import { supabase } from '@/lib/supabase'
+
+export const prerender = false
+
+const { data: messages } = await supabase
+  .from('guestbook')
+  .select('id, message, created_at, name, email')
+  .order('created_at', { ascending: false })
+  .limit(100)
+
+const error = Astro.url.searchParams.get('error')
 ---
 
 <Layout class='max-w-2xl'>
@@ -11,5 +23,6 @@ import Layout from '@/layouts/Layout.astro'
   <PageTitle titleJP='ズラじゃない！桂だ！'>
     <Breadcrumbs slot='breadcrumbs' items={[{ label: 'Guestbook', icon: 'lucide:book-open' }]} />
   </PageTitle>
-  <Guestbook client:only="react" />
+  <Guestbook messages={messages ?? []} error={error} />
+  <SpinMail client:load />
 </Layout>

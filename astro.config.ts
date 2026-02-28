@@ -1,4 +1,5 @@
 import mdx from '@astrojs/mdx'
+import node from '@astrojs/node'
 import { defineConfig } from 'astro/config'
 
 import react from '@astrojs/react'
@@ -21,6 +22,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   site: 'https://vankythien.dev',
+  output: 'server',
+  adapter: node({ mode: 'standalone' }),
   integrations: [mdx(), react(), sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()],
