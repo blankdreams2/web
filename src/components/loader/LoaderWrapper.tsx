@@ -22,14 +22,16 @@ export function LoaderWrapper({
     }
   }, [showOnLanding])
 
+  /* TODO: add the loader back in after dev */
   return (
     <>
-      <AnimatePresence mode="wait">
+      {/* <AnimatePresence mode="wait">
         {showLoader && (
           <Loader key="loader" onComplete={() => setShowLoader(false)} />
         )}
-      </AnimatePresence>
-      {!showLoader && children}
+      </AnimatePresence> */}
+      {/* {!showLoader && children} */}
+      {children}
     </>
   )
 }

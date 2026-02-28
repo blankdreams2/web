@@ -97,3 +97,35 @@ export type BentoSize = (typeof BENTO_PATTERN)[number]
 
 export const getBentoSize = (index: number): BentoSize =>
   BENTO_PATTERN[index % BENTO_PATTERN.length]
+
+export const GITHUB_API_BASE_URL = 'https://api.github.com/graphql'
+export const GITHUB_ACCOUNTS = {
+  username: 'blankdreams2',
+  token: import.meta.env.GITHUB_TOKEN,
+  endpoint: '/api/github?type=personal',
+  type: 'personal',
+  is_active: true,
+}
+export const GITHUB_USER_QUERY = `query($username: String!, $from: DateTime!, $to: DateTime!) {
+    user(login: $username) {
+      contributionsCollection(from: $from, to: $to) {
+        contributionCalendar {
+          colors
+          totalContributions
+          months {
+            firstDay
+            name
+            totalWeeks
+          }
+          weeks {
+            contributionDays {
+              color
+              contributionCount
+              date
+            }
+            firstDay
+          }
+        }
+      }
+    }
+  }`

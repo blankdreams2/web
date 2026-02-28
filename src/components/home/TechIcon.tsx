@@ -26,9 +26,16 @@ import {
   SiTypescript,
   SiVuedotjs,
   SiZapier,
+  SiVite,
+  SiTailwindcss,
 } from 'react-icons/si'
+import { BsMicrosoftTeams } from 'react-icons/bs'
+// import { TbBrandZapier } from "react-icons/tb";
 
-const TECH_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+const TECH_ICON_MAP: Record<
+  string,
+  React.ComponentType<{ className?: string }>
+> = {
   PHP: SiPhp,
   Bootstrap: SiBootstrap,
   Linux: SiLinux,
@@ -57,6 +64,10 @@ const TECH_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>>
   PyTorch: SiPytorch,
   TensorFlow: SiTensorflow,
   Keras: SiKeras,
+  'Microsoft Teams': BsMicrosoftTeams,
+  // 'Zapier': TbBrandZapier,
+  Vite: SiVite,
+  'Tailwind CSS': SiTailwindcss,
 }
 
 export function TechIcon({

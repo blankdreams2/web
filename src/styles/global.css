@@ -244,6 +244,7 @@
   --destructive-foreground: oklch(0.98 0 0);
   --border: oklch(0.91 0 0);
   --ring: oklch(0.75 0 0);
+  --bright-yellow: #facc15;
 }
 
 [data-theme='dark'] {
@@ -261,6 +262,7 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --ring: oklch(0.556 0 0);
+  --bright-yellow: #FACC15;
 }
 
 @layer base {
