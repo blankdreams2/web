@@ -19,6 +19,7 @@ export const AnimatedThemeToggler = ({
   ...props
 }: AnimatedThemeTogglerProps) => {
   const [isDark, setIsDark] = useState(false)
+  const [isSpinning, setIsSpinning] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -41,6 +42,9 @@ export const AnimatedThemeToggler = ({
 
   const toggleTheme = useCallback(async () => {
     if (!buttonRef.current) return
+
+    setIsSpinning(true)
+    setTimeout(() => setIsSpinning(false), 500)
 
     const newTheme = !isDark
     const apply = () => {
@@ -91,8 +95,9 @@ export const AnimatedThemeToggler = ({
       type="button"
       title="Toggle theme"
       className={cn(
-        'hover:bg-muted hover:text-foreground dark:hover:bg-muted/50 inline-flex size-9 items-center justify-center rounded-md',
+        'hover:bg-muted hover:text-foreground dark:hover:bg-muted/50 inline-flex size-9 items-center justify-center rounded-md transition-transform duration-500 ease-out',
         '[&_svg]:size-4',
+        isSpinning && 'animate-[spin_0.5s_ease-in-out]',
         className,
       )}
       {...props}

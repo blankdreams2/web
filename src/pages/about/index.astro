@@ -2,15 +2,12 @@
 import AboutHero from '@/components/about/AboutHero.astro'
 import AboutPageTitle from '@/components/about/AboutPageTitle'
 import AboutSections from '@/components/about/AboutSections.astro'
-// import Contributions from '@/components/about/contributions/Contributions'
+import { SpinPenguin } from '@/components/about/SpinPenguin'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import { ExperienceTimeline } from '@/components/home/ExperienceTimeline'
 import PageHead from '@/components/PageHead.astro'
 import { EXPERIENCES } from '@/data/experiences'
 import Layout from '@/layouts/Layout.astro'
-// import { getGithubData } from '@/lib/github'
-
-// const githubData = await getGithubData()
 ---
 
 <Layout class='max-w-3xl'>
@@ -20,6 +17,6 @@ import Layout from '@/layouts/Layout.astro'
   </AboutPageTitle>
   <AboutHero />
   <AboutSections />
-  <!-- <Contributions client:load githubData={githubData} /> -->
   <ExperienceTimeline client:load experiences={EXPERIENCES} />
+  <SpinPenguin client:load />
 </Layout>

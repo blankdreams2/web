@@ -3,6 +3,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Hero from '@/components/home/Hero.astro'
 import PageTitle from '@/components/home/PageTitle.astro'
 import ProjectsSection from '@/components/home/ProjectsSection.astro'
+import { SpinCat } from '@/components/home/SpinCat'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
 ---
@@ -14,4 +15,5 @@ import Layout from '@/layouts/Layout.astro'
   </PageTitle>
   <Hero />
   <ProjectsSection />
+  <SpinCat client:load />
 </Layout>
