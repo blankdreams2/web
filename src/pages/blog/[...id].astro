@@ -57,6 +57,7 @@ const tocSections = await getTOCSections(currentPostId)
 
 <Layout>
   <PostHead slot='head' post={post} />
+
   {
     (hasChildPosts || isCurrentSubpost) && (
       <SubpostsHeader
@@ -75,34 +76,43 @@ const tocSections = await getTOCSections(currentPostId)
   <section
     class='grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6'
   >
+    <!-- jp title -->
+
+    <!-- breadcrumbs -->
     <div class='col-start-2'>
-      <Breadcrumbs
-        items={[
-          { href: '/blog', label: 'Blog', icon: 'lucide:library-big' },
-          ...(isCurrentSubpost && parentPost
-            ? [
-                {
-                  href: `/blog/${parentPost.id}`,
-                  label: parentPost.data.title,
-                  icon: 'lucide:book-open',
-                },
-                {
-                  href: `/blog/${currentPostId}`,
-                  label: post.data.title,
-                  icon: 'lucide:file-text',
-                },
-              ]
-            : [
-                {
-                  href: `/blog/${currentPostId}`,
-                  label: post.data.title,
-                  icon: 'lucide:book-open-text',
-                },
-              ]),
-        ]}
-      />
+      <div class='mt-3 mb-6 text-center'>
+        <h2 class='text-foreground text-xl font-bold'>{'キャプチャ・ザ・フラッグ'}</h2>
+        <div class='mt-2'>
+          <Breadcrumbs
+            items={[
+              { href: '/blog', label: 'Blog', icon: 'lucide:library-big' },
+              ...(isCurrentSubpost && parentPost
+                ? [
+                    {
+                      href: `/blog/${parentPost.id}`,
+                      label: parentPost.data.title,
+                      icon: 'lucide:book-open',
+                    },
+                    {
+                      href: `/blog/${currentPostId}`,
+                      label: post.data.title,
+                      icon: 'lucide:file-text',
+                    },
+                  ]
+                : [
+                    {
+                      href: `/blog/${currentPostId}`,
+                      label: post.data.title,
+                      icon: 'lucide:book-open-text',
+                    },
+                  ]),
+            ]}
+          />
+        </div>
+      </div>
     </div>
 
+    <!-- the damn image -->
     {
       post.data.image && (
         <Image
@@ -115,6 +125,7 @@ const tocSections = await getTOCSections(currentPostId)
       )
     }
 
+    <!-- post title and metadata -->
     <section class='col-start-2 flex flex-col gap-y-6 text-center'>
       <div class='flex flex-col'>
         <h1
@@ -127,41 +138,14 @@ const tocSections = await getTOCSections(currentPostId)
         <div
           class='text-muted-foreground divide-border mb-4 flex flex-col items-center justify-center divide-y text-xs sm:flex-row sm:flex-wrap sm:divide-x sm:divide-y-0 sm:text-sm'
         >
-          <!-- {
-            authors.length > 0 && (
-              <div class="flex w-full items-center justify-center gap-x-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0">
-                {authors.map((author) => (
-                  <div class="flex items-center gap-x-1.5">
-                    <Image
-                      src={author.avatar}
-                      alt={author.name}
-                      width={20}
-                      height={20}
-                      class="rounded-full"
-                    />
-                    {author.isRegistered ? (
-                      <Link
-                        href={`/authors/${author.id}`}
-                        underline
-                        class="text-foreground"
-                      >
-                        <span>{author.name}</span>
-                      </Link>
-                    ) : (
-                      <span>{author.name}</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )
-          } -->
-
+          <!-- date -->
           <div
             class='flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0'
           >
             <span>{formatDate(post.data.date)}</span>
           </div>
 
+          <!-- reading time -->
           <div
             class='flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0'
           >
@@ -175,6 +159,7 @@ const tocSections = await getTOCSections(currentPostId)
             </span>
           </div>
 
+          <!-- subposts count -->
           {
             subpostCount > 0 && (
               <div class='flex w-full items-center justify-center gap-1 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0'>
@@ -184,6 +169,8 @@ const tocSections = await getTOCSections(currentPostId)
             )
           }
         </div>
+
+        <!-- tags -->
         <div class='flex flex-wrap justify-center gap-2'>
           {
             post.data.tags &&
@@ -205,6 +192,7 @@ const tocSections = await getTOCSections(currentPostId)
       />
     </section>
 
+    <!-- left toc -->
     {tocSections.length > 0 && <TOCSidebar sections={tocSections} currentPostId={currentPostId} />}
 
     <article class='prose col-start-2 max-w-none'>

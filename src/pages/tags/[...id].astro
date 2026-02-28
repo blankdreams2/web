@@ -1,6 +1,6 @@
 ---
 import BlogCard from '@/components/BlogCard.astro'
-import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import BlogTitle from '@/components/BlogTitle.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getAllTags, getPostsByTag } from '@/lib/data-utils'
@@ -34,17 +34,13 @@ const { tag, posts } = Astro.props
     noindex
   />
 
-  <div class='mt-3 mb-6 text-center'>
-    <h2 class='text-foreground text-xl font-bold'>#{tag}</h2>
-    <div class='mt-2'>
-      <Breadcrumbs
-        items={[
-          { href: '/tags', label: 'Tags', icon: 'lucide:tags' },
-          { label: tag, icon: 'lucide:tag' },
-        ]}
-      />
-    </div>
-  </div>
+  <BlogTitle
+    title={`#${tag}`}
+    breadcrumbItems={[
+      { href: '/tags', label: 'Tags', icon: 'lucide:tags' },
+      { label: tag, icon: 'lucide:tag' },
+    ]}
+  />
 
   <!-- this gonna be a bigass calendar -->
   <ul class='flex flex-col gap-y-4'>
