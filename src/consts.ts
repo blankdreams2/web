@@ -2,7 +2,8 @@ import type { IconMap, SocialLink, Site } from '@/types'
 
 export const SITE: Site = {
   title: 'blank_dreams',
-  description: 'Personal blog by T — school work, UI/UX, rpg maker games, and CTFs.',
+  description:
+    'Personal blog by T — school work, UI/UX, rpg maker games, and CTFs.',
   href: 'https://vankythien.dev',
   author: 'T',
   locale: 'en-US',
@@ -78,3 +79,21 @@ export const ICON_MAP: IconMap = {
 // forgot what is this for.
 export const LIGHT_UNDERLINE = '#D87787'
 export const DARK_UNDERLINE = '#b620e0'
+
+export const BENTO_PATTERN = [
+  'wide',
+  'small',
+  'small',
+  'wide',
+  'small',
+  'small',
+  'tall',
+  'small',
+  'small',
+  'wide',
+] as const
+
+export type BentoSize = (typeof BENTO_PATTERN)[number]
+
+export const getBentoSize = (index: number): BentoSize =>
+  BENTO_PATTERN[index % BENTO_PATTERN.length]

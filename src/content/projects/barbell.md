@@ -1,6 +1,6 @@
 ---
 name: 'Barbell'
-description: 'A workout app that does mroe than just track workouts.'
+description: 'A workout app that does more than just track workouts.'
 tags:
   [
     'Web',
