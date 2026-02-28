@@ -16,10 +16,13 @@ const parentId = isCurrentSubpost ? getParentId(currentPostId) : currentPostId
 
 {
   sections.length > 0 && (
-    <div id='toc-sidebar-container' class='hidden w-full min-w-0 xl:block'>
+    <div
+      id='toc-sidebar-container'
+      class='sticky top-20 col-start-1 row-span-1 mr-8 ml-auto hidden h-[calc(100vh-5rem)] max-w-md xl:block'
+    >
       <ScrollArea
         client:load
-        className='flex max-h-[20rem] flex-col overflow-y-auto'
+        className='flex max-h-[calc(100vh-8rem)] flex-col overflow-y-auto'
         type='hover'
         data-toc-scroll-area
       >
