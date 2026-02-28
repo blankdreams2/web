@@ -24,6 +24,11 @@ export default defineConfig({
   integrations: [mdx(), react(), sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()],
+    define: {
+      'import.meta.env.VITE_CONVEX_URL': JSON.stringify(
+        process.env.CONVEX_URL ?? '',
+      ),
+    },
   },
   server: {
     port: 1234,
