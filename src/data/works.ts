@@ -1,6 +1,6 @@
 export const PLACEHOLDER_PROJECTS = [
   {
-    name: 'Lorem Project One',
+    name: '',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     tags: ['lorem', 'ipsum', 'dolor', 'sit'],

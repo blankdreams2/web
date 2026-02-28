@@ -10,6 +10,8 @@ export const SITE: Site = {
   postsPerPage: 3,
 }
 
+export const REPO_URL = 'https://github.com/blankdreams2/website'
+
 export const NAV_LINKS: SocialLink[] = [
   // {
   //   href: '/',

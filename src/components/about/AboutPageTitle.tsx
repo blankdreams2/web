@@ -11,9 +11,13 @@ const TITLE_JP = '何でもは知らないわよ、知ってることだけ。'
 const TOOLTIP =
   "I don't know everything. I just know what I know. — Hanekawa Tsubasa"
 
-export default function AboutPageTitle() {
+interface AboutPageTitleProps {
+  children?: React.ReactNode
+}
+
+export default function AboutPageTitle({ children }: AboutPageTitleProps) {
   return (
-    <div className="text-center">
+    <div className="mt-3 mb-6 text-center">
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -29,6 +33,7 @@ export default function AboutPageTitle() {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+      {children && <div className="mt-2">{children}</div>}
     </div>
   )
 }

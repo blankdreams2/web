@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { Loader } from './Loader'
 
 interface LoaderWrapperProps {
@@ -14,7 +14,7 @@ export function LoaderWrapper({
   children,
   showOnLanding = false,
 }: LoaderWrapperProps) {
-  const [showLoader, setShowLoader] = useState(false)
+  const [showLoader, setShowLoader] = useState(showOnLanding)
 
   useEffect(() => {
     if (showOnLanding) {
@@ -25,9 +25,11 @@ export function LoaderWrapper({
   return (
     <>
       <AnimatePresence mode="wait">
-        {showLoader && <Loader key="loader" onComplete={() => setShowLoader(false)} />}
+        {showLoader && (
+          <Loader key="loader" onComplete={() => setShowLoader(false)} />
+        )}
       </AnimatePresence>
-      {children}
+      {!showLoader && children}
     </>
   )
 }

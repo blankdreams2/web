@@ -1,26 +1,24 @@
 ---
+import AboutPageContent from '@/components/about/AboutPageContent.astro'
 import AboutPageTitle from '@/components/about/AboutPageTitle'
 import LiveClock from '@/components/about/LiveClock'
 import Paragraph from '@/components/about/Paragraph.tsx'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
+import { REPO_URL } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { Image } from 'astro:assets'
-
-const repoUrl = 'https://github.com/blankdreams2/website'
 ---
 
 <Layout class='max-w-3xl'>
   <PageHead slot='head' title='About' />
-  <div class='mt-3 mb-6 text-center'>
-    <AboutPageTitle client:load />
-    <div class='mt-2'>
-      <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
-    </div>
-  </div>
-  <div class='about-page bg-starfield relative flex flex-col gap-y-8'>
-    <!-- Hero: clock, location, profile -->
-    <section class='bg-grid-pattern flex flex-col items-center gap-6 p-6 pb-4 text-center'>
+  <AboutPageTitle client:load>
+    <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
+  </AboutPageTitle>
+
+  <AboutPageContent>
+    <!-- hero: clock, location, profile -->
+    <section class='flex flex-col items-center gap-6 p-6 pb-4 text-center'>
       <LiveClock client:load />
       <!-- polaroid frame -->
       <div
@@ -47,21 +45,24 @@ const repoUrl = 'https://github.com/blankdreams2/website'
       </h1>
     </section>
 
-    <!-- About sections -->
+    <!-- who's blank_dreams? sections -->
     <section class='flex flex-col gap-8 px-2'>
       <Paragraph client:load tag='chào, or hi there' dir='ltr'>
-        I started coding in <span class='font-semibold text-[#facc15]'>2021</span>
+        {`I'm a grad student at `}
+        <span class='font-semibold text-[#c10e2f]'>UNLV</span>
         {
-          ` and I've been kinda like? it. While I may not be deeply curious about how "computer" works but I do want to see how they come together and literally create dark magic, and that's how this website was made. `
+          `, 2x hackathon winner, 10x CTF winner. Been doing the coding thing for a bit and it's pretty fun. Right now I'm really into `
         }
+        <span class='text-accent font-semibold'>CTFs</span>
+        {` — and i'm broke (classic :D).`}
       </Paragraph>
 
-      <Paragraph client:load tag='outside of coding' dir='rtl'>
+      <Paragraph client:load tag='outside of school' dir='rtl'>
         {`I'm also fascinated with `}
-        <span class='text-accent font-semibold'>mathematics</span>
+        <span class='font-semibold text-white'>mathematics</span>
         {` and wish to make a career out of it someday. Things I love include: `}
-        <span class='text-accent font-semibold'>japan</span>
-        {`, coffee, dark mode, and cats.`}
+        <span class='font-semibold text-[#eb8033] dark:text-[#C4A484]'>coffee</span>
+        {`, dark mode, and cats.`}
       </Paragraph>
 
       <Paragraph client:load tag='currently?' dir='ltr'>
@@ -82,7 +83,7 @@ const repoUrl = 'https://github.com/blankdreams2/website'
       <Paragraph client:load tag='thank you' dir='ltr'>
         {`I hope you enjoy your stay. The source code for this website is available at `}
         <a
-          href={repoUrl}
+          href={REPO_URL}
           target='_blank'
           rel='noopener noreferrer'
           class='text-accent decoration-accent font-semibold underline underline-offset-2 hover:opacity-80'
@@ -91,5 +92,5 @@ const repoUrl = 'https://github.com/blankdreams2/website'
         </a>
       </Paragraph>
     </section>
-  </div>
+  </AboutPageContent>
 </Layout>

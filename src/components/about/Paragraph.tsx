@@ -52,7 +52,7 @@ export default function Paragraph({
       <div className="flex w-full max-w-3xl flex-col border-b border-slate-700 pt-1 pb-2 dark:border-slate-400">
         {/* Tag */}
         <p
-          className={`pb-2 font-sans text-lg text-black dark:text-white ${tagAlignment}`}
+          className={`pb-2 font-display text-xl text-black dark:text-white ${tagAlignment}`}
         >
           {tag === 'rpg maker games' && (
             <Gamepad2 className="mt-1 mr-1.5 inline-block h-5 w-5 animate-pulse" />
@@ -73,12 +73,12 @@ export default function Paragraph({
 
         {customAnswer || children ? (
           <p
-            className={`pb-2 font-sans text-[15px] font-medium tracking-wide text-black dark:font-light dark:text-slate-50 ${tagAlignment}`}
+            className={`pb-2 font-sans text-[15px] font-medium tracking-wide text-black dark:font-light dark:text-muted-foreground ${tagAlignment}`}
           >
             {customAnswer ?? children}
           </p>
         ) : (
-          <p className="pb-2 font-sans text-[15px] text-gray-500 opacity-80 dark:text-slate-50">
+          <p className="pb-2 font-sans text-[15px] text-gray-500 opacity-80 dark:text-muted-foreground">
             {answer ||
               'Consectetur adipiscing elit, sed do eiusmod tempor incididunt.'}
           </p>

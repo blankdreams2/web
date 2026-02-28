@@ -263,7 +263,6 @@
   --ring: oklch(0.556 0 0);
 }
 
-
 @layer base {
 
   *,
@@ -375,4 +374,11 @@
       linear-gradient(to right, oklch(1 0 0 / 0.15) 1px, transparent 1px),
       linear-gradient(to bottom, oklch(1 0 0 / 0.15) 1px, transparent 1px);
   }
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation:
+    none;
+    mix-blend-mode:
+    normal;
 }

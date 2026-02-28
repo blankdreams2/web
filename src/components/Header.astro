@@ -1,11 +1,9 @@
 ---
-import Link from '@/components/Link.astro'
-import ThemeToggle from '@/components/ThemeToggle.astro'
 import { HeaderLogo } from '@/components/HeaderLogo'
+import Link from '@/components/Link.astro'
+import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 import { NAV_LINKS } from '@/consts'
 import { Image } from 'astro:assets'
-
-import logo from '../../public/static/coffee.png'
 ---
 
 <div>
@@ -14,7 +12,13 @@ import logo from '../../public/static/coffee.png'
     <div class='flex min-w-0 items-center gap-3'>
       <!-- logo -->
       <Link href='/' class='flex shrink-0 items-center justify-center gap-3'>
-        <Image src={logo} alt='Logo' class='size-5 rounded-2xl sm:size-6' />
+        <Image
+          src='/static/coffee.png'
+          width={200}
+          height={200}
+          alt='Logo'
+          class='size-5 rounded-2xl sm:size-6'
+        />
         <span class='hidden h-full text-lg leading-none font-medium min-[400px]:block'>
           <HeaderLogo client:load />
         </span>
@@ -50,8 +54,7 @@ import logo from '../../public/static/coffee.png'
           ))
         }
       </nav>
-
-      <ThemeToggle transition:persist />
+      <AnimatedThemeToggler client:load className='-my-2 -me-2' />
     </div>
   </div>
 </div>
