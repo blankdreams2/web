@@ -29,6 +29,9 @@ export default defineConfig({
         process.env.CONVEX_URL ?? '',
       ),
     },
+    build: {
+      chunkSizeWarningLimit: 600,
+    },
   },
   server: {
     port: 1234,

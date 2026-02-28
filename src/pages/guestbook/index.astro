@@ -1,7 +1,6 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
-import { ConvexClientProvider } from '@/components/guestbook/ConvexClientProvider'
-import { Guestbook } from '@/components/guestbook/Guestbook'
+import { GuestbookLazy } from '@/components/guestbook/GuestbookLazy'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
 ---
@@ -12,8 +11,6 @@ import Layout from '@/layouts/Layout.astro'
     <Breadcrumbs items={[{ label: 'Guestbook', icon: 'lucide:book-open' }]} />
     <h1 class='font-display text-2xl font-bold sm:text-3xl'>Guestbook</h1>
     <p class='text-muted-foreground text-sm'>Leave an anonymous message. No login required.</p>
-    <ConvexClientProvider client:only="react">
-      <Guestbook />
-    </ConvexClientProvider>
+    <GuestbookLazy client:only="react" />
   </div>
 </Layout>
