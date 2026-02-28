@@ -21,9 +21,12 @@ export async function getAllPostsAndSubposts(): Promise<
 export async function getAllProjects(): Promise<CollectionEntry<'projects'>[]> {
   const projects = await getCollection('projects')
   return projects.sort((a, b) => {
-    const dateA = a.data.startDate?.getTime() || 0
-    const dateB = b.data.startDate?.getTime() || 0
-    return dateB - dateA
+    const startA = a.data.startDate?.getTime() ?? 0
+    const startB = b.data.startDate?.getTime() ?? 0
+    if (startB !== startA) return startB - startA
+    const endA = a.data.endDate?.getTime() ?? 0
+    const endB = b.data.endDate?.getTime() ?? 0
+    return endB - endA
   })
 }
 

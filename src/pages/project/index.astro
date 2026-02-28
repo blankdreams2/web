@@ -2,46 +2,48 @@
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageTitle from '@/components/home/PageTitle.astro'
 import PageHead from '@/components/PageHead.astro'
-import ProjectCard from '@/components/ProjectCard.astro'
-import PaginationComponent from '@/components/ui/pagination'
-import { SITE } from '@/consts'
+import { BentoProjectGrid } from '@/components/project/BentoProjectGrid'
 import Layout from '@/layouts/Layout.astro'
 import { getAllProjects } from '@/lib/data-utils'
-import type { PaginateFunction } from 'astro'
 import { Icon } from 'astro-icon/components'
 import type { CollectionEntry } from 'astro:content'
 
-export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
-  const allProjects = await getAllProjects()
-  return paginate(allProjects, { pageSize: SITE.projectsPerPage })
+const allProjects = await getAllProjects()
+function serializeProject(p: CollectionEntry<'projects'>) {
+  const img = p.data.image as unknown
+  let imageSrc: string | null = null
+  if (img) {
+    if (typeof img === 'string') {
+      imageSrc = (img as string).startsWith('/public') ? (img as string).slice(7) : (img as string)
+    } else if (typeof img === 'object' && img !== null && 'src' in img) {
+      imageSrc = (img as { src?: string }).src ?? null
+    }
+  }
+  return {
+    id: p.id,
+    name: p.data.name,
+    description: p.data.description,
+    link: p.data.link,
+    image: imageSrc,
+    tags: p.data.tags ?? [],
+    startDate: p.data.startDate?.toISOString() ?? null,
+    endDate: p.data.endDate?.toISOString() ?? null,
+  }
 }
-
-const { page } = Astro.props
+const serializedProjects = allProjects.map(serializeProject)
 ---
 
-<Layout class='max-w-3xl'>
+<Layout class='max-w-5xl'>
   <PageHead slot='head' title='project' />
   <PageTitle titleJP='注目プロジェクト。'>
-    <Breadcrumbs
-      slot='breadcrumbs'
-      items={[
-        { label: 'project', icon: 'lucide:sparkle' },
-        { label: `Page ${page.currentPage}`, icon: 'lucide:book-copy' },
-      ]}
-    />
+    <Breadcrumbs slot='breadcrumbs' items={[{ label: 'project', icon: 'lucide:sparkle' }]} />
   </PageTitle>
 
-  <!-- TODO: do I need to make it into a component? -->
+  <!-- TODO: make it into a component -->
   <section class='flex flex-col'>
     {
-      page.data.length > 0 ? (
-        <ul class='flex flex-col gap-6'>
-          {page.data.map((project: CollectionEntry<'projects'>) => (
-            <li>
-              <ProjectCard project={project} />
-            </li>
-          ))}
-        </ul>
+      allProjects.length > 0 ? (
+        <BentoProjectGrid projects={serializedProjects} client:load />
       ) : (
         <div
           class='bg-muted/30 flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed py-16 text-center'
@@ -59,11 +61,4 @@ const { page } = Astro.props
       )
     }
   </section>
-
-  <PaginationComponent
-    currentPage={page.currentPage}
-    totalPages={page.lastPage}
-    baseUrl='/project/'
-    client:load
-  />
 </Layout>
