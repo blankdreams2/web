@@ -1,6 +1,7 @@
 ---
 import BlogCard from '@/components/BlogCard.astro'
-import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import BlogPageHeader from '@/components/BlogPageHeader.astro'
+import BlogSidebar from '@/components/BlogSidebar.astro'
 import PageHead from '@/components/PageHead.astro'
 import PaginationComponent from '@/components/ui/pagination'
 import { SITE } from '@/consts'
@@ -21,41 +22,52 @@ const postsByYear = groupPostsByYear(page.data)
 const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
 ---
 
-<Layout class='max-w-3xl'>
+<Layout class='max-w-none'>
   <PageHead slot='head' title='Blog' />
-  <div class='mt-3 mb-6 text-center'>
-    <h2 class='text-foreground text-xl font-bold'>Blog</h2>
-    <div class='mt-2'>
-      <Breadcrumbs
-        items={[
+
+  <div class='grid grid-cols-1 lg:grid-cols-[1fr_minmax(0,80rem)_1fr]'>
+    <!-- Left: Blog sidebar centered in its column -->
+    <div class='hidden lg:flex lg:justify-center lg:pr-4'>
+      <BlogSidebar />
+    </div>
+
+    <!-- Middle: Blog content max-w-5xl -->
+    <div class='min-w-0 px-4'>
+      <BlogPageHeader
+        breadcrumbItems={[
           { label: 'Blog', href: '/blog', icon: 'lucide:library-big' },
           { label: `Page ${page.currentPage}`, icon: 'lucide:book-copy' },
         ]}
       />
+
+      <div class='mx-auto max-w-5xl'>
+        <div class='flex min-h-[calc(100vh-18rem)] flex-col gap-y-8'>
+          {
+            years.map((year) => (
+              <section class='flex flex-col gap-y-4'>
+                <div class='font-medium'>{year}</div>
+                <ul class='flex flex-col gap-4'>
+                  {postsByYear[year].map((post) => (
+                    <li>
+                      <BlogCard entry={post} />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))
+          }
+        </div>
+
+        <PaginationComponent
+          currentPage={page.currentPage}
+          totalPages={page.lastPage}
+          baseUrl='/blog/'
+          client:load
+        />
+      </div>
     </div>
-  </div>
 
-  <div class='flex min-h-[calc(100vh-18rem)] flex-col gap-y-8'>
-    {
-      years.map((year) => (
-        <section class='flex flex-col gap-y-4'>
-          <div class='font-medium'>{year}</div>
-          <ul class='flex flex-col gap-4'>
-            {postsByYear[year].map((post) => (
-              <li>
-                <BlogCard entry={post} />
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))
-    }
+    <!-- Right: empty, reserved for symmetry with post pages -->
+    <div class='hidden lg:block' />
   </div>
-
-  <PaginationComponent
-    currentPage={page.currentPage}
-    totalPages={page.lastPage}
-    baseUrl='/blog/'
-    client:load
-  />
 </Layout>

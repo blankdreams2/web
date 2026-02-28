@@ -192,6 +192,36 @@ export function groupPostsByYear(
   )
 }
 
+export type BlogSidebarGroup = {
+  category: string
+  years: Record<string, CollectionEntry<'blog'>[]>
+}
+
+export async function getPostsGroupedByCategoryAndYear(): Promise<
+  BlogSidebarGroup[]
+> {
+  const allPosts = await getAllPostsAndSubposts()
+  const parentPosts = allPosts.filter((p) => !isSubpost(p.id))
+  const byCategory = parentPosts.reduce(
+    (acc: Record<string, CollectionEntry<'blog'>[]>, post) => {
+      const category = post.data.category ?? 'general'
+      const key = category.toLowerCase()
+      ;(acc[key] ??= []).push(post)
+      return acc
+    },
+    {},
+  )
+
+  const categoryOrder = ['ctf', 'education', 'tools', 'general']
+  return categoryOrder
+    .filter((c) => byCategory[c]?.length)
+    .map((category) => {
+      const categoryPosts = byCategory[category]
+      const years = groupPostsByYear(categoryPosts)
+      return { category, years }
+    })
+}
+
 export async function hasSubposts(postId: string): Promise<boolean> {
   const subposts = await getSubpostsForParent(postId)
   return subposts.length > 0

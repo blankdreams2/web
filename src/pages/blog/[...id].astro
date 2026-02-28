@@ -1,5 +1,6 @@
 ---
-import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import BlogPageHeader from '@/components/BlogPageHeader.astro'
+import BlogSidebar from '@/components/BlogSidebar.astro'
 import PostHead from '@/components/PostHead.astro'
 import PostNavigation from '@/components/PostNavigation.astro'
 import SubpostsHeader from '@/components/SubpostsHeader.astro'
@@ -55,6 +56,7 @@ const tocSections = await getTOCSections(currentPostId)
 
 <Layout>
   <PostHead slot='head' post={post} />
+
   {
     (hasChildPosts || isCurrentSubpost) && (
       <SubpostsHeader
@@ -70,165 +72,181 @@ const tocSections = await getTOCSections(currentPostId)
       )
   }
 
-  <section
-    class='grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6'
-  >
-    {
-      post.data.image && (
-        <Image
-          src={post.data.image}
-          alt={post.data.title}
-          width={1200}
-          height={630}
-          class='col-span-full mx-auto w-full max-w-5xl object-cover'
-        />
-      )
-    }
+  <div class='grid grid-cols-1 lg:grid-cols-[1fr_minmax(0,80rem)_1fr]'>
+    <!-- Left: Blog sidebar centered in its column -->
+    <div class='hidden lg:flex lg:justify-center lg:pr-4'>
+      <BlogSidebar currentPostId={currentPostId} />
+    </div>
 
-    <section class='col-start-2 flex flex-col gap-y-6 text-center'>
-      <div class='flex flex-col'>
-        <h1
-          class='mb-2 scroll-mt-31 text-3xl leading-tight font-medium sm:text-4xl'
-          id='post-title'
-        >
-          {post.data.title}
-        </h1>
+    <!-- Middle: Blog content max-w-5xl -->
+    <div class='min-w-0 px-4'>
+      <BlogPageHeader
+        breadcrumbItems={[
+          { href: '/blog', label: 'Blog', icon: 'lucide:library-big' },
+          ...(isCurrentSubpost && parentPost
+            ? [
+                { href: `/blog/${parentPost.id}`, label: parentPost.data.title, icon: 'lucide:book-open' },
+                { href: `/blog/${currentPostId}`, label: post.data.title, icon: 'lucide:file-text' },
+              ]
+            : [
+                { href: `/blog/${currentPostId}`, label: post.data.title, icon: 'lucide:book-open-text' },
+              ]),
+        ]}
+      />
 
-        <div class='mt-2'>
-          <Breadcrumbs
-            items={[
-              { href: '/blog', label: 'Blog', icon: 'lucide:library-big' },
-              ...(isCurrentSubpost && parentPost
-                ? [
-                    {
-                      href: `/blog/${parentPost.id}`,
-                      label: parentPost.data.title,
-                      icon: 'lucide:book-open',
-                    },
-                    {
-                      href: `/blog/${currentPostId}`,
-                      label: post.data.title,
-                      icon: 'lucide:file-text',
-                    },
-                  ]
-                : [
-                    {
-                      href: `/blog/${currentPostId}`,
-                      label: post.data.title,
-                      icon: 'lucide:book-open-text',
-                    },
-                  ]),
-            ]}
-          />
-        </div>
-
-        <div
-          class='text-muted-foreground divide-border mb-4 flex flex-col items-center justify-center divide-y text-xs sm:flex-row sm:flex-wrap sm:divide-x sm:divide-y-0 sm:text-sm'
-        >
-          <div
-            class='flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0'
-          >
-            <span>{formatDate(post.data.date)}</span>
-          </div>
-
-          <div
-            class='flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0'
-          >
-            <span>
-              {postReadingTime}
-              {
-                combinedReadingTime && combinedReadingTime !== postReadingTime && (
-                  <span class='text-muted-foreground'> ({combinedReadingTime} total)</span>
-                )
-              }
-            </span>
-          </div>
-
+      <!-- Post content -->
+      <div class='mx-auto max-w-5xl'>
+        <section class='flex flex-col gap-y-6'>
           {
-            subpostCount > 0 && (
-              <div class='flex w-full items-center justify-center gap-1 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0'>
-                <Icon name='lucide:file-text' class='size-3' />
-                {subpostCount} subpost{subpostCount === 1 ? '' : 's'}
-              </div>
+            post.data.image && (
+              <Image
+                src={post.data.image}
+                alt={post.data.title}
+                width={1200}
+                height={630}
+                class='mx-auto w-full max-w-5xl object-cover'
+              />
             )
           }
-        </div>
-        <div class='flex flex-wrap justify-center gap-2'>
-          {
-            post.data.tags &&
-              post.data.tags.length > 0 &&
-              post.data.tags.map((tag) => (
-                <a href={`/tags/${tag}`} class={badgeVariants({ variant: 'muted' })}>
-                  <Icon name='lucide:hash' class='size-3' />
-                  {tag}
-                </a>
-              ))
-          }
-        </div>
-      </div>
 
-      <PostNavigation
-        newerPost={navigation.newer}
-        olderPost={navigation.older}
-        parentPost={isCurrentSubpost ? navigation.parent : undefined}
-      />
-    </section>
+          <div class='flex flex-col gap-y-6 text-center'>
+            <h1
+              class='mb-2 scroll-mt-31 text-3xl leading-tight font-medium sm:text-4xl'
+              id='post-title'
+            >
+              {post.data.title}
+            </h1>
 
-    {tocSections.length > 0 && <TOCSidebar sections={tocSections} currentPostId={currentPostId} />}
+            <div
+              class='text-muted-foreground divide-border mb-4 flex flex-col items-center justify-center divide-y text-xs sm:flex-row sm:flex-wrap sm:divide-x sm:divide-y-0 sm:text-sm'
+            >
+              <div
+                class='flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0'
+              >
+                <span>{formatDate(post.data.date)}</span>
+              </div>
 
-    <article class='prose col-start-2 max-w-none'>
-      <Content />
-    </article>
+              <div
+                class='flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0'
+              >
+                <span>
+                {postReadingTime}
+                {
+                  combinedReadingTime && combinedReadingTime !== postReadingTime && (
+                    <span class='text-muted-foreground'> ({combinedReadingTime} total)</span>
+                  )
+                }
+                </span>
+              </div>
 
-    {
-      (hasChildPosts || isCurrentSubpost) && (
-        <SubpostsSidebar
-          parentId={isCurrentSubpost ? getParentId(currentPostId) : currentPostId}
-          className='w-64'
+              {
+                subpostCount > 0 && (
+                  <div class='flex w-full items-center justify-center gap-1 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0'>
+                  <Icon name='lucide:file-text' class='size-3' />
+                    {subpostCount} subpost{subpostCount === 1 ? '' : 's'}
+                  </div>
+                )
+              }
+            </div>
+            <div class='flex flex-wrap justify-center gap-2'>
+              {
+              post.data.tags &&
+                post.data.tags.length > 0 &&
+                post.data.tags.map((tag) => (
+                  <a href={`/tags/${tag}`} class={badgeVariants({ variant: 'muted' })}>
+                    <Icon name='lucide:hash' class='size-3' />
+                    {tag}
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+
+          <PostNavigation
+            newerPost={navigation.newer}
+            olderPost={navigation.older}
+            parentPost={isCurrentSubpost ? navigation.parent : undefined}
+          />
+        </section>
+
+        <article class='prose mx-auto w-full max-w-5xl'>
+          <Content />
+        </article>
+
+        <PostNavigation
+          newerPost={navigation.newer}
+          olderPost={navigation.older}
+          parentPost={isCurrentSubpost ? navigation.parent : undefined}
         />
+      </div>
+    </div>
+
+    <!-- Right: TOC and Subposts -->
+    {
+      (tocSections.length > 0 || hasChildPosts || isCurrentSubpost) && (
+        <aside class='hidden max-h-[calc(100vh-5rem)] min-w-0 flex-col gap-8 overflow-y-auto pl-4 lg:flex xl:sticky xl:top-20'>
+          {tocSections.length > 0 && (
+            <div class='shrink-0'>
+              <TOCSidebar sections={tocSections} currentPostId={currentPostId} />
+            </div>
+          )}
+          {tocSections.length > 0 && (hasChildPosts || isCurrentSubpost) && (
+            <div class='flex shrink-0 items-center gap-2'>
+              <div class='bg-border h-px flex-1' />
+              <span class='text-muted-foreground text-xs font-medium'>In this series</span>
+              <div class='bg-border h-px flex-1' />
+            </div>
+          )}
+          {(hasChildPosts || isCurrentSubpost) && (
+            <div class='min-h-0 shrink-0'>
+              <SubpostsSidebar
+                parentId={isCurrentSubpost ? getParentId(currentPostId) : currentPostId}
+                className='w-full min-w-0'
+              />
+            </div>
+          )}
+        </aside>
       )
     }
+  </div>
 
-    <PostNavigation
-      newerPost={navigation.newer}
-      olderPost={navigation.older}
-      parentPost={isCurrentSubpost ? navigation.parent : undefined}
-    />
-  </section>
 
-  <Button
-    variant='outline'
-    size='icon'
-    className='group fixed right-8 bottom-8 z-50 hidden'
-    id='scroll-to-top'
-    title='Scroll to top'
-    aria-label='Scroll to top'
-  >
-    <Icon
-      name='lucide:arrow-up'
-      class='mx-auto size-4 transition-all group-hover:-translate-y-0.5'
-    />
-  </Button>
+    <!-- scroll to top button -->
+    <Button
+      variant='outline'
+      size='icon'
+      className='group fixed right-8 bottom-8 z-50 hidden'
+      id='scroll-to-top'
+      title='Scroll to top'
+      aria-label='Scroll to top'
+    >
+      <Icon
+        name='lucide:arrow-up'
+        class='mx-auto size-4 transition-all group-hover:-translate-y-0.5'
+      />
+    </Button>
 
-  <script>
-    document.addEventListener('astro:page-load', () => {
-      const scrollToTopButton = document.getElementById('scroll-to-top')
-      const footer = document.querySelector('footer')
+    <!-- scroll to top button -->
+    <script>
+      document.addEventListener('astro:page-load', () => {
+        const scrollToTopButton = document.getElementById('scroll-to-top')
+        const footer = document.querySelector('footer')
 
-      if (scrollToTopButton && footer) {
-        scrollToTopButton.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
-        })
+        if (scrollToTopButton && footer) {
+          scrollToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          })
 
-        window.addEventListener('scroll', () => {
-          const footerRect = footer.getBoundingClientRect()
-          const isFooterVisible = footerRect.top <= window.innerHeight
+          window.addEventListener('scroll', () => {
+            const footerRect = footer.getBoundingClientRect()
+            const isFooterVisible = footerRect.top <= window.innerHeight
 
-          scrollToTopButton.classList.toggle('hidden', window.scrollY <= 300 || isFooterVisible)
-        })
-      }
-    })
-  </script>
+            scrollToTopButton.classList.toggle('hidden', window.scrollY <= 300 || isFooterVisible)
+          })
+        }
+      })
+    </script>
+  </div>
 </Layout>
 
 <script>
