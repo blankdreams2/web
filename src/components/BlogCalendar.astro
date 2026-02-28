@@ -1,11 +1,7 @@
 ---
 import BlogCard from '@/components/BlogCard.astro'
-import {
-  getSubpostsForParent,
-  groupPostsByYear,
-  isSubpost,
-} from '@/lib/data-utils'
-import { Icon } from 'astro-icon/components'
+import { groupPostsByYear } from '@/lib/data-utils'
+import { formatDateShort } from '@/lib/utils'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
@@ -15,45 +11,46 @@ interface Props {
 const { parentPosts } = Astro.props
 const postsByYear = groupPostsByYear(parentPosts)
 const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
-
-// Pre-fetch subposts for each parent
-const subpostsMap = new Map<string, CollectionEntry<'blog'>[]>()
-for (const post of parentPosts) {
-  if (!isSubpost(post.id)) {
-    subpostsMap.set(post.id, await getSubpostsForParent(post.id))
-  }
-}
 ---
 
-<div class='flex min-h-[calc(100vh-18rem)] flex-col gap-y-10'>
+<div class='flex min-h-[calc(100vh-18rem)] flex-col'>
   {
-    years.map((year) => (
-      <section class='flex flex-col gap-y-4'>
-        <div class='text-muted-foreground flex items-center gap-2 font-medium'>
-          <Icon name='lucide:calendar' class='size-4' />
-          {year}
+    years.map((year, yearIndex) => (
+      <section class='relative flex flex-col'>
+        <!-- Year header with timeline accent -->
+        <div class='mb-8 flex items-baseline gap-4'>
+          <div class='bg-primary/15 text-primary ring-primary/20 flex size-14 shrink-0 items-center justify-center rounded-2xl font-bold tabular-nums ring-1'>
+            {year}
+          </div>
+          <div class='text-muted-foreground text-sm font-medium uppercase tracking-wider'>
+            {postsByYear[year].length} post{postsByYear[year].length === 1 ? '' : 's'}
+          </div>
+          <div class='bg-border h-px flex-1' />
         </div>
-        <ul class='flex flex-col gap-4'>
-          {postsByYear[year].map((post) => {
-            const subposts = subpostsMap.get(post.id) ?? []
-            return (
-              <li class='flex flex-col gap-3'>
-                <BlogCard entry={post} />
-                {
-                  subposts.length > 0 && (
-                    <ul class='border-border ml-4 flex flex-col gap-3 border-l pl-4'>
-                      {subposts.map((sp) => (
-                        <li>
-                          <BlogCard entry={sp} />
-                        </li>
-                      ))}
-                    </ul>
-                  )
-                }
-              </li>
-            )
-          })}
+
+        <!-- Posts with date badges -->
+        <ul class='flex flex-col gap-8'>
+          {postsByYear[year].map((post) => (
+            <li class='relative'>
+              <div class='mb-2 flex items-center gap-2'>
+                <time
+                  datetime={post.data.date.toISOString()}
+                  class='text-muted-foreground bg-muted/60 rounded-lg px-2.5 py-1 text-xs font-medium tabular-nums'
+                >
+                  {formatDateShort(post.data.date)}
+                </time>
+              </div>
+              <BlogCard entry={post} />
+            </li>
+          ))}
         </ul>
+
+        <!-- Divider between years -->
+        {
+          yearIndex < years.length - 1 && (
+            <div class='border-border my-16 border-t' aria-hidden />
+          )
+        }
       </section>
     ))
   }
