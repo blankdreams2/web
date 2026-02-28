@@ -11,6 +11,16 @@ export type Experience = {
 // from linkedin - you can fix/edit these
 export const EXPERIENCES: Experience[] = [
   {
+    role: 'Losgistic',
+    company: 'Company A',
+    duration: 'March 2026 - Present',
+    location: 'Remote',
+    description:
+      'Responsible for the logistic and transportation of goods and services.',
+    logo: '/static/coffee.png',
+    technologies: ['Brain'],
+  },
+  {
     role: 'Software Engineer',
     company: 'New Harbor',
     duration: 'Sep 2024 - May 2025',

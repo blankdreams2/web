@@ -1,0 +1,60 @@
+---
+import BlogCard from '@/components/BlogCard.astro'
+import {
+  getSubpostsForParent,
+  groupPostsByYear,
+  isSubpost,
+} from '@/lib/data-utils'
+import { Icon } from 'astro-icon/components'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  parentPosts: CollectionEntry<'blog'>[]
+}
+
+const { parentPosts } = Astro.props
+const postsByYear = groupPostsByYear(parentPosts)
+const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
+
+// Pre-fetch subposts for each parent
+const subpostsMap = new Map<string, CollectionEntry<'blog'>[]>()
+for (const post of parentPosts) {
+  if (!isSubpost(post.id)) {
+    subpostsMap.set(post.id, await getSubpostsForParent(post.id))
+  }
+}
+---
+
+<div class='flex min-h-[calc(100vh-18rem)] flex-col gap-y-10'>
+  {
+    years.map((year) => (
+      <section class='flex flex-col gap-y-4'>
+        <div class='text-muted-foreground flex items-center gap-2 font-medium'>
+          <Icon name='lucide:calendar' class='size-4' />
+          {year}
+        </div>
+        <ul class='flex flex-col gap-4'>
+          {postsByYear[year].map((post) => {
+            const subposts = subpostsMap.get(post.id) ?? []
+            return (
+              <li class='flex flex-col gap-3'>
+                <BlogCard entry={post} />
+                {
+                  subposts.length > 0 && (
+                    <ul class='border-border ml-4 flex flex-col gap-3 border-l pl-4'>
+                      {subposts.map((sp) => (
+                        <li>
+                          <BlogCard entry={sp} />
+                        </li>
+                      ))}
+                    </ul>
+                  )
+                }
+              </li>
+            )
+          })}
+        </ul>
+      </section>
+    ))
+  }
+</div>

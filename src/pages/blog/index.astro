@@ -1,0 +1,27 @@
+---
+import BlogCalendar from '@/components/BlogCalendar.astro'
+import BlogTitle from '@/components/BlogTitle.astro'
+import PageHead from '@/components/PageHead.astro'
+import Layout from '@/layouts/Layout.astro'
+import { SpinCar } from '@/components/blog/SpinCar'
+import { getAllPostsAndSubposts, isSubpost } from '@/lib/data-utils'
+
+const allPosts = await getAllPostsAndSubposts()
+const parentPosts = allPosts.filter((p) => !isSubpost(p.id))
+---
+
+<Layout class='max-w-3xl'>
+  <PageHead slot='head' title='Blog' />
+
+  <BlogTitle
+    title='ズラじゃない！桂だ！'
+    breadcrumbItems={[
+      { href: '/blog', label: 'Blog', icon: 'lucide:library-big' },
+      { label: 'All', icon: 'lucide:book-copy' },
+    ]}
+  />
+
+  <BlogCalendar parentPosts={parentPosts} />
+
+  <SpinCar client:load />
+</Layout>
