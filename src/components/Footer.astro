@@ -24,8 +24,7 @@ import SocialIcons from './SocialIcons.astro'
   <div class='m-0 overflow-visible p-0'>
     <!-- footer typography -->
     <div
-      class='text-accent pointer-events-none m-0 mx-auto max-w-full overflow-visible p-0 text-center leading-none font-bold select-none'
-      style='font-size: clamp(2rem, 18vw, 8rem);'
+      class='footer-brand text-accent pointer-events-none m-0 mx-auto max-w-full overflow-visible p-0 text-center leading-none font-bold select-none'
     >
       blankdreams
     </div>
@@ -47,3 +46,14 @@ import SocialIcons from './SocialIcons.astro'
     </svg>
   </div>
 </footer>
+
+<style>
+  .footer-brand {
+    font-size: clamp(1.25rem, 14vw, 8rem);
+  }
+  @media (min-width: 640px) {
+    .footer-brand {
+      font-size: clamp(2rem, 18vw, 8rem);
+    }
+  }
+</style>
