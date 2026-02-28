@@ -2,7 +2,7 @@
 import AboutHero from '@/components/about/AboutHero.astro'
 import AboutPageTitle from '@/components/about/AboutPageTitle'
 import AboutSections from '@/components/about/AboutSections.astro'
-import { SpinPenguin } from '@/components/about/SpinPenguin'
+import { SpinMonika } from '@/components/about/SpinMonika'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import { ExperienceTimeline } from '@/components/home/ExperienceTimeline'
 import PageHead from '@/components/PageHead.astro'
@@ -18,5 +18,5 @@ import Layout from '@/layouts/Layout.astro'
   <AboutHero />
   <AboutSections />
   <ExperienceTimeline client:load experiences={EXPERIENCES} />
-  <SpinPenguin client:load />
+  <SpinMonika client:load />
 </Layout>

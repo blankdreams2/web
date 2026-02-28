@@ -58,15 +58,22 @@ export default function Calendar({ data }: CalendarProps) {
       }
     }) ?? []
 
-  // Accent palette — index 0 = 1 contribution (least), never transparent. 0 contributions use empty cell style.
+  // Theme-aware palette via CSS variables (pink for light, blue for dark)
   const ACCENT_PALETTE = [
-    'oklch(0.82 0.14 258)', // level 0: 1 contribution — always visible
-    'oklch(0.72 0.13 258)', // level 1: 2–3
-    'oklch(0.62 0.12 258)', // level 2: 4–6
-    'oklch(0.52 0.12 258)', // level 3: 7+
+    'var(--contribution-1)',
+    'var(--contribution-2)',
+    'var(--contribution-3)',
+    'var(--contribution-4)',
   ]
   const getAccentColor = (_githubColor: string, contributionCount: number) => {
-    const level = contributionCount <= 1 ? 0 : contributionCount <= 3 ? 1 : contributionCount <= 6 ? 2 : 3
+    const level =
+      contributionCount <= 1
+        ? 0
+        : contributionCount <= 3
+          ? 1
+          : contributionCount <= 6
+            ? 2
+            : 3
     return ACCENT_PALETTE[level]
   }
   const contributionColors = ACCENT_PALETTE
@@ -74,7 +81,7 @@ export default function Calendar({ data }: CalendarProps) {
   return (
     <>
       <div className="relative flex flex-col">
-        <ul className="flex justify-end gap-[3px] overflow-hidden text-xs md:justify-start dark:text-neutral-400">
+        <ul className="text-muted-foreground flex justify-end gap-[3px] overflow-hidden text-xs font-medium md:justify-start">
           {months.map((month) => (
             <li
               key={month.firstDay}
@@ -91,7 +98,10 @@ export default function Calendar({ data }: CalendarProps) {
               {week.contributionDays.map((contribution) => {
                 const backgroundColor =
                   contribution.contributionCount > 0
-                    ? getAccentColor(contribution.color, contribution.contributionCount)
+                    ? getAccentColor(
+                        contribution.color,
+                        contribution.contributionCount,
+                      )
                     : undefined
 
                 const getRandomDelayAnimate =
@@ -110,8 +120,11 @@ export default function Calendar({ data }: CalendarProps) {
                         transition: { delay: getRandomDelayAnimate },
                       },
                     }}
-                    className="my-[2px] block h-[12px] w-[12px] rounded-sm bg-neutral-300 dark:bg-neutral-600"
-                    style={backgroundColor ? { backgroundColor } : undefined}
+                    className="my-[2px] block h-[12px] w-[12px] rounded-sm"
+                    style={{
+                      backgroundColor:
+                        backgroundColor ?? 'var(--contribution-empty)',
+                    }}
                     onMouseEnter={() =>
                       setSelectContribution({
                         count: contribution.contributionCount,
@@ -130,10 +143,13 @@ export default function Calendar({ data }: CalendarProps) {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-2 text-sm">
-          <span className="dark:text-neutral-400">Less</span>
+        <div className="text-muted-foreground flex items-center gap-2 text-sm font-medium">
+          <span>Less</span>
           <ul className="flex gap-1">
-            <motion.li className="h-[10px] w-[10px] rounded-sm bg-neutral-300 dark:bg-neutral-600" />
+            <motion.li
+              className="h-[10px] w-[10px] rounded-sm"
+              style={{ backgroundColor: 'var(--contribution-empty)' }}
+            />
             {contributionColors.map((item, index) => (
               <motion.li
                 key={item}
@@ -157,7 +173,7 @@ export default function Calendar({ data }: CalendarProps) {
         <div
           className={clsx(
             `${selectContribution?.date ? 'opacity-100' : 'opacity-0'}`,
-            'rounded bg-neutral-200 px-2 text-sm dark:bg-neutral-700',
+            'bg-muted text-foreground rounded px-2 text-sm',
           )}
         >
           {selectContribution?.count} contributions on{' '}

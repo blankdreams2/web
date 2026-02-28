@@ -12,14 +12,19 @@ export default function OverviewItem({
   unit = '',
 }: OverviewItemProps) {
   return (
-    <div className="flex flex-col self-center rounded-xl border border-neutral-200 from-white to-neutral-100 px-4 py-3 dark:border-neutral-700 dark:from-neutral-800 dark:to-neutral-900">
-      <span className="text-sm dark:text-neutral-400">{label}</span>
+    <div className="border-border bg-muted/30 flex flex-col self-center rounded-xl border px-4 py-3">
+      <span className="text-muted-foreground text-sm font-medium">{label}</span>
       <div>
         <AnimateCounter
-          className="text-xl font-medium text-accent lg:text-2xl"
+          className="text-accent text-xl font-medium lg:text-2xl"
           total={value}
         />
-        {unit && <span className="text-sm dark:text-neutral-400"> {unit}</span>}
+        {unit && (
+          <span className="text-muted-foreground text-sm font-medium">
+            {' '}
+            {unit}
+          </span>
+        )}
       </div>
     </div>
   )
