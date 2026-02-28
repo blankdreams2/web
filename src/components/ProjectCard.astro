@@ -21,15 +21,15 @@ const { project } = Astro.props
     class="group flex flex-col gap-4 sm:flex-row"
     external
   >
-    <div class="bg-muted flex aspect-video w-full shrink-0 items-center justify-center overflow-hidden rounded-lg sm:max-w-48">
+    <div class="bg-muted flex aspect-video w-full shrink-0 items-center justify-center overflow-hidden rounded-lg sm:w-48 sm:h-36">
       {
         project.data.image ? (
           <Image
             src={project.data.image}
             alt={project.data.name}
-            width={1200}
-            height={630}
-            class="h-full w-full object-cover"
+            width={300}
+            height={108}
+            class="size-full object-cover"
           />
         ) : (
           <span class="text-muted-foreground text-4xl">📦</span>
