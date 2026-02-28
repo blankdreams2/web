@@ -7,6 +7,9 @@ import type { BentoProject } from '@/lib/project-utils'
 
 export type BentoSize = 'wide' | 'small' | 'tall'
 
+const PLACEHOLDER_IMAGE =
+  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"%3E%3Crect fill="%23999" width="400" height="300"/%3E%3Ctext fill="%23666" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="24"%3Eplaceholder%3C/text%3E%3C/svg%3E'
+
 const formatDate = (iso: string | null): string => {
   if (!iso) return ''
   const d = new Date(iso)
@@ -43,7 +46,7 @@ export const BentoCard: React.FC<BentoCardProps> = ({
       ref={setNodeRef}
       style={style}
       className={cn(
-        'group bg-background relative flex h-full min-h-0 overflow-hidden rounded-xl border transition-shadow',
+        'group bg-background relative flex h-full min-h-0 overflow-visible rounded-xl border transition-shadow',
         isDragging && 'z-50 opacity-90 shadow-xl',
         !isDragging && 'hover:bg-muted/50 hover:shadow-md',
       )}
@@ -53,7 +56,7 @@ export const BentoCard: React.FC<BentoCardProps> = ({
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          'flex h-full min-h-0 overflow-hidden',
+          'relative flex h-full min-h-0 overflow-hidden',
           isWide && 'flex-col gap-2 p-4 sm:flex-row sm:gap-3',
           size === 'tall' && 'flex-col gap-2 p-3',
           size === 'small' &&
@@ -70,17 +73,11 @@ export const BentoCard: React.FC<BentoCardProps> = ({
             size === 'small' && 'aspect-video w-full sm:h-20 sm:w-28',
           )}
         >
-          {project.image ? (
-            <img
-              src={project.image}
-              alt={project.name}
-              className="size-full object-cover"
-            />
-          ) : (
-            <span className="text-muted-foreground text-2xl sm:text-3xl">
-              📦
-            </span>
-          )}
+          <img
+            src={project.image ?? PLACEHOLDER_IMAGE}
+            alt={project.name}
+            className="size-full object-cover"
+          />
         </div>
         <div className="min-h-0 min-w-0 flex-1 overflow-hidden">
           <h3
@@ -141,9 +138,16 @@ export const BentoCard: React.FC<BentoCardProps> = ({
           </span>
         </div>
       </a>
+      {/* Floating image pops out on top of the card on hover */}
+      <img
+        src={project.image ?? PLACEHOLDER_IMAGE}
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-0 z-30 w-48 -translate-x-1/2 -translate-y-2 rounded-lg border border-border bg-background object-cover opacity-0 shadow-xl transition-all duration-300 ease-out group-hover:-translate-y-4 group-hover:opacity-100"
+      />
       <button
         type="button"
-        className="hover:bg-muted/80 absolute top-3 right-3 rounded-md p-1.5 opacity-0 transition-opacity group-hover:opacity-100"
+        className="hover:bg-muted/80 absolute top-3 right-3 z-20 rounded-md p-1.5 opacity-0 transition-opacity group-hover:opacity-100"
         aria-label="Drag to reorder"
         {...(attributes as object)}
         {...(listeners ?? {})}
