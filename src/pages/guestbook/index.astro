@@ -1,4 +1,5 @@
 ---
+import { Guestbook } from '@/components/guestbook/Guestbook'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageTitle from '@/components/home/PageTitle.astro'
 import PageHead from '@/components/PageHead.astro'
@@ -10,9 +11,5 @@ import Layout from '@/layouts/Layout.astro'
   <PageTitle titleJP='ズラじゃない！桂だ！'>
     <Breadcrumbs slot='breadcrumbs' items={[{ label: 'Guestbook', icon: 'lucide:book-open' }]} />
   </PageTitle>
-  <div class='rounded-lg border border-border bg-muted/30 px-4 py-8 text-center'>
-    <p class='text-muted-foreground text-sm'>
-      Guestbook coming soon — Supabase setup in progress.
-    </p>
-  </div>
+  <Guestbook client:only="react" />
 </Layout>
