@@ -1,9 +1,6 @@
 import { calculateWordCountFromHtml, readingTime } from '@/lib/utils'
 import { getCollection, render, type CollectionEntry } from 'astro:content'
 
-export async function getAllAuthors(): Promise<CollectionEntry<'authors'>[]> {
-  return await getCollection('authors')
-}
 
 export async function getAllPosts(): Promise<CollectionEntry<'blog'>[]> {
   const posts = await getCollection('blog')
@@ -28,6 +25,14 @@ export async function getAllProjects(): Promise<CollectionEntry<'projects'>[]> {
     const dateB = b.data.startDate?.getTime() || 0
     return dateB - dateA
   })
+}
+
+export async function getFeaturedProjects(): Promise<
+  CollectionEntry<'projects'>[]
+> {
+  const { FEATURED_PROJECT_NAMES } = await import('@/consts')
+  const all = await getAllProjects()
+  return all.filter((p) => FEATURED_PROJECT_NAMES.includes(p.data.name))
 }
 
 export async function getAllTags(): Promise<Map<string, number>> {

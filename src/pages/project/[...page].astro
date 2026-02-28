@@ -3,25 +3,40 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageTitle from '@/components/home/PageTitle.astro'
 import PageHead from '@/components/PageHead.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
+import PaginationComponent from '@/components/ui/pagination'
+import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getAllProjects } from '@/lib/data-utils'
+import type { PaginateFunction } from 'astro'
 import { Icon } from 'astro-icon/components'
 import type { CollectionEntry } from 'astro:content'
 
-const allProjects = await getAllProjects()
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+  const allProjects = await getAllProjects()
+  return paginate(allProjects, { pageSize: SITE.projectsPerPage })
+}
+
+const { page } = Astro.props
 ---
 
 <Layout class='max-w-3xl'>
   <PageHead slot='head' title='project' />
   <PageTitle titleJP='注目プロジェクト。'>
-    <Breadcrumbs slot='breadcrumbs' items={[{ label: 'project', icon: 'lucide:sparkle' }]} />
+    <Breadcrumbs
+      slot='breadcrumbs'
+      items={[
+        { label: 'project', icon: 'lucide:sparkle' },
+        { label: `Page ${page.currentPage}`, icon: 'lucide:book-copy' },
+      ]}
+    />
   </PageTitle>
 
+  <!-- TODO: do I need to make it into a component? -->
   <section class='flex flex-col'>
     {
-      allProjects.length > 0 ? (
+      page.data.length > 0 ? (
         <ul class='flex flex-col gap-6'>
-          {allProjects.map((project: CollectionEntry<'projects'>) => (
+          {page.data.map((project: CollectionEntry<'projects'>) => (
             <li>
               <ProjectCard project={project} />
             </li>
@@ -44,4 +59,11 @@ const allProjects = await getAllProjects()
       )
     }
   </section>
+
+  <PaginationComponent
+    currentPage={page.currentPage}
+    totalPages={page.lastPage}
+    baseUrl='/project/'
+    client:load
+  />
 </Layout>

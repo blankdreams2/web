@@ -6,7 +6,6 @@ tags:
     'Python',
     'OpenCV',
     'Tesseract',
-    'Image Processing',
     'Computer Vision',
     'OCR',
     'Pokemon',

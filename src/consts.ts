@@ -8,7 +8,14 @@ export const SITE: Site = {
   locale: 'en-US',
   featuredPostCount: 2,
   postsPerPage: 3,
+  projectsPerPage: 3,
 }
+
+export const FEATURED_PROJECT_NAMES = [
+  'Bad Decicions Inc.',
+  'Barbell',
+  'Cyber Clinic',
+]
 
 export const REPO_URL = 'https://github.com/blankdreams2/website'
 
