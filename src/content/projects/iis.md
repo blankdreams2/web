@@ -6,11 +6,10 @@ tags:
     'Research',
     'Generative AI',
     'Deep Learning',
-    'Privacy Preservation',
-    'Artificial Intelligence',
-    'Computer Vision',
-    'Natural Language Processing',
-    'Machine Learning',
+    'Privacy',
+    'AI',
+    'NLP',
+    'ML',
     'Data Visualization',
   ]
 link: 'https://iis-web-five.vercel.app/'
