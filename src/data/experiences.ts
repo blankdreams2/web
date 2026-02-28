@@ -8,7 +8,6 @@ export type Experience = {
   technologies?: string[]
 }
 
-// from linkedin - you can fix/edit these
 export const EXPERIENCES: Experience[] = [
   {
     role: 'Losgistic',
