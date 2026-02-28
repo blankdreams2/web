@@ -4,8 +4,6 @@ import { Center, useGLTF } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import type { Group } from 'three'
-import { cn } from '@/lib/utils'
-
 const TREE_BASE_Y = -0.8 // bottom-left: negative y = down in 3D
 
 function Computer() {
@@ -20,8 +18,8 @@ function Computer() {
   })
 
   return (
-    <group ref={groupRef} position={[1.2, -0.2, 0.5]}>
-      <primitive object={scene} scale={0.0055} />
+    <group ref={groupRef} position={[1, 1, 0.4]}>
+      <primitive object={scene} scale={0.0065} />
     </group>
   )
 }
@@ -51,23 +49,6 @@ const canvasClass =
 
 export function AboutScene() {
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 overflow-visible">
-      <div className={cn('z-0', canvasClass)}>
-        <Canvas
-          camera={{ position: [0, 0, 2.5], fov: 75 }}
-          gl={{ antialias: true, alpha: true }}
-        >
-          <ambientLight intensity={1} />
-          <directionalLight position={[5, 5, 5]} intensity={1.5} />
-          <Computer />
-        </Canvas>
-      </div>
-    </div>
-  )
-}
-
-export function AboutSceneTree() {
-  return (
     <div className="pointer-events-none absolute inset-0 z-20 overflow-visible">
       <div className={canvasClass}>
         <Canvas
@@ -76,6 +57,7 @@ export function AboutSceneTree() {
         >
           <ambientLight intensity={1} />
           <directionalLight position={[5, 5, 5]} intensity={1.5} />
+          <Computer />
           <Tree />
         </Canvas>
       </div>
