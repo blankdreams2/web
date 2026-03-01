@@ -3,7 +3,6 @@ import Link from '@/components/Link.astro'
 import { Badge } from '@/components/ui/badge'
 import { cn, formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
-import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
@@ -12,6 +11,17 @@ interface Props {
 }
 
 const { project, featured = false } = Astro.props
+
+// Normalize image path
+const img = project.data.image as unknown
+let imageSrc: string | null = null
+if (img) {
+  if (typeof img === 'string') {
+    imageSrc = img.startsWith('/public') ? img.slice(7) : img
+  } else if (typeof img === 'object' && img !== null && 'src' in img) {
+    imageSrc = (img as { src?: string }).src ?? null
+  }
+}
 ---
 
 <div
@@ -32,9 +42,9 @@ const { project, featured = false } = Astro.props
       )}
     >
       {
-        project.data.image ? (
-          <Image
-            src={project.data.image}
+        imageSrc ? (
+          <img
+            src={imageSrc}
             alt={project.data.name}
             width={featured ? 600 : 300}
             height={featured ? 340 : 108}
