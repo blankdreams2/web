@@ -1,5 +1,6 @@
 ---
 import BlogCalendar from '@/components/BlogCalendar.astro'
+import BlogTagFilter from '@/components/BlogTagFilter.astro'
 import BlogTitle from '@/components/BlogTitle.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
@@ -20,6 +21,8 @@ const parentPosts = allPosts.filter((p) => !isSubpost(p.id))
       { label: 'All', icon: 'lucide:book-copy' },
     ]}
   />
+
+  <BlogTagFilter posts={parentPosts} />
 
   <BlogCalendar parentPosts={parentPosts} />
 
