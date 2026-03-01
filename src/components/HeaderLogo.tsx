@@ -5,7 +5,7 @@ import { SITE } from '@/consts'
 
 export function HeaderLogo() {
   return (
-    <span className="block min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+    <span className="hidden max-w-full min-w-0 overflow-hidden text-center text-lg leading-none font-medium text-ellipsis whitespace-nowrap text-white sm:block">
       <Typewriter
         onInit={(typewriter) => {
           typewriter.typeString(SITE.title).start()
@@ -13,7 +13,6 @@ export function HeaderLogo() {
         options={{
           delay: 60,
           cursor: '|',
-          wrapperClassName: 'inline-block min-w-0 max-w-full overflow-hidden',
           cursorClassName: 'typewriter-cursor animate-pulse',
           skipAddStyles: true,
         }}
