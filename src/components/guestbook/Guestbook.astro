@@ -2,9 +2,11 @@
 interface Props {
   messages: { id: string; message: string; created_at: string; name?: string | null; email?: string | null }[]
   error?: string | null
+  supabaseUrl: string
+  supabaseKey: string
 }
 
-const { messages, error } = Astro.props
+const { messages, error, supabaseUrl, supabaseKey } = Astro.props
 ---
 
 <div class='flex flex-col gap-6'>
@@ -43,23 +45,39 @@ const { messages, error } = Astro.props
       </button>
     </div>
   </form>
-  <script>
-    const form = document.querySelector<HTMLFormElement>('#guestbook-form')
-    const submitBtn = document.querySelector<HTMLButtonElement>('#guestbook-submit')
+  <script define:vars={{ supabaseUrl, supabaseKey }}>
+    const form = document.querySelector('#guestbook-form')
+    const submitBtn = document.querySelector('#guestbook-submit')
     if (form && submitBtn) {
       form.addEventListener('submit', async (e) => {
         e.preventDefault()
         submitBtn.disabled = true
         submitBtn.textContent = 'Posting...'
         try {
-          const formData = new FormData(form)
-          const res = await fetch('/api/guestbook', { method: 'POST', body: formData })
-          if (res.redirected) {
-            window.location.href = res.url
-          } else if (res.ok) {
+          const fd = new FormData(form)
+          const message = fd.get('message')?.toString()?.trim().slice(0, 500)
+          const name = fd.get('name')?.toString()?.trim().slice(0, 100) || null
+          const email = fd.get('email')?.toString()?.trim().slice(0, 255) || null
+          if (!message) {
+            window.location.href = '/guestbook?error=' + encodeURIComponent('Message required')
+            return
+          }
+          const res = await fetch(`${supabaseUrl}/rest/v1/guestbook`, {
+            method: 'POST',
+            headers: {
+              apikey: supabaseKey,
+              Authorization: `Bearer ${supabaseKey}`,
+              'Content-Type': 'application/json',
+              Prefer: 'return=minimal',
+            },
+            body: JSON.stringify({ message, name, email }),
+          })
+          if (res.ok) {
             window.location.reload()
           } else {
-            window.location.href = '/guestbook?error=' + encodeURIComponent('Something went wrong')
+            const err = await res.json().catch(() => ({}))
+            window.location.href =
+              '/guestbook?error=' + encodeURIComponent(err.message ?? 'Something went wrong')
           }
         } catch {
           window.location.href = '/guestbook?error=' + encodeURIComponent('Network error')

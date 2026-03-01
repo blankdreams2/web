@@ -23,6 +23,11 @@ const error = Astro.url.searchParams.get('error')
   <PageTitle titleJP='ズラじゃない！桂だ！'>
     <Breadcrumbs slot='breadcrumbs' items={[{ label: 'Guestbook', icon: 'lucide:book-open' }]} />
   </PageTitle>
-  <Guestbook messages={messages ?? []} error={error} />
+  <Guestbook
+    messages={messages ?? []}
+    error={error}
+    supabaseUrl={import.meta.env.SUPABASE_URL}
+    supabaseKey={import.meta.env.SUPABASE_ANON_KEY}
+  />
   <SpinMail client:only="react" />
 </Layout>
