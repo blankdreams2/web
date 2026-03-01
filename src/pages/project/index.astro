@@ -13,5 +13,5 @@ import Layout from '@/layouts/Layout.astro'
     <Breadcrumbs slot='breadcrumbs' items={[{ label: 'project', icon: 'lucide:sparkle' }]} />
   </PageTitle>
   <ProjectSection />
-  <SpinBanhmy client:load />
+  <SpinBanhmy client:only="react" />
 </Layout>

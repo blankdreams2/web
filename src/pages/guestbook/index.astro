@@ -24,5 +24,5 @@ const error = Astro.url.searchParams.get('error')
     <Breadcrumbs slot='breadcrumbs' items={[{ label: 'Guestbook', icon: 'lucide:book-open' }]} />
   </PageTitle>
   <Guestbook messages={messages ?? []} error={error} />
-  <SpinMail client:load />
+  <SpinMail client:only="react" />
 </Layout>

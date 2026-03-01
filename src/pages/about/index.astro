@@ -18,5 +18,5 @@ import Layout from '@/layouts/Layout.astro'
   <AboutHero />
   <AboutSections />
   <ExperienceTimeline client:load experiences={EXPERIENCES} />
-  <SpinMonika client:load />
+  <SpinMonika client:only="react" />
 </Layout>

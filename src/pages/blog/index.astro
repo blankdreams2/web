@@ -26,5 +26,5 @@ const parentPosts = allPosts.filter((p) => !isSubpost(p.id))
 
   <BlogCalendar parentPosts={parentPosts} />
 
-  <SpinCar client:load />
+  <SpinCar client:only="react" />
 </Layout>
