@@ -509,3 +509,10 @@ body[data-quick-access='open'] .quick-access-panel {
 .quick-access-tips {
   padding-top: 1rem;
 }
+
+/* Custom cursor: hide default on desktop when walking gif is shown */
+@media (min-width: 1024px) {
+  body.custom-cursor-active {
+    cursor: none;
+  }
+}

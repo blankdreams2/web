@@ -1,0 +1,76 @@
+---
+
+---
+
+<div
+  id='custom-cursor'
+  class='pointer-events-none fixed top-0 left-0 z-9999 hidden size-24 lg:block'
+  style='
+    opacity: 0;
+    background-image: url(/walking.gif);
+    background-position: 120% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  '
+  aria-hidden='true'
+>
+</div>
+
+<script>
+  const CURSOR_SIZE = 96
+
+  function initCustomCursor() {
+    const cursor = document.getElementById('custom-cursor')
+    if (!cursor) return
+
+    const mq = window.matchMedia('(min-width: 1024px)')
+    if (!mq.matches) return
+
+    let visible = false
+
+    function updatePosition(x: number, y: number) {
+      if (!cursor) return
+      cursor.style.transform = `translate(${x - CURSOR_SIZE / 2}px, ${y - CURSOR_SIZE / 2}px)`
+    }
+
+    function show() {
+      visible = true
+      if (!cursor) return
+      cursor.style.opacity = '1'
+    }
+
+    function hide() {
+      visible = false
+      if (!cursor) return
+      cursor.style.opacity = '0'
+    }
+
+    function handleMouseMove(e: MouseEvent) {
+      if (!cursor) return
+      updatePosition(e.clientX, e.clientY)
+      show()
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseleave', hide)
+    document.addEventListener('mousedown', hide)
+    document.addEventListener('mouseup', show)
+
+    document.body.classList.add('custom-cursor-active')
+
+    // cleanup on astro:before-swap (SPA navigation)
+    document.addEventListener('astro:before-swap', () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseleave', hide)
+      document.removeEventListener('mousedown', hide)
+      document.removeEventListener('mouseup', show)
+      document.body.classList.remove('custom-cursor-active')
+    })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCustomCursor)
+  } else {
+    initCustomCursor()
+  }
+</script>

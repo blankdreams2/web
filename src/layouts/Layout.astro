@@ -8,6 +8,7 @@ import Head from '@/components/shared/Head.astro'
 import Header from '@/components/shared/Header.astro'
 import { LoaderWrapper } from '@/components/loader/LoaderWrapper'
 import QuickAccess from '@/components/quick-access/QuickAccess.astro'
+import CustomCursor from '@/components/ui/CustomCursor.astro'
 import { SITE } from '@/consts'
 import { cn } from '@/lib/utils'
 
@@ -37,6 +38,7 @@ const { class: className } = Astro.props
     <slot name='head' />
   </Head>
   <body class='flex h-fit min-h-screen flex-col gap-y-4 font-sans'>
+    <CustomCursor />
     <LoaderWrapper
       client:load
       showOnLanding={Astro.url.pathname === '/' || Astro.url.pathname === ''}
