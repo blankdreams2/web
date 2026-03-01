@@ -91,19 +91,19 @@ const tocSections = await getTOCSections(currentPostId)
                 ? [
                     {
                       href: `/blog/${parentPost.id}`,
-                      label: parentPost.data.title,
+                      label: parentPost?.data?.title ?? 'Post',
                       icon: 'lucide:book-open',
                     },
                     {
                       href: `/blog/${currentPostId}`,
-                      label: post.data.title,
+                      label: post?.data?.title ?? 'Post',
                       icon: 'lucide:file-text',
                     },
                   ]
                 : [
                     {
                       href: `/blog/${currentPostId}`,
-                      label: post.data.title,
+                      label: post?.data?.title ?? 'Post',
                       icon: 'lucide:book-open-text',
                     },
                   ]),
@@ -115,10 +115,10 @@ const tocSections = await getTOCSections(currentPostId)
 
     <!-- the damn image -->
     {
-      post.data.image && (
+      post.data?.image && (
         <Image
-          src={post.data.image}
-          alt={post.data.title}
+          src={post.data?.image}
+          alt={post.data?.title}
           width={1200}
           height={630}
           class='col-span-full mx-auto w-full max-w-5xl object-cover'
@@ -133,7 +133,7 @@ const tocSections = await getTOCSections(currentPostId)
           class='mb-2 scroll-mt-31 text-3xl leading-tight font-medium sm:text-4xl'
           id='post-title'
         >
-          {post.data.title}
+          {post.data?.title}
         </h1>
 
         <div
@@ -143,7 +143,7 @@ const tocSections = await getTOCSections(currentPostId)
           <div
             class='flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0'
           >
-            <span>{formatDate(post.data.date)}</span>
+            <span>{formatDate(post.data?.date)}</span>
           </div>
 
           <!-- reading time -->
@@ -174,9 +174,9 @@ const tocSections = await getTOCSections(currentPostId)
         <!-- tags -->
         <div class='flex flex-wrap justify-center gap-2'>
           {
-            post.data.tags &&
-              post.data.tags.length > 0 &&
-              post.data.tags.map((tag) => (
+            post.data?.tags &&
+              post.data?.tags.length > 0 &&
+              post.data?.tags.map((tag) => (
                 <a href={`/tags/${tag}`} class={badgeVariants({ variant: 'muted' })}>
                   <Icon name='lucide:hash' class='size-3' />
                   {tag}

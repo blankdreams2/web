@@ -390,3 +390,121 @@
       linear-gradient(to bottom, oklch(1 0 0 / 0.15) 1px, transparent 1px);
   }
 }
+
+/* Focus mode: dim header/footer to reduce distractions */
+html.focus-mode header,
+html.focus-mode footer {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+html.focus-mode header:hover,
+html.focus-mode footer:hover {
+  opacity: 1;
+}
+
+/* Quick Access */
+.quick-access {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+body[data-quick-access='open'] .quick-access {
+  pointer-events: auto;
+}
+
+.quick-access-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in oklch, var(--background) 95%, transparent);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+body[data-quick-access='open'] .quick-access-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.quick-access-close {
+  position: fixed;
+  top: 2rem;
+  right: 1rem;
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+  background: color-mix(in oklch, var(--muted) 50%, transparent);
+  color: var(--foreground);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+body[data-quick-access='open'] .quick-access-close {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.quick-access-close:hover {
+  background: color-mix(in oklch, var(--muted) 70%, transparent);
+}
+
+.quick-access-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0.5rem;
+  right: 0.5rem;
+  top: 5rem;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+  border-radius: 1rem 1rem 0 0;
+  border: 1px solid var(--border);
+  background: color-mix(in oklch, var(--background) 98%, transparent);
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+  box-shadow: 0 -4px 20px oklch(0 0 0 / 0.1);
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .quick-access-panel {
+    left: auto;
+    right: 1.5rem;
+    top: 6rem;
+    width: 320px;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px oklch(0 0 0 / 0.1);
+  }
+}
+
+body[data-quick-access='open'] .quick-access-panel {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.quick-access-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.quick-access-tips {
+  padding-top: 1rem;
+}

@@ -7,6 +7,7 @@ import Footer from '@/components/Footer.astro'
 import Head from '@/components/Head.astro'
 import Header from '@/components/Header.astro'
 import { LoaderWrapper } from '@/components/loader/LoaderWrapper'
+import QuickAccess from '@/components/QuickAccess.astro'
 import { SITE } from '@/consts'
 import { cn } from '@/lib/utils'
 
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const { class: className } = Astro.props
+
 ---
 
 <!doctype html>
@@ -49,6 +51,7 @@ const { class: className } = Astro.props
       </main>
       <Footer />
     </LoaderWrapper>
+    <QuickAccess />
 
     <!-- added this listener so the theme persists when the page is reloaded -->
     <script is:inline>

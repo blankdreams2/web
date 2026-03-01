@@ -1,60 +1,27 @@
 ---
 import { HeaderLogo } from '@/components/HeaderLogo'
 import Link from '@/components/Link.astro'
-import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
-import { NAV_LINKS } from '@/consts'
+import NavIconQuickAccess from '@/components/NavIconQuickAccess.astro'
 import { Image } from 'astro:assets'
 ---
 
-<div>
-    <div class='mx-auto flex w-full max-w-3xl items-center justify-center gap-4 px-4 py-3 sm:justify-between'>
-    {/* LEFT: logo + (mobile) nav */}
-    <div class='flex min-w-0 items-center gap-3'>
-      <!-- logo -->
-      <Link href='/' class='flex shrink-0 items-center justify-center gap-3'>
-        <Image
-          src='/static/coffee.png'
-          width={200}
-          height={200}
-          alt='Logo'
-          class='size-5 rounded-2xl sm:size-6'
-        />
-        <span class='hidden h-full text-lg leading-none font-medium min-[400px]:block'>
-          <HeaderLogo client:load />
-        </span>
-      </Link>
+<div class="min-w-0 overflow-hidden">
+    <div class='mx-auto flex w-full max-w-3xl min-w-0 items-center justify-between gap-4 overflow-hidden px-4 py-3'>
+    <!-- logo -->
+    <Link href='/' class='flex shrink-0 items-center gap-3'>
+      <Image
+        src='/static/coffee.png'
+        width={200}
+        height={200}
+        alt='Logo'
+        class='size-5 shrink-0 rounded-2xl sm:size-6'
+      />
+      <span class='hidden min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-lg leading-none font-medium sm:block'>
+        <HeaderLogo client:load />
+      </span>
+    </Link>
 
-      {/* mobile nav (<= sm) */}
-      <nav class='flex items-center gap-3 text-sm sm:hidden' aria-label='Primary'>
-        {
-          NAV_LINKS.map((item) => (
-            <Link
-              href={item.href}
-              class='text-foreground/60 hover:text-foreground transition-colors'
-            >
-              {item.label}
-            </Link>
-          ))
-        }
-      </nav>
-    </div>
-
-    {/* RIGHT: (desktop) nav + theme toggle */}
-    <div class='flex items-center gap-4'>
-      {/* Desktop nav (sm and up) */}
-      <nav class='hidden items-center gap-4 text-sm sm:flex sm:gap-6' aria-label='Primary'>
-        {
-          NAV_LINKS.map((item) => (
-            <Link
-              href={item.href}
-              class='text-foreground/60 hover:text-foreground transition-colors'
-            >
-              {item.label}
-            </Link>
-          ))
-        }
-      </nav>
-      <AnimatedThemeToggler client:load className='-my-2 -me-2' />
-    </div>
+    <!-- Quick Access - nav lives inside -->
+    <NavIconQuickAccess />
   </div>
 </div>
