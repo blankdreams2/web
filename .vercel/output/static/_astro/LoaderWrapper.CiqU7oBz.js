@@ -1,1 +1,0 @@
-import{j as t}from"./jsx-runtime.D_zvdyIk.js";import{r as e}from"./index.DgAskmve.js";import"./index.BM9YtLjs.js";function u({children:o,showOnLanding:r=!1}){const[a,s]=e.useState(r);return e.useEffect(()=>{r&&s(!0)},[r]),t.jsx(t.Fragment,{children:o})}export{u as LoaderWrapper};
