@@ -18,7 +18,7 @@ export const FEATURED_PROJECT_NAMES = [
   'Cyber Clinic',
 ]
 
-export const REPO_URL = 'https://github.com/blankdreams2/website'
+export const REPO_URL = 'https://github.com/blankdreams2/web'
 
 export const NAV_LINKS: SocialLink[] = [
   {
