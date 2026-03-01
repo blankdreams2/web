@@ -22,6 +22,8 @@ const { class: className } = Astro.props
 
 <!doctype html>
 <html class='bg-background text-foreground scheme-light-dark' lang={SITE.locale}>
+
+  <!--  -->
   <script is:inline>
     ;(() => {
       const theme = (() => {
@@ -34,11 +36,30 @@ const { class: className } = Astro.props
       document.documentElement.setAttribute('data-theme', theme)
     })()
   </script>
+  <!--  -->
+  <script is:inline>
+    ;(() => {
+      const enabled = (() => {
+        try {
+          const stored = localStorage.getItem('sound') ?? ''
+          if (stored === 'off') return false
+          if (stored === 'on') return true
+        } catch (_) {}
+        return true
+      })()
+      document.documentElement.classList.toggle('sound-off', !enabled)
+    })()
+  </script>
+
   <Head>
     <slot name='head' />
   </Head>
+
+  <!--  -->
   <body class='flex h-fit min-h-screen flex-col gap-y-4 font-sans'>
+    <!--  -->
     <CustomCursor />
+
     <LoaderWrapper
       client:load
       showOnLanding={Astro.url.pathname === '/' || Astro.url.pathname === ''}
@@ -53,6 +74,8 @@ const { class: className } = Astro.props
       </main>
       <Footer />
     </LoaderWrapper>
+
+    <!--  -->
     <QuickAccess />
 
     <!-- added this listener so the theme persists when the page is reloaded -->
@@ -60,6 +83,9 @@ const { class: className } = Astro.props
       document.addEventListener('astro:after-swap', () => {
         const stored = localStorage.getItem('theme') || 'light'
         document.documentElement.setAttribute('data-theme', stored)
+
+        const sound = localStorage.getItem('sound') || 'on'
+        document.documentElement.classList.toggle('sound-off', sound === 'off')
       })
     </script>
   </body>

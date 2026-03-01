@@ -18,6 +18,7 @@
 
 <script>
   const CURSOR_SIZE = 96
+  const FOLLOW_SPEED = 0.12
 
   function initCustomCursor() {
     const cursor = document.getElementById('custom-cursor')
@@ -26,11 +27,32 @@
     const mq = window.matchMedia('(min-width: 1024px)')
     if (!mq.matches) return
 
+    const state = ((window as any).__customCursor = (window as any).__customCursor || {})
+
+    if (state.cleanup) state.cleanup()
+
     let visible = false
+    let rafId = 0
+
+    let targetX = 0
+    let targetY = 0
+    let currentX = 0
+    let currentY = 0
+    let hasTarget = false
 
     function updatePosition(x: number, y: number) {
       if (!cursor) return
       cursor.style.transform = `translate(${x - CURSOR_SIZE / 2}px, ${y - CURSOR_SIZE / 2}px)`
+    }
+
+    function tick() {
+      rafId = window.requestAnimationFrame(tick)
+      if (!visible || !hasTarget) return
+
+      currentX += (targetX - currentX) * FOLLOW_SPEED
+      currentY += (targetY - currentY) * FOLLOW_SPEED
+
+      updatePosition(currentX, currentY)
     }
 
     function show() {
@@ -46,26 +68,44 @@
     }
 
     function handleMouseMove(e: MouseEvent) {
-      if (!cursor) return
-      updatePosition(e.clientX, e.clientY)
+      targetX = e.clientX
+      targetY = e.clientY
+      if (!hasTarget) {
+        hasTarget = true
+        currentX = targetX
+        currentY = targetY
+        updatePosition(currentX, currentY)
+      }
+      show()
+    }
+
+    function handleMouseLeave() {
+      hide()
+    }
+
+    function handleMouseDown() {
+      hide()
+    }
+
+    function handleMouseUp() {
       show()
     }
 
     document.addEventListener('mousemove', handleMouseMove)
-    document.addEventListener('mouseleave', hide)
-    document.addEventListener('mousedown', hide)
-    document.addEventListener('mouseup', show)
+    document.addEventListener('mouseleave', handleMouseLeave)
+    document.addEventListener('mousedown', handleMouseDown)
+    document.addEventListener('mouseup', handleMouseUp)
 
-    document.body.classList.add('custom-cursor-active')
+    rafId = window.requestAnimationFrame(tick)
 
-    // cleanup on astro:before-swap (SPA navigation)
-    document.addEventListener('astro:before-swap', () => {
+    state.cleanup = () => {
       document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseleave', hide)
-      document.removeEventListener('mousedown', hide)
-      document.removeEventListener('mouseup', show)
-      document.body.classList.remove('custom-cursor-active')
-    })
+      document.removeEventListener('mouseleave', handleMouseLeave)
+      document.removeEventListener('mousedown', handleMouseDown)
+      document.removeEventListener('mouseup', handleMouseUp)
+      if (rafId) window.cancelAnimationFrame(rafId)
+      state.cleanup = null
+    }
   }
 
   if (document.readyState === 'loading') {
@@ -73,4 +113,6 @@
   } else {
     initCustomCursor()
   }
+
+  document.addEventListener('astro:after-swap', initCustomCursor)
 </script>

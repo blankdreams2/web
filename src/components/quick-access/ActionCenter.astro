@@ -56,6 +56,55 @@ import { ActionCenterThemeCard } from './ActionCenterThemeCard'
         </div>
       </button>
     </div>
+
+    <div class='flex h-24 gap-4'>
+      <!-- Sound Toggle -->
+      <button
+        type='button'
+        id='action-sound'
+        class='action-center-sound relative flex flex-1 flex-col justify-between overflow-hidden rounded-xl p-4 transition-colors bg-muted/30'
+      >
+        <div class='flex h-9 w-9 shrink-0 items-center justify-center'>
+          <span class='action-sound-on' aria-hidden>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='20'
+              height='20'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='2'
+              stroke-linecap='round'
+              stroke-linejoin='round'
+            >
+              <path d='M11 5L6 9H2v6h4l5 4V5Z'></path>
+              <path d='M15.54 8.46a5 5 0 0 1 0 7.07'></path>
+              <path d='M19.07 4.93a10 10 0 0 1 0 14.14'></path>
+            </svg>
+          </span>
+          <span class='action-sound-off hidden' aria-hidden>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='20'
+              height='20'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='2'
+              stroke-linecap='round'
+              stroke-linejoin='round'
+            >
+              <path d='M11 5L6 9H2v6h4l5 4V5Z'></path>
+              <path d='M22 9l-6 6'></path>
+              <path d='M16 9l6 6'></path>
+            </svg>
+          </span>
+        </div>
+        <div class='text-left text-[13px] font-medium dark:font-normal'>
+          Sound: <span class='action-sound-label'>On</span>
+        </div>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -63,6 +112,18 @@ import { ActionCenterThemeCard } from './ActionCenterThemeCard'
   ;(function () {
     function getFocus() {
       return document.documentElement.classList.contains('focus-mode')
+    }
+
+    function getSoundEnabled() {
+      return !document.documentElement.classList.contains('sound-off')
+    }
+
+    function initSoundFromStorage() {
+      try {
+        const stored = localStorage.getItem('sound')
+        if (stored === 'off') document.documentElement.classList.add('sound-off')
+        if (stored === 'on') document.documentElement.classList.remove('sound-off')
+      } catch (_) {}
     }
 
     function updateFocusUI() {
@@ -81,8 +142,35 @@ import { ActionCenterThemeCard } from './ActionCenterThemeCard'
       }
     }
 
+    function updateSoundUI() {
+      const on = getSoundEnabled()
+      const btn = document.getElementById('action-sound')
+      const label = btn?.querySelector('.action-sound-label')
+      const iconOn = btn?.querySelector('.action-sound-on')
+      const iconOff = btn?.querySelector('.action-sound-off')
+
+      if (label) label.textContent = on ? 'On' : 'Off'
+      if (iconOn) iconOn.classList.toggle('hidden', !on)
+      if (iconOff) iconOff.classList.toggle('hidden', on)
+      if (btn) {
+        btn.classList.toggle('bg-muted', on)
+        btn.classList.toggle('bg-muted/30', !on)
+      }
+    }
+
+    function setSoundEnabled(enabled) {
+      document.documentElement.classList.toggle('sound-off', !enabled)
+      try {
+        localStorage.setItem('sound', enabled ? 'on' : 'off')
+      } catch (_) {}
+      window.dispatchEvent(new CustomEvent('sound-mode-change'))
+    }
+
     function init() {
       const focusBtn = document.getElementById('action-focus')
+      const soundBtn = document.getElementById('action-sound')
+
+      initSoundFromStorage()
 
       focusBtn?.addEventListener('click', () => {
         document.documentElement.classList.toggle('focus-mode')
@@ -90,8 +178,15 @@ import { ActionCenterThemeCard } from './ActionCenterThemeCard'
         window.dispatchEvent(new CustomEvent('focus-mode-change'))
       })
 
+      soundBtn?.addEventListener('click', () => {
+        setSoundEnabled(!getSoundEnabled())
+        updateSoundUI()
+      })
+
       window.addEventListener('focus-mode-change', updateFocusUI)
+      window.addEventListener('sound-mode-change', updateSoundUI)
       updateFocusUI()
+      updateSoundUI()
     }
 
     if (document.readyState === 'loading') {
