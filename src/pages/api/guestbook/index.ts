@@ -3,6 +3,11 @@ import { supabase } from '@/lib/supabase'
 
 export const prerender = false
 
+/** Fallback when POST gets converted to GET (e.g. redirect chain) */
+export const GET: APIRoute = ({ redirect }) => {
+  return redirect('/guestbook')
+}
+
 export const POST: APIRoute = async ({ request, redirect }) => {
   const formData = await request.formData()
   const message = formData.get('message')?.toString()?.trim().slice(0, 500)
