@@ -5,7 +5,7 @@ import { SITE } from '@/consts'
 
 export function HeaderLogo() {
   return (
-    <span className="hidden max-w-full min-w-0 overflow-hidden text-center text-lg leading-none font-medium text-ellipsis whitespace-nowrap text-white sm:block">
+    <span className="hidden max-w-full min-w-0 overflow-hidden text-center text-lg leading-none font-medium text-ellipsis whitespace-nowrap text-black sm:block dark:text-white">
       <Typewriter
         onInit={(typewriter) => {
           typewriter.typeString(SITE.title).start()
