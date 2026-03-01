@@ -1,6 +1,6 @@
 import { S as SITE } from '../chunks/consts_RqznFRTQ.mjs';
 import rss from '@astrojs/rss';
-import { o as getAllPosts } from '../chunks/data-utils_CmMo04gt.mjs';
+import { o as getAllPosts } from '../chunks/data-utils_B611coWT.mjs';
 export { renderers } from '../renderers.mjs';
 
 async function GET(context) {

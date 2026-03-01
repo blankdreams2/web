@@ -1,12 +1,10 @@
 'use client'
 
-import { m } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { Eye, EyeOff, Moon, Sun } from 'lucide-react'
-
-import { cn } from '@/lib/utils'
-
 import { useFocusMode } from '@/hooks/useQuickAccessStore'
+import { cn } from '@/lib/utils'
+import { m } from 'framer-motion'
+import { Eye, EyeOff, Moon, Sun } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 const animation = {
   hide: { y: -16, opacity: 0 },
@@ -45,7 +43,7 @@ function ActionCenterButton({
       className={cn(
         'relative flex flex-1 flex-col justify-between overflow-hidden rounded-xl p-4 transition-colors',
         'bg-muted/50 hover:bg-muted/70',
-        active && 'bg-muted'
+        active && 'bg-muted',
       )}
     >
       <div className="flex items-center justify-center">{icon}</div>
@@ -59,7 +57,7 @@ export default function ActionCenter() {
   const [isDark, setIsDark] = useState(
     () =>
       typeof document !== 'undefined' &&
-      document.documentElement.getAttribute('data-theme') === 'dark'
+      document.documentElement.getAttribute('data-theme') === 'dark',
   )
 
   useEffect(() => {
@@ -83,7 +81,7 @@ export default function ActionCenter() {
       transition={{ staggerChildren: 0.06 }}
     >
       <m.div
-        className="px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+        className="text-muted-foreground px-2 text-xs font-semibold tracking-wider uppercase"
         variants={animation}
       >
         Action Center
@@ -95,11 +93,7 @@ export default function ActionCenter() {
             title={isDark ? 'Dark Mode: On' : 'Dark Mode: Off'}
             onClick={toggleTheme}
             icon={
-              isDark ? (
-                <Moon className="size-5" />
-              ) : (
-                <Sun className="size-5" />
-              )
+              isDark ? <Moon className="size-5" /> : <Sun className="size-5" />
             }
           />
           <ActionCenterButton
@@ -108,9 +102,9 @@ export default function ActionCenter() {
             active={focusMode}
             icon={
               focusMode ? (
-                <EyeOff className="size-5 text-muted-foreground" />
+                <EyeOff className="text-muted-foreground size-5" />
               ) : (
-                <Eye className="size-5 text-muted-foreground" />
+                <Eye className="text-muted-foreground size-5" />
               )
             }
           />

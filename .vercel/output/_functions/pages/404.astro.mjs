@@ -1,5 +1,5 @@
 import { c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_v3yWdH_B.mjs';
-import { $ as $$Layout, a as $$Breadcrumbs, b as $$Link, c as buttonVariants } from '../chunks/Layout_yZGE3sl7.mjs';
+import { $ as $$Layout, a as $$Breadcrumbs, b as $$Link, c as buttonVariants } from '../chunks/Layout_CfgLFcEj.mjs';
 import { $ as $$PageHead } from '../chunks/PageHead_DQNRM4qn.mjs';
 import { c as cn } from '../chunks/consts_RqznFRTQ.mjs';
 export { renderers } from '../renderers.mjs';

@@ -17,3 +17,5 @@ teaser.pptx
 
 .env.local
 .env
+.vercel
+.env*.local

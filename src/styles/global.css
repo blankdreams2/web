@@ -419,7 +419,7 @@ body[data-quick-access='open'] .quick-access {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: color-mix(in oklch, var(--background) 95%, transparent);
+  background: color-mix(in oklch, var(--background) 50%, transparent);
   backdrop-filter: blur(8px);
   opacity: 0;
   pointer-events: none;
@@ -460,7 +460,7 @@ body[data-quick-access='open'] .quick-access-close {
 
 .quick-access-panel {
   position: fixed;
-  bottom: 0;
+  bottom: 1.5rem;
   left: 0.5rem;
   right: 0.5rem;
   top: 5rem;
@@ -485,8 +485,9 @@ body[data-quick-access='open'] .quick-access-close {
   .quick-access-panel {
     left: auto;
     right: 1.5rem;
-    top: 6rem;
-    width: 320px;
+    top: 5.5rem;
+    bottom: 2rem;
+    width: 368px;
     border-radius: 1rem;
     box-shadow: 0 4px 20px oklch(0 0 0 / 0.1);
   }

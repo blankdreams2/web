@@ -1,5 +1,5 @@
 import { c as createComponent, m as maybeRenderHead, r as renderComponent, a as renderTemplate } from '../chunks/astro/server_v3yWdH_B.mjs';
-import { $ as $$Layout, a as $$Breadcrumbs } from '../chunks/Layout_yZGE3sl7.mjs';
+import { $ as $$Layout, a as $$Breadcrumbs } from '../chunks/Layout_CfgLFcEj.mjs';
 import { $ as $$PageTitle } from '../chunks/PageTitle_CfOsVEq7.mjs';
 import { $ as $$PageHead } from '../chunks/PageHead_DQNRM4qn.mjs';
 import { jsxs, jsx } from 'react/jsx-runtime';
@@ -10,7 +10,7 @@ import { Suspense } from 'react';
 import { c as cn, e as getBentoSize } from '../chunks/consts_RqznFRTQ.mjs';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical } from 'lucide-react';
-import { n as getAllProjects } from '../chunks/data-utils_CmMo04gt.mjs';
+import { n as getAllProjects } from '../chunks/data-utils_B611coWT.mjs';
 import { OrbitControls, useGLTF, Center } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 export { renderers } from '../renderers.mjs';

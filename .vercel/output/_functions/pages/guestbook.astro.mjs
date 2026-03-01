@@ -1,5 +1,5 @@
 import { d as createAstro, c as createComponent, m as maybeRenderHead, a as renderTemplate, b as addAttribute, r as renderComponent } from '../chunks/astro/server_v3yWdH_B.mjs';
-import { $ as $$Layout, a as $$Breadcrumbs } from '../chunks/Layout_yZGE3sl7.mjs';
+import { $ as $$Layout, a as $$Breadcrumbs } from '../chunks/Layout_CfgLFcEj.mjs';
 import 'clsx';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { OrbitControls, useGLTF, Center } from '@react-three/drei';

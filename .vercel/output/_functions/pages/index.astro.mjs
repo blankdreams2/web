@@ -1,5 +1,5 @@
 import { c as createComponent, m as maybeRenderHead, r as renderComponent, a as renderTemplate, d as createAstro, b as addAttribute } from '../chunks/astro/server_v3yWdH_B.mjs';
-import { b as $$Link, d as $$Icon, $ as $$Layout, a as $$Breadcrumbs } from '../chunks/Layout_yZGE3sl7.mjs';
+import { b as $$Link, d as $$Icon, $ as $$Layout, a as $$Breadcrumbs } from '../chunks/Layout_CfgLFcEj.mjs';
 import { $ as $$Image } from '../chunks/_astro_assets_BFlWmnoX.mjs';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { useGLTF, OrbitControls, Center } from '@react-three/drei';
@@ -8,7 +8,7 @@ import { useRef, Suspense } from 'react';
 import { $ as $$PageTitle } from '../chunks/PageTitle_CfOsVEq7.mjs';
 import { B as Badge } from '../chunks/badge_FkkX4EQ5.mjs';
 import { c as cn, d as formatDate } from '../chunks/consts_RqznFRTQ.mjs';
-import { s as getFeaturedProjects } from '../chunks/data-utils_CmMo04gt.mjs';
+import { s as getFeaturedProjects } from '../chunks/data-utils_B611coWT.mjs';
 import { $ as $$PageHead } from '../chunks/PageHead_DQNRM4qn.mjs';
 export { renderers } from '../renderers.mjs';
 

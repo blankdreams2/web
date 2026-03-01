@@ -1,58 +1,64 @@
 ---
+import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 ---
-
-<div class="flex flex-col gap-2">
-  <h3 class="px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+<!-- Action Center -->
+<div class='flex flex-col gap-2'>
+  <h3 class='text-muted-foreground px-2 text-xs font-semibold tracking-wider uppercase'>
     Action Center
   </h3>
-  <div class="flex flex-1 flex-col gap-8 p-2">
-    <div class="flex h-24 gap-4">
-      <button
-        type="button"
-        id="action-theme"
-        class="action-center-btn relative flex flex-1 flex-col justify-between overflow-hidden rounded-xl p-4 transition-colors bg-muted/50 hover:bg-muted/70"
+
+  <!-- Action Center Buttons -->
+  <div class='flex flex-1 flex-col gap-8 p-2'>
+    <div class='flex h-16 gap-4'>
+      <!-- Theme Toggle -->
+      <div
+        class='bg-muted/50 hover:bg-muted/70 flex flex-1 items-center justify-between gap-3 overflow-hidden rounded-xl px-4 py-3 transition-colors'
       >
-        <div class="flex items-center justify-center">
-          <span class="action-theme-icon-dark hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
-            </svg>
-          </span>
-          <span class="action-theme-icon-light">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="4"/>
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-            </svg>
-          </span>
-        </div>
-        <div class="text-left text-[13px] font-medium">
-          Dark Mode: <span class="action-theme-label text-muted-foreground">Off</span>
-        </div>
-      </button>
+        <span class='text-[13px] font-medium'>Dark Mode</span>
+        <AnimatedThemeToggler client:load className='size-9 shrink-0 rounded-lg' />
+      </div>
+
+      <!-- Focus Mode Toggle -->
       <button
-        type="button"
-        id="action-focus"
-        class="action-center-btn relative flex flex-1 flex-col justify-between overflow-hidden rounded-xl p-4 transition-colors bg-muted/50 hover:bg-muted/70"
+        type='button'
+        id='action-focus'
+        class='action-center-btn bg-muted/50 hover:bg-muted/70 relative flex flex-1 items-center justify-between overflow-hidden rounded-xl px-4 py-3 transition-colors'
       >
-        <div class="flex items-center justify-center text-muted-foreground">
-          <span class="action-focus-icon-off">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-              <circle cx="12" cy="12" r="3"/>
+        <div class='text-muted-foreground flex shrink-0 items-center justify-center'>
+          <span class='action-focus-icon-off'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='20'
+              height='20'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='2'
+            >
+              <path d='M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z'></path>
+              <circle cx='12' cy='12' r='3'></circle>
             </svg>
           </span>
-          <span class="action-focus-icon-on hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M10.733 5a3 3 0 0 1 2.534 0"/>
-              <path d="M17.252 4.03A10 10 0 0 0 4.03 17.25"/>
-              <path d="M19.03 6.75a10 10 0 0 0-13.28 13.28"/>
-              <path d="M14 12a2 2 0 0 1-2 2"/>
-              <path d="M2 2l20 20"/>
+          <span class='action-focus-icon-on hidden'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='20'
+              height='20'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='2'
+            >
+              <path d='M10.733 5a3 3 0 0 1 2.534 0'></path>
+              <path d='M17.252 4.03A10 10 0 0 0 4.03 17.25'></path>
+              <path d='M19.03 6.75a10 10 0 0 0-13.28 13.28'></path>
+              <path d='M14 12a2 2 0 0 1-2 2'></path>
+              <path d='M2 2l20 20'></path>
             </svg>
           </span>
         </div>
-        <div class="text-left text-[13px] font-medium">
-          Focus: <span class="action-focus-label text-muted-foreground">Off</span>
+        <div class='text-[13px] font-medium'>
+          Focus: <span class='action-focus-label text-muted-foreground'>Off</span>
         </div>
       </button>
     </div>
@@ -60,33 +66,7 @@
 </div>
 
 <script is:inline>
-  (function () {
-    function initTheme() {
-      const btn = document.getElementById('action-theme')
-      const label = btn?.querySelector('.action-theme-label')
-      const iconDark = btn?.querySelector('.action-theme-icon-dark')
-      const iconLight = btn?.querySelector('.action-theme-icon-light')
-
-      function update() {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
-        if (label) label.textContent = isDark ? 'On' : 'Off'
-        if (iconDark) iconDark.classList.toggle('hidden', !isDark)
-        if (iconLight) iconLight.classList.toggle('hidden', isDark)
-      }
-
-      btn?.addEventListener('click', () => {
-        const el = document.documentElement
-        const next = el.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
-        el.setAttribute('data-theme', next)
-        localStorage.setItem('theme', next)
-        update()
-      })
-
-      const obs = new MutationObserver(update)
-      obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
-      update()
-    }
-
+  ;(function () {
     function initFocus() {
       const btn = document.getElementById('action-focus')
       const label = btn?.querySelector('.action-focus-label')
@@ -110,9 +90,8 @@
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => { initTheme(); initFocus() })
+      document.addEventListener('DOMContentLoaded', initFocus)
     } else {
-      initTheme()
       initFocus()
     }
   })()
