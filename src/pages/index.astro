@@ -13,7 +13,7 @@ import Layout from '@/layouts/Layout.astro'
   <PageTitle titleJP='ホームページ。'>
     <Breadcrumbs slot='breadcrumbs' items={[{ label: 'home', icon: 'lucide:home' }]} />
   </PageTitle>
-  <!-- <Hero /> -->
+  <Hero />
   <ProjectsSection />
-  <!-- <SpinCat client:visible /> -->
+  <SpinCat client:idle />
 </Layout>

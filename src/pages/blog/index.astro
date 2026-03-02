@@ -3,8 +3,8 @@ import BlogCalendar from '@/components/blog/BlogCalendar.astro'
 import BlogTagFilter from '@/components/blog/BlogTagFilter.astro'
 import BlogTitle from '@/components/blog/BlogTitle.astro'
 import PageHead from '@/components/shared/PageHead.astro'
-import Layout from '@/layouts/Layout.astro'
 import { SpinCar } from '@/components/spin/SpinCar'
+import Layout from '@/layouts/Layout.astro'
 import { getAllPostsAndSubposts, isSubpost } from '@/lib/data-utils'
 
 const allPosts = await getAllPostsAndSubposts()
@@ -23,5 +23,5 @@ const parentPosts = allPosts.filter((p) => !isSubpost(p.id))
   />
   <BlogTagFilter posts={parentPosts} />
   <BlogCalendar parentPosts={parentPosts} />
-  <!-- <SpinCar client:visible /> -->
+  <SpinCar client:idle />
 </Layout>

@@ -30,5 +30,5 @@ const error = Astro.url.searchParams.get('error')
     supabaseUrl={import.meta.env.SUPABASE_URL}
     supabaseKey={import.meta.env.SUPABASE_ANON_KEY}
   />
-  <SpinMail client:visible />
+  <SpinMail client:idle />
 </Layout>
