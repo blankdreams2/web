@@ -22,7 +22,6 @@ export function LoaderWrapper({
     }
   }, [showOnLanding])
 
-  /* TODO: add the loader back in after dev */
   return (
     <>
       <AnimatePresence mode="wait">

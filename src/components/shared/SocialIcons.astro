@@ -14,7 +14,7 @@ interface Props {
 const { links, variant = 'outline', iconClass = 'size-4' } = Astro.props
 ---
 
-<ul class="flex flex-wrap justify-center gap-2" role="list">
+<ul class='flex flex-wrap justify-center gap-2' role='list'>
   {
     links.map(({ href, label }) => (
       <li>
@@ -26,10 +26,7 @@ const { links, variant = 'outline', iconClass = 'size-4' } = Astro.props
           external
         >
           <Icon
-            name={
-              ICON_MAP[label as keyof typeof ICON_MAP] ||
-              'lucide:message-circle-question'
-            }
+            name={ICON_MAP[label as keyof typeof ICON_MAP] || 'lucide:message-circle-question'}
             class={iconClass}
           />
         </Link>

@@ -37,6 +37,8 @@ export async function getGithubData() {
         },
       },
     )
+
+    /*  */
     return (
       response.data?.data?.user?.contributionsCollection
         ?.contributionCalendar ?? null

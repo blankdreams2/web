@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-// Chaotic underline — wild curves, irregular amplitude
+// underline — wild curves
 const UNDERLINE_PATH =
   'M 0,85 C 50,60 100,95 150,75 C 200,98 260,68 320,90 C 380,65 440,92 500,78 C 560,96 620,72 680,88 C 740,70 780,94 840,82'
 

@@ -1,7 +1,10 @@
 import { calculateWordCountFromHtml, readingTime } from '@/lib/utils'
 import { getCollection, render, type CollectionEntry } from 'astro:content'
 
-
+/**
+ * Posts -- Blog
+ *
+ */
 export async function getAllPosts(): Promise<CollectionEntry<'blog'>[]> {
   const posts = await getCollection('blog')
   return posts
@@ -18,6 +21,10 @@ export async function getAllPostsAndSubposts(): Promise<
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 }
 
+/**
+ * Projects
+ *
+ */
 export async function getAllProjects(): Promise<CollectionEntry<'projects'>[]> {
   const projects = await getCollection('projects')
   return projects.sort((a, b) => {
@@ -107,9 +114,7 @@ export async function getAdjacentPosts(currentId: string): Promise<{
   const parentPosts = allPosts.filter((post) => !isSubpost(post.id))
   const currentIndex = parentPosts.findIndex((post) => post.id === currentId)
 
-  if (currentIndex === -1) {
-    return { newer: null, older: null, parent: null }
-  }
+  if (currentIndex === -1) return { newer: null, older: null, parent: null }
 
   return {
     newer: currentIndex > 0 ? parentPosts[currentIndex - 1] : null,
@@ -197,6 +202,8 @@ export type BlogSidebarGroup = {
   years: Record<string, CollectionEntry<'blog'>[]>
 }
 
+
+/*  */
 export async function getPostsGroupedByCategoryAndYear(): Promise<
   BlogSidebarGroup[]
 > {

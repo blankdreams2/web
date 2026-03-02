@@ -1,10 +1,10 @@
 export type Experience = {
-  role: string
-  company: string
-  duration: string
-  location: string
-  description: string
-  logo?: string
+  role         : string
+  company      : string
+  duration     : string
+  location     : string
+  description  : string
+  logo        ?: string
   technologies?: string[]
 }
 
