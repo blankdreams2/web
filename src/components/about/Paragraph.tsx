@@ -1,6 +1,6 @@
 'use client'
 
-// import { Highlighter } from '@/components/ui/highlighter'
+import { Highlighter } from '@/components/ui/highlighter'
 import { DARK_UNDERLINE, LIGHT_UNDERLINE } from '@/consts'
 import { Gamepad2, Laptop2 } from 'lucide-react'
 import React from 'react'
@@ -60,7 +60,7 @@ export default function Paragraph({
           {tag === 'chào, or hi there' && (
             <Laptop2 className="mt-1 mr-1.5 inline-block h-5 w-5" />
           )}
-          {/* <Highlighter
+          <Highlighter
             key={highlightKey}
             action="underline"
             color={underlineColor}
@@ -68,8 +68,8 @@ export default function Paragraph({
             isView={false}
           >
             {tag || 'Lorem ipsum dolor sit amet.'}
-          </Highlighter> */}
-          {tag || 'Lorem ipsum dolor sit amet.'}
+          </Highlighter>
+          {/* {tag || 'Lorem ipsum dolor sit amet.'} */}
         </p>
 
         {customAnswer || children ? (
