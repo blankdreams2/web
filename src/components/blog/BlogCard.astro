@@ -26,17 +26,29 @@ const subposts =
 <div class='hover:bg-muted/50 rounded-xl border p-4 transition-colors duration-300 ease-in-out'>
   <Link href={`/${entry.collection}/${entry.id}`} class='flex flex-col gap-4 sm:flex-row'>
     {
-      entry.data.image && (
-        <div class='w-full sm:max-w-3xs sm:shrink-0'>
-          <Image
-            src={entry.data.image}
-            alt={entry.data.title}
-            width={1200}
-            height={630}
-            class='object-cover'
-          />
-        </div>
-      )
+      (() => {
+        const img = entry.data.image as unknown
+        if (!img) return null
+        if (typeof img === 'string') {
+          const src = img.startsWith('/public') ? img.slice(7) : img
+          return (
+            <div class='w-full sm:max-w-3xs sm:shrink-0'>
+              <img src={src} alt={entry.data.title} class='object-cover' />
+            </div>
+          )
+        }
+        return (
+          <div class='w-full sm:max-w-3xs sm:shrink-0'>
+            <Image
+              src={img as import('astro').ImageMetadata}
+              alt={entry.data.title}
+              width={1200}
+              height={630}
+              class='object-cover'
+            />
+          </div>
+        )
+      })()
     }
 
     <div class='grow'>

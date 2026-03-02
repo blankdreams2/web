@@ -81,8 +81,14 @@ const { class: className } = Astro.props
     <!-- added this listener so the theme persists when the page is reloaded -->
     <script is:inline>
       document.addEventListener('astro:after-swap', () => {
-        const stored = localStorage.getItem('theme') || 'light'
-        document.documentElement.setAttribute('data-theme', stored)
+        const theme = (() => {
+          try {
+            const stored = localStorage.getItem('theme') ?? ''
+            if (['dark', 'light'].includes(stored)) return stored
+          } catch (_) {}
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        })()
+        document.documentElement.setAttribute('data-theme', theme)
 
         const sound = localStorage.getItem('sound') || 'on'
         document.documentElement.classList.toggle('sound-off', sound === 'off')

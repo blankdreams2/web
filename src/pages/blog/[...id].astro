@@ -1,12 +1,12 @@
 ---
 import PostHead from '@/components/blog/PostHead.astro'
 import PostNavigation from '@/components/blog/PostNavigation.astro'
-import { SpinCar } from '@/components/spin/SpinCar'
 import SubpostsHeader from '@/components/blog/SubpostsHeader.astro'
 import SubpostsSidebar from '@/components/blog/SubpostsSidebar.astro'
 import TOCHeader from '@/components/blog/TOCHeader.astro'
 import TOCSidebar from '@/components/blog/TOCSidebar.astro'
 import Breadcrumbs from '@/components/shared/Breadcrumbs.astro'
+import { SpinCar } from '@/components/spin/SpinCar'
 import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Layout from '@/layouts/Layout.astro'
@@ -56,6 +56,7 @@ const tocSections = await getTOCSections(currentPostId)
 <Layout>
   <PostHead slot='head' post={post} />
 
+  <!-- subposts navigation -->
   {
     (hasChildPosts || isCurrentSubpost) && (
       <SubpostsHeader
@@ -64,6 +65,8 @@ const tocSections = await getTOCSections(currentPostId)
       />
     )
   }
+
+  <!-- table of contents -->
   {
     headings?.length > 0 &&
       !(isCurrentSubpost && headings.length === 1 && headings[0].text === post.data.title) && (
@@ -112,15 +115,29 @@ const tocSections = await getTOCSections(currentPostId)
 
     <!-- the damn image -->
     {
-      post.data?.image && (
-        <Image
-          src={post.data?.image}
-          alt={post.data?.title}
-          width={1200}
-          height={630}
-          class='col-span-full mx-auto w-full max-w-5xl object-cover'
-        />
-      )
+      (() => {
+        const img = post.data?.image as unknown
+        if (!img) return null
+        if (typeof img === 'string') {
+          const src = img.startsWith('/public') ? img.slice(7) : img
+          return (
+            <img
+              src={src}
+              alt={post.data?.title ?? ''}
+              class='col-span-full mx-auto w-full max-w-3xl object-cover'
+            />
+          )
+        }
+        return (
+          <Image
+            src={img as import('astro').ImageMetadata}
+            alt={post.data?.title ?? ''}
+            width={1200}
+            height={630}
+            class='col-span-full mx-auto w-full max-w-3xl object-cover'
+          />
+        )
+      })()
     }
 
     <!-- post title and metadata -->

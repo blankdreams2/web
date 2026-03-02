@@ -2,25 +2,107 @@ export type TableEntryCategory = 'ctf' | 'project' | 'tools' | 'education'
 
 export type CTFTableEntry = {
   name: string
-  /** Slug or path to blog post, e.g. "infinite-qualifier" or "amazon-appsec/final" */
   postId?: string
-  /** Category for filtering/grouping. CTF, projects, tools, education — table shows all (writeups + non-writeups) */
   category?: TableEntryCategory
   ranking: string
-  /** ye = has writeup, nein/nein?/no = no writeup yet — both shown in table */
-  openWriteups: 'ye' | 'nein' | 'nein?' | 'no' | string
+  openWriteups: string
   date: string
   comment?: string
 }
 
-export const CTF_TABLE: CTFTableEntry[] = [
+/** Parse date string (M.D.YYYY or M.D-D.YYYY range) to timestamp for sorting. Unparseable = -Infinity (end). */
+function parseDateForSort(dateStr: string): number {
+  const match = dateStr.match(/(\d{1,2})\.(\d{1,2})(?:[-\s]\d{1,2})*\.(\d{4})/)
+  if (!match) return -Infinity
+  const [, m, d, y] = match
+  const month = parseInt(m!, 10) - 1
+  const day = parseInt(d!, 10)
+  const year = parseInt(y!, 10)
+  return new Date(year, month, day).getTime()
+}
+
+const CTF_TABLE_ENTRIES: CTFTableEntry[] = [
+  {
+    name: 'utampa',
+    postId: 'utampa-2026',
+    ranking: '1st',
+    openWriteups: 'nein',
+    date: '2.7.2026',
+    comment: 'was it close? nah i got it',
+  },
+  {
+    name: 'dc207',
+    postId: 'dc207-2025',
+    ranking: '2nd',
+    openWriteups: 'nein',
+    date: '11.20.2025',
+    comment: "my brain legit fried...but 207 gang, you guys didn't send it :(",
+  },
+  {
+    name: 'SANS Veterans Day CTF 2025',
+    postId: 'sans-veterans-day-ctf-2025',
+    ranking: '5th',
+    openWriteups: 'nein',
+    date: '11.11.2025',
+    comment: 'bootupctf but its quite bootlicker of a ctf',
+  },
+  {
+    name: 'ncl fall 2025',
+    postId: 'ncl-fall-2025',
+    ranking: '18th (solo) / 18th (team)',
+    openWriteups: 'nein',
+    date: '11.10.2025',
+    comment:
+      'experimental challenges lead to experimental result (absolute mental)',
+  },
+  {
+    name: 'Mission: Truist Possible',
+    postId: 'mission-truist-possible-2025',
+    ranking: '2nd',
+    openWriteups: 'nein',
+    date: '11.7.2025',
+    comment: 'shibal',
+  },
+  {
+    name: 'unr',
+    postId: 'unr-2025',
+    ranking: '1st',
+    openWriteups: 'nein',
+    date: '11.6.2025',
+    comment: 'not even close',
+  },
+  {
+    name: 'v1t',
+    postId: 'v1t-2025',
+    ranking: 'anon',
+    openWriteups: 'ye',
+    date: '10.31 - 11.2.2025',
+    comment: 'have with friend, really creative trivia challenges',
+  },
+  {
+    name: 'und final',
+    postId: 'und-final-2025',
+    ranking: '13th',
+    openWriteups: 'nein',
+    date: '10.28.2025 (online)',
+    comment: '📦 wrap it up gang, i was so sleepy',
+  },
+  {
+    name: 'Cyberweek @ UNLV',
+    postId: 'cyberweek-unlv-2025',
+    ranking: '1st',
+    openWriteups: 'nein',
+    date: '10.3.2025',
+    comment: 'MY REGION, MY SCHOOL muhehe',
+  },
   {
     name: 'infinite ctf qualifier',
     postId: 'infinite-qualifier',
     ranking: '5th',
     openWriteups: '🌹',
     date: '9.27.2025',
-    comment: 'attack/defense (2 boxes) — automation to cheese the bottom teams the strat;',
+    comment:
+      'attack/defense (2 boxes) — automation to cheese the bottom teams the strat;',
   },
   {
     name: 'amazon app sec ctf namer final',
@@ -36,7 +118,8 @@ export const CTF_TABLE: CTFTableEntry[] = [
     ranking: 'dead (in game)',
     openWriteups: 'ye',
     date: '9.22-26.2025',
-    comment: "forensics main players are having a blast with this. I'm dead in the water though.",
+    comment:
+      "forensics main players are having a blast with this. I'm dead in the water though.",
   },
   {
     name: 'und cyberhawks national ctf qualifiers',
@@ -44,7 +127,8 @@ export const CTF_TABLE: CTFTableEntry[] = [
     ranking: '5th',
     openWriteups: 'nein',
     date: '9.16-20.2025',
-    comment: 'in such a short notice with no online-option for the final...while the flight ticket is 4 digits. BROTHERRRR 🤷🏽‍♀️. They offer an online option but no prize',
+    comment:
+      'in such a short notice with no online-option for the final...while the flight ticket is 4 digits. BROTHERRRR 🤷🏽‍♀️. They offer an online option but no prize',
   },
   {
     name: 'owasp secure coding',
@@ -186,3 +270,7 @@ export const CTF_TABLE: CTFTableEntry[] = [
     comment: 'first ctf. (L)',
   },
 ]
+
+export const CTF_TABLE = CTF_TABLE_ENTRIES.sort(
+  (a, b) => parseDateForSort(b.date) - parseDateForSort(a.date),
+)
