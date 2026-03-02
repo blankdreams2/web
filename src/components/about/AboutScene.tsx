@@ -1,10 +1,12 @@
 'use client'
 
+import { CANVAS_DPR, CANVAS_GL_OPTIONS } from '@/lib/canvas-gl-options'
 import { Center, useGLTF } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import type { Group } from 'three'
-const TREE_BASE_Y = -0.8 // bottom-left: negative y = down in 3D
+
+const TREE_BASE_Y = -0.8
 
 function Computer() {
   const groupRef = useRef<Group>(null)
@@ -53,7 +55,8 @@ export function AboutScene() {
       <div className={canvasClass}>
         <Canvas
           camera={{ position: [0, 0, 2.5], fov: 75 }}
-          gl={{ antialias: true, alpha: true }}
+          dpr={CANVAS_DPR}
+          gl={CANVAS_GL_OPTIONS}
         >
           <ambientLight intensity={1} />
           <directionalLight position={[5, 5, 5]} intensity={1.5} />

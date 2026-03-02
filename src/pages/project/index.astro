@@ -3,7 +3,7 @@ import Breadcrumbs from '@/components/shared/Breadcrumbs.astro'
 import PageTitle from '@/components/home/PageTitle.astro'
 import PageHead from '@/components/shared/PageHead.astro'
 import ProjectSection from '@/components/project/ProjectSection.astro'
-import { SpinBanhmy } from '@/components/project/SpinBanhmy'
+import { SpinBanhmy } from '@/components/spin/SpinBanhmy'
 import Layout from '@/layouts/Layout.astro'
 ---
 
@@ -13,5 +13,5 @@ import Layout from '@/layouts/Layout.astro'
     <Breadcrumbs slot='breadcrumbs' items={[{ label: 'project', icon: 'lucide:sparkle' }]} />
   </PageTitle>
   <ProjectSection />
-  <SpinBanhmy client:only="react" />
+  <SpinBanhmy client:visible />
 </Layout>

@@ -5,6 +5,8 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import type { Group } from 'three'
 
+import { CANVAS_DPR, CANVAS_GL_OPTIONS } from '@/lib/canvas-gl-options'
+
 // cup: inside polaroid bottom-right, gentle steam-like bob
 function CupCoffee() {
   const groupRef = useRef<Group>(null)
@@ -68,7 +70,8 @@ export function CoffeeScene() {
       <div className="size-full min-h-[192px] min-w-[192px] sm:min-h-[300px] sm:min-w-[300px]">
         <Canvas
           camera={{ position: [-0.2, 0.6, 3.5], fov: 60 }}
-          gl={{ antialias: true, alpha: true }}
+          dpr={CANVAS_DPR}
+          gl={CANVAS_GL_OPTIONS}
         >
           <ambientLight intensity={1} />
           <directionalLight position={[5, 5, 5]} intensity={1.5} />

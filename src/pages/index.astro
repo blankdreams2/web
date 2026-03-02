@@ -1,10 +1,10 @@
 ---
-import Breadcrumbs from '@/components/shared/Breadcrumbs.astro'
 import Hero from '@/components/home/Hero.astro'
 import PageTitle from '@/components/home/PageTitle.astro'
 import ProjectsSection from '@/components/home/ProjectsSection.astro'
-import { SpinCat } from '@/components/home/SpinCat'
+import Breadcrumbs from '@/components/shared/Breadcrumbs.astro'
 import PageHead from '@/components/shared/PageHead.astro'
+import { SpinCat } from '@/components/spin/SpinCat'
 import Layout from '@/layouts/Layout.astro'
 ---
 
@@ -15,5 +15,5 @@ import Layout from '@/layouts/Layout.astro'
   </PageTitle>
   <Hero />
   <ProjectsSection />
-  <SpinCat client:only="react" />
+  <SpinCat client:visible />
 </Layout>

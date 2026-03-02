@@ -4,6 +4,8 @@ import { Center, OrbitControls, useGLTF } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react'
 
+import { CANVAS_DPR, CANVAS_GL_OPTIONS } from '@/lib/canvas-gl-options'
+import { useDelayed3DMount } from '@/hooks/use-delayed-3d-mount'
 import {
   getSoundEnabled,
   SOUND_MODE_CHANGE_EVENT,
@@ -66,6 +68,7 @@ function SpinCatScene({ soundEnabled }: { soundEnabled: boolean }) {
 
 export function SpinCat() {
   const [soundEnabled, setSoundEnabled] = useState(() => getSoundEnabled())
+  const shouldMount = useDelayed3DMount(400)
 
   useEffect(() => {
     const update = () => setSoundEnabled(getSoundEnabled())
@@ -77,6 +80,14 @@ export function SpinCat() {
       document.removeEventListener('astro:after-swap', update)
     }
   }, [])
+
+  if (!shouldMount) {
+    return (
+      <section className="flex flex-col items-center py-12">
+        <div className="bg-muted/30 dark:bg-neutral-900/50 relative h-64 w-full max-w-md animate-pulse rounded-xl" />
+      </section>
+    )
+  }
 
   return (
     <section className="flex flex-col items-center py-12">
@@ -132,7 +143,8 @@ export function SpinCat() {
         </span>
         <Canvas
           camera={{ position: [0, 0, 3], fov: 50 }}
-          gl={{ antialias: true, alpha: true }}
+          dpr={CANVAS_DPR}
+          gl={CANVAS_GL_OPTIONS}
           className="size-full rounded-xl"
         >
           <SpinCatScene soundEnabled={soundEnabled} />

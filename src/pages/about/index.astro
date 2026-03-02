@@ -2,7 +2,7 @@
 import AboutHero from '@/components/about/AboutHero.astro'
 import AboutPageTitle from '@/components/about/AboutPageTitle'
 import AboutSections from '@/components/about/AboutSections.astro'
-import { SpinMonika } from '@/components/about/SpinMonika'
+import { SpinMonika } from '@/components/spin/SpinMonika'
 import Breadcrumbs from '@/components/shared/Breadcrumbs.astro'
 import { ExperienceTimeline } from '@/components/home/ExperienceTimeline'
 import PageHead from '@/components/shared/PageHead.astro'
@@ -18,5 +18,5 @@ import Layout from '@/layouts/Layout.astro'
   <AboutHero />
   <AboutSections />
   <ExperienceTimeline client:load experiences={EXPERIENCES} />
-  <SpinMonika client:only="react" />
+  <SpinMonika client:visible />
 </Layout>

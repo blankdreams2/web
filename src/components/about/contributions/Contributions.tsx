@@ -1,5 +1,3 @@
-// import { BsGithub as GithubIcon } from 'react-icons/bs'
-// import Link from '@/components/Link.astro'
 import Calendar from './Calendar'
 import Overview from './Overview'
 
@@ -10,24 +8,6 @@ type ContributionsProps = {
 export default function Contributions({ githubData }: ContributionsProps) {
   return (
     <section className="flex flex-col gap-y-2">
-      {/* <SectionHeading
-        title="Contributions"
-        icon={<GithubIcon className="mr-1" />}
-      />
-      <SectionSubHeading>
-        <p className="dark:text-neutral-400">
-          My public contributions from last year on GitHub.
-        </p>
-        <Link
-          href={`https://github.com/${GITHUB_ACCOUNTS.username}`}
-          target="_blank"
-          passHref
-          className="font-code text-sm text-neutral-600 hover:text-neutral-700 dark:text-neutral-400 hover:dark:text-neutral-400"
-        >
-          @{GITHUB_ACCOUNTS.username}
-        </Link>
-      </SectionSubHeading> */}
-
       {!githubData && <div className="dark:text-neutral-400">No Data</div>}
 
       {githubData && (

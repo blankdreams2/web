@@ -1,7 +1,7 @@
 ---
 import PostHead from '@/components/blog/PostHead.astro'
 import PostNavigation from '@/components/blog/PostNavigation.astro'
-import { SpinCar } from '@/components/blog/SpinCar'
+import { SpinCar } from '@/components/spin/SpinCar'
 import SubpostsHeader from '@/components/blog/SubpostsHeader.astro'
 import SubpostsSidebar from '@/components/blog/SubpostsSidebar.astro'
 import TOCHeader from '@/components/blog/TOCHeader.astro'
@@ -213,7 +213,7 @@ const tocSections = await getTOCSections(currentPostId)
     />
   </section>
 
-  <SpinCar client:only='react' />
+  <SpinCar client:visible />
 
   <Button
     variant='outline'
