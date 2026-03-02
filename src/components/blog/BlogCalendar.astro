@@ -17,6 +17,7 @@ const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
   {
     years.map((year, yearIndex) => (
       <section class='relative flex flex-col' data-blog-year={year}>
+
         <!-- Year header with timeline accent -->
         <div class='mb-8 flex items-baseline gap-4'>
           <div class='bg-primary/15 text-primary ring-primary/20 flex size-14 shrink-0 items-center justify-center rounded-2xl font-bold tabular-nums ring-1'>

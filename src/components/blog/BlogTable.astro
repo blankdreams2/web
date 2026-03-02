@@ -1,0 +1,52 @@
+---
+import Link from '@/components/shared/Link.astro'
+import { Icon } from 'astro-icon/components'
+import type { CTFTableEntry } from '@/data/ctf-table'
+
+interface Props {
+  entries: CTFTableEntry[]
+}
+
+const { entries } = Astro.props
+---
+
+<div class='overflow-x-auto rounded-xl border'>
+  <table class='w-full min-w-[600px] border-collapse text-sm'>
+    <thead>
+      <tr class='border-b bg-muted/50'>
+        <th class='text-muted-foreground px-4 py-3 text-left font-medium uppercase tracking-wider'>Name</th>
+        <th class='text-muted-foreground px-4 py-3 text-left font-medium uppercase tracking-wider'>Ranking</th>
+        <th class='text-muted-foreground px-4 py-3 text-left font-medium uppercase tracking-wider'>Open Writeups</th>
+        <th class='text-muted-foreground px-4 py-3 text-left font-medium uppercase tracking-wider'>Date</th>
+        <th class='text-muted-foreground px-4 py-3 text-left font-medium uppercase tracking-wider'>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        entries.map((entry) => (
+          <tr class='border-b transition-colors hover:bg-muted/30 last:border-b-0'>
+            <td class='px-4 py-3'>
+              {
+                entry.postId ? (
+                  <Link
+                    href={`/blog/${entry.postId}`}
+                    class='text-primary hover:text-primary/80 inline-flex items-center gap-1 font-medium underline-offset-4 hover:underline'
+                  >
+                    {entry.name}
+                    <Icon name='lucide:arrow-up-right' class='size-3 shrink-0' />
+                  </Link>
+                ) : (
+                  <span class='text-foreground'>{entry.name}</span>
+                )
+              }
+            </td>
+            <td class='text-muted-foreground px-4 py-3'>{entry.ranking}</td>
+            <td class='px-4 py-3'>{entry.openWriteups}</td>
+            <td class='text-muted-foreground px-4 py-3 tabular-nums'>{entry.date}</td>
+            <td class='text-muted-foreground px-4 py-3 text-sm'>{entry.comment ?? '—'}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

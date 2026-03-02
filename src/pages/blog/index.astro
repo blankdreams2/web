@@ -1,10 +1,13 @@
 ---
 import BlogCalendar from '@/components/blog/BlogCalendar.astro'
+import BlogTable from '@/components/blog/BlogTable.astro'
+import BlogTabs from '@/components/blog/BlogTabs.astro'
 import BlogTagFilter from '@/components/blog/BlogTagFilter.astro'
 import BlogTitle from '@/components/blog/BlogTitle.astro'
 import PageHead from '@/components/shared/PageHead.astro'
 import { SpinCar } from '@/components/spin/SpinCar'
 import Layout from '@/layouts/Layout.astro'
+import { CTF_TABLE } from '@/data/ctf-table'
 import { getAllPostsAndSubposts, isSubpost } from '@/lib/data-utils'
 
 const allPosts = await getAllPostsAndSubposts()
@@ -21,7 +24,19 @@ const parentPosts = allPosts.filter((p) => !isSubpost(p.id))
       { label: 'All', icon: 'lucide:book-copy' },
     ]}
   />
-  <BlogTagFilter posts={parentPosts} />
-  <BlogCalendar parentPosts={parentPosts} />
+
+  <BlogTabs activeTab='table' />
+
+  <div id='blog-table-panel' role='tabpanel' aria-labelledby='blog-table-tab'>
+    <div class='flex min-h-[calc(100vh-18rem)] flex-col'>
+      <BlogTable entries={CTF_TABLE} />
+    </div>
+  </div>
+
+  <div id='blog-posts-panel' role='tabpanel' aria-labelledby='blog-posts-tab' hidden>
+    <BlogTagFilter posts={parentPosts} />
+    <BlogCalendar parentPosts={parentPosts} />
+  </div>
+
   <SpinCar client:idle />
 </Layout>
