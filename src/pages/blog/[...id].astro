@@ -1,13 +1,12 @@
 ---
-import Breadcrumbs from '@/components/shared/Breadcrumbs.astro'
-// import Link from '@/components/Link.astro'
-import { SpinCar } from '@/components/blog/SpinCar'
 import PostHead from '@/components/blog/PostHead.astro'
 import PostNavigation from '@/components/blog/PostNavigation.astro'
+import { SpinCar } from '@/components/blog/SpinCar'
 import SubpostsHeader from '@/components/blog/SubpostsHeader.astro'
 import SubpostsSidebar from '@/components/blog/SubpostsSidebar.astro'
 import TOCHeader from '@/components/blog/TOCHeader.astro'
 import TOCSidebar from '@/components/blog/TOCSidebar.astro'
+import Breadcrumbs from '@/components/shared/Breadcrumbs.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Layout from '@/layouts/Layout.astro'
@@ -28,10 +27,10 @@ import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
 import { render } from 'astro:content'
 
+export const prerender = true
+
 export async function getStaticPaths() {
   const posts = await getAllPostsAndSubposts()
-  // cannot read property 'map' of undefined
-  // how to fix this?
   return posts?.map((post) => ({
     params: { id: post.id },
     props: post,
@@ -41,8 +40,6 @@ export async function getStaticPaths() {
 const post = Astro.props
 const currentPostId = Astro.params.id
 const { Content, headings } = await render(post)
-// const authors = await parseAuthors(post.data.authors ?? [])
-
 const isCurrentSubpost = isSubpost(currentPostId)
 const navigation = await getAdjacentPosts(currentPostId)
 const parentPost = isCurrentSubpost ? await getParentPost(currentPostId) : null
@@ -216,7 +213,7 @@ const tocSections = await getTOCSections(currentPostId)
     />
   </section>
 
-  <SpinCar client:only="react" />
+  <SpinCar client:only='react' />
 
   <Button
     variant='outline'

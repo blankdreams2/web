@@ -5,6 +5,8 @@ import PageHead from '@/components/shared/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getAllTags, getPostsByTag } from '@/lib/data-utils'
 
+export const prerender = true
+
 export async function getStaticPaths() {
   const tagMap = await getAllTags()
   const uniqueTags = Array.from(tagMap.keys())

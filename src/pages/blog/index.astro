@@ -21,10 +21,7 @@ const parentPosts = allPosts.filter((p) => !isSubpost(p.id))
       { label: 'All', icon: 'lucide:book-copy' },
     ]}
   />
-
   <BlogTagFilter posts={parentPosts} />
-
   <BlogCalendar parentPosts={parentPosts} />
-
   <SpinCar client:only="react" />
 </Layout>

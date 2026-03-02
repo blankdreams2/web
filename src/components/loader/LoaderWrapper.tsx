@@ -25,11 +25,12 @@ export function LoaderWrapper({
   return (
     <>
       <AnimatePresence mode="wait">
-        {showLoader && (
+        {/* {showLoader && (
           <Loader key="loader" onComplete={() => setShowLoader(false)} />
-        )}
+        )} */}
       </AnimatePresence>
-      {!showLoader && children}
+      {/* {!showLoader && children} */}
+      {children}
     </>
   )
 }
